@@ -36,7 +36,7 @@ const Navbar = () => {
     { name: 'About Us', link: '/about' },
     { name: 'Services', link: '#', hasDropdown: true }, 
     { name: 'Projects', link: '/projects' },
-    { name: 'News & Events', link: '/news' },
+    { name: 'Gallery', link: '/gallery' },
     { name: 'Careers', link: '/careers' },
     { name: 'Contact Us', link: '/contact' }
   ];
