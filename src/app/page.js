@@ -7,6 +7,7 @@ import ContactSection from "./contact/page";
 
 
 
+
 export default function Home() {
   return (
   <div>
@@ -14,8 +15,8 @@ export default function Home() {
        <AboutSection/>
        <ServicesSection/>
        <ProjectsSection/>
-       
        <ContactSection/>
+   
   </div>
   );
 }

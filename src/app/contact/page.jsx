@@ -410,32 +410,61 @@ const ContactSection = () => {
           </motion.div>
         </div>
 
-        {/* Map Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          id="map"
-          className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200"
-        >
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 h-96 flex items-center justify-center">
-            <div className="text-center text-white">
-              <FiMapPin className="text-6xl text-amber-500 mx-auto mb-4" />
-              <h4 className="text-2xl font-bold mb-2">Visit Our Workshop</h4>
-              <p className="text-gray-300 mb-4">Glassco Aluminium & Glass Workshop LLC, UAE</p>
+      
+          {/* Google Maps Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="border-t border-white/10"
+      >
+        <div className="h-96 w-full relative">
+          {/* Embedded Google Map */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3634.8!2d54.481352!3d24.339201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDIwJzIxLjEiTiA1NMKwMjgnNTIuOSJF!5e0!3m2!1sen!2sae!4v1234567890"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="grayscale hover:grayscale-0 transition-all duration-500"
+          ></iframe>
+          
+          {/* Map Overlay Info */}
+          <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-sm">
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-6 shadow-2xl"
+            >
+              <h4 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                <FiMapPin className="text-amber-600" />
+                Visit Our Workshop
+              </h4>
+              <p className="text-gray-700 text-sm mb-4 leading-relaxed">
+                Glassco Aluminum & Glass Workshop<br />
+                Mussaffah 42 - 42 Street<br />
+                Musaffah - M42, Abu Dhabi, UAE
+              </p>
               <motion.a
-                href="https://maps.google.com"
+                href="https://www.google.com/maps/dir/?api=1&destination=24.339201,54.481352"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block px-6 py-3 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center"
               >
-                Open in Google Maps
+                <FiMapPin />
+                Get Directions
               </motion.a>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
       </div>
     </section>
   );
