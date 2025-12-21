@@ -19,22 +19,22 @@ const Navbar = () => {
   }, []);
 
   const services = [
-    'Aluminum doors and windows',
-    'Curtain walls',
-    'Spider glazing',
-    'Composite cladding',
-    'Pergolas & canopy',
-    'Automatic doors',
-    'Steel and metal decoration works',
-    'Gates and boundary walls',
-    'Partition glazing',
-    'Glass processing'
+    { name: 'Aluminum doors and windows', slug: 'aluminum-doors-windows' },
+    { name: 'Curtain walls', slug: 'curtain-walls' },
+    { name: 'Spider glazing', slug: 'spider-glazing' },
+    { name: 'Composite cladding', slug: 'composite-cladding' },
+    { name: 'Pergolas & canopy', slug: 'pergolas-canopy' },
+    { name: 'Automatic doors', slug: 'automatic-doors' },
+    { name: 'Steel and metal decoration works', slug: 'steel-metal-decoration' },
+    { name: 'Gates and boundary walls', slug: 'gates-boundary-walls' },
+    { name: 'Partition glazing', slug: 'partition-glazing' },
+    { name: 'Glass processing', slug: 'glass-processing' }
   ];
 
   const menuItems = [
     { name: 'Home', link: '/' },
     { name: 'About Us', link: '/about' },
-    { name: 'Services', link: '/services', hasDropdown: true },
+    { name: 'Services', link: '#', hasDropdown: true }, // Changed to # to prevent navigation
     { name: 'Projects', link: '/projects' },
     { name: 'News & Events', link: '/news' },
     { name: 'Careers', link: '/careers' },
@@ -172,14 +172,22 @@ const Navbar = () => {
                           className="absolute top-full left-0 mt-4 w-80 bg-slate-900/98 backdrop-blur-lg shadow-2xl rounded-lg overflow-hidden border border-amber-600/20"
                         >
                           <div className="py-3">
+                            <motion.a
+                              href="/services"
+                              className="block px-6 py-3 text-amber-400 hover:bg-amber-600/10 font-semibold transition-all duration-200 border-l-2 border-amber-500"
+                              whileHover={{ x: 5 }}
+                            >
+                              <span className="text-sm">View All Services</span>
+                            </motion.a>
+                            <div className="border-t border-gray-700 my-2"></div>
                             {services.map((service, idx) => (
                               <motion.a
                                 key={idx}
-                                href={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}
+                                href={`/services/${service.slug}`}
                                 className="block px-6 py-3 text-gray-300 hover:bg-amber-600/10 hover:text-amber-500 transition-all duration-200 border-l-2 border-transparent hover:border-amber-500"
                                 whileHover={{ x: 5 }}
                               >
-                                <span className="text-sm">{service}</span>
+                                <span className="text-sm">{service.name}</span>
                               </motion.a>
                             ))}
                           </div>
@@ -286,13 +294,20 @@ const Navbar = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden bg-slate-800/50 rounded-lg mb-3"
                               >
+                                <a
+                                  href="/services"
+                                  className="block px-4 py-3 text-sm text-amber-400 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-amber-500 font-semibold"
+                                >
+                                  View All Services
+                                </a>
+                                <div className="border-t border-gray-700 mx-4 my-2"></div>
                                 {services.map((service, idx) => (
                                   <a
                                     key={idx}
-                                    href={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}
+                                    href={`/services/${service.slug}`}
                                     className="block px-4 py-3 text-sm text-gray-300 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-transparent hover:border-amber-500"
                                   >
-                                    {service}
+                                    {service.name}
                                   </a>
                                 ))}
                               </motion.div>
