@@ -34,7 +34,7 @@ const Navbar = () => {
   const menuItems = [
     { name: 'Home', link: '/' },
     { name: 'About Us', link: '/about' },
-    { name: 'Services', link: '#', hasDropdown: true }, // Changed to # to prevent navigation
+    { name: 'Services', link: '#', hasDropdown: true }, 
     { name: 'Projects', link: '/projects' },
     { name: 'News & Events', link: '/news' },
     { name: 'Careers', link: '/careers' },

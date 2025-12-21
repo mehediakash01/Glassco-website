@@ -1,7 +1,8 @@
 import HeroBanner from "@/components/HeroBanner";
-import Image from "next/image";
 import AboutSection from "./about/page";
 import ServicesSection from "./services/page";
+import ProjectsSection from "./projects/page";
+
 
 
 
@@ -11,6 +12,7 @@ export default function Home() {
        <HeroBanner />
        <AboutSection/>
        <ServicesSection/>
+       <ProjectsSection></ProjectsSection>
   </div>
   );
 }
