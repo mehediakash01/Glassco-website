@@ -14,6 +14,7 @@ export default function Home() {
        <AboutSection/>
        <ServicesSection/>
        <ProjectsSection/>
+       
        <ContactSection/>
   </div>
   );
