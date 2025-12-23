@@ -435,7 +435,7 @@ const servicesData = {
   }
 };
 
-export default function ServiceDetailPage({ params }) {
+export default function ServiceDetailPage() {
   const{ slug} = useParams()
  
   const service = servicesData[slug];

@@ -15,6 +15,7 @@ import {
   FiTool
 } from 'react-icons/fi';
 import { BsDoorOpen, BsBuilding, BsGrid3X3Gap } from 'react-icons/bs';
+import Link from 'next/link';
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
@@ -29,7 +30,8 @@ const ServicesSection = () => {
       category: 'aluminum',
       description: 'High-performance aluminium doors and windows designed for durability, insulation, and aesthetic appeal with premium-grade profiles.',
       features: ['Weather Resistant', 'Thermal Efficiency', 'Custom Designs', 'High Security'],
-      image: '/services/aluminum-windows.jpg'
+      image: '/services/aluminum-windows.jpg',
+     slug: 'aluminum-doors-windows' 
     },
     {
       id: 2,
@@ -38,7 +40,8 @@ const ServicesSection = () => {
       category: 'glazing',
       description: 'Architectural elegance with superior engineering. Maximize natural light while maintaining structural integrity and energy efficiency.',
       features: ['Structural Glazing', 'Energy Efficient', 'Weatherproofing', 'Modern Aesthetics'],
-      image: '/services/curtain-walls.jpg'
+      image: '/services/curtain-walls.jpg',
+      slug: 'curtain-walls' 
     },
     {
       id: 3,
@@ -47,7 +50,8 @@ const ServicesSection = () => {
       category: 'glazing',
       description: 'Seamless all-glass look using high-grade stainless steel spider fittings for maximum transparency and modern appeal.',
       features: ['Point-Load System', 'Maximum Transparency', 'Wind Load Resistant', 'Premium Fittings'],
-      image: '/services/spider-glazing.jpg'
+      image: '/services/spider-glazing.jpg',
+      slug: 'spider-glazing'
     },
     {
       id: 4,
@@ -56,7 +60,8 @@ const ServicesSection = () => {
       category: 'cladding',
       description: 'Contemporary appearance with insulation, fire safety, and weather resistance. Wide range of colors and textures available.',
       features: ['Fire Resistant', 'Weather Protection', 'Lightweight', 'Easy Installation'],
-      image: '/services/composite-cladding.jpg'
+      image: '/services/composite-cladding.jpg',
+      slug: 'composite-cladding'
     },
     {
       id: 5,
@@ -65,7 +70,8 @@ const ServicesSection = () => {
       category: 'outdoor',
       description: 'Premium outdoor structures adding style, shade, and protection with durable aluminium and optional glass roofing.',
       features: ['Custom Designs', 'Durable Structure', 'Weather Resistant', 'Elegant Finish'],
-      image: '/services/pergolas.jpg'
+      image: '/services/pergolas.jpg',
+      slug: 'pergolas-canopy'
     },
     {
       id: 6,
@@ -74,7 +80,8 @@ const ServicesSection = () => {
       category: 'automation',
       description: 'Advanced automatic door systems with precision sensors and robust motors for smooth, quiet, and reliable operation.',
       features: ['Sensor Technology', 'Smooth Operation', 'High Safety', 'Low Maintenance'],
-      image: '/services/automatic-doors.jpg'
+      image: '/services/automatic-doors.jpg',
+      slug: 'automatic-doors'
     },
     {
       id: 7,
@@ -83,7 +90,8 @@ const ServicesSection = () => {
       category: 'metalwork',
       description: 'Custom steel and metal decorative works including railings, screens, and architectural accents with precision craftsmanship.',
       features: ['Custom Fabrication', 'Artistic Design', 'Premium Finish', 'Corrosion Resistant'],
-      image: '/services/metal-decoration.jpg'
+      image: '/services/metal-decoration.jpg',
+      slug: 'steel-metal-decoration'
     },
     {
       id: 8,
@@ -92,7 +100,8 @@ const ServicesSection = () => {
       category: 'metalwork',
       description: 'Strong and stylish gate systems with optional automation. Corrosion-resistant and designed for smooth operation.',
       features: ['Security First', 'Automation Ready', 'Weather Proof', 'Premium Materials'],
-      image: '/services/gates.jpg'
+      image: '/services/gates.jpg',
+      slug: 'gates-boundary-walls'
     },
     {
       id: 9,
@@ -101,7 +110,8 @@ const ServicesSection = () => {
       category: 'glazing',
       description: 'Modern glass partition systems for offices and homes. Improve space efficiency while maintaining light flow and acoustic comfort.',
       features: ['Space Efficient', 'Acoustic Comfort', 'Privacy Options', 'Modern Look'],
-      image: '/services/partition-glazing.jpg'
+      image: '/services/partition-glazing.jpg',
+      slug: 'partition-glazing'
     },
     {
       id: 10,
@@ -110,7 +120,8 @@ const ServicesSection = () => {
       category: 'processing',
       description: 'Comprehensive glass processing including cutting, tempering, lamination, and insulated glass production with strict quality standards.',
       features: ['Precision Cutting', 'Tempering', 'Lamination', 'Quality Assured'],
-      image: '/services/glass-processing.jpg'
+      image: '/services/glass-processing.jpg',
+      lug: 'glass-processing'
     }
   ];
 
@@ -260,10 +271,12 @@ const ServicesSection = () => {
 
                 {/* CTA Button */}
                 <motion.button
+                
                   whileHover={{ x: 5 }}
+                 
                   className="flex items-center gap-2 text-amber-600 font-semibold hover:gap-3 transition-all duration-300 group"
                 >
-                  Learn More
+                  <Link href={`/services/${service?.slug}`} >Learn More</Link>
                   <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </div>
