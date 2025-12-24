@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Overview from './Overview';
 import ServicesManager from './ServicesManager';
-import ProjectsManager from './ProjectsManager';
-import GalleryManager from './GalleryManager';
-import ContactsView from './ContactsView';
+// import ProjectsManager from './ProjectsManager';
+// import GalleryManager from './GalleryManager';
+// import ContactsView from './ContactsView';
 import LoginForm from './LoginForm';
 
 export default function AdminDashboard() {
@@ -41,9 +41,9 @@ export default function AdminDashboard() {
       <main className="ml-64 p-8">
         {activeTab === 'overview' && <Overview />}
         {activeTab === 'services' && <ServicesManager />}
-        {activeTab === 'projects' && <ProjectsManager />}
+        {/* {activeTab === 'projects' && <ProjectsManager />}
         {activeTab === 'gallery' && <GalleryManager />}
-        {activeTab === 'contacts' && <ContactsView />}
+        {activeTab === 'contacts' && <ContactsView />} */}
         {activeTab === 'settings' && <div>Settings (Coming soon)</div>}
       </main>
     </div>
