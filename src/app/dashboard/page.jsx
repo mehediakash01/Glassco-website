@@ -1,6 +1,6 @@
 'use client';
 
-import AdminDashboard from "../../components/AdminDashboard";
+import AdminDashboard from "../../components/dashboard/AdminDashboard";
 
 
 
