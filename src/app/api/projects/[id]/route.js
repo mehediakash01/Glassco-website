@@ -1,6 +1,6 @@
 
 import { NextResponse } from 'next/server';
-import { pool } from '@/config/db';
+import { pool } from '@/lib/db';
 import { ApiResponse } from '@/lib/utils/apiResponse';
 import { uploadToCloudinary } from '@/lib/cloudinary';
 

@@ -1,6 +1,6 @@
 // app/api/projects/page.js
 import { NextResponse } from 'next/server';
-import { pool } from '@/config/db';
+import { pool } from '@/lib/db';
 import { ApiResponse } from '@/lib/utils/apiResponse';
 
 export async function GET(request) {

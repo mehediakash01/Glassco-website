@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Overview from './Overview';
 import ServicesManager from './ServicesManager';
-// import ProjectsManager from './ProjectsManager';
+
 // import GalleryManager from './GalleryManager';
 // import ContactsView from './ContactsView';
 import LoginForm from './LoginForm';
+import ProjectsManager from './ProjectManager';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,9 +42,9 @@ export default function AdminDashboard() {
       <main className="ml-64 p-8">
         {activeTab === 'overview' && <Overview />}
         {activeTab === 'services' && <ServicesManager />}
-        {/* {activeTab === 'projects' && <ProjectsManager />}
-        {activeTab === 'gallery' && <GalleryManager />}
-        {activeTab === 'contacts' && <ContactsView />} */}
+        {activeTab === 'projects' && <ProjectsManager />}
+        {/* {activeTab === 'gallery' && <GalleryManager />}
+         {activeTab === 'contacts' && <ContactsView />}  */}
         {activeTab === 'settings' && <div>Settings (Coming soon)</div>}
       </main>
     </div>
