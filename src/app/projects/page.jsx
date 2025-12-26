@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiExternalLink, FiMapPin, FiCalendar, FiAward } from 'react-icons/fi';
+import SectionWrapper from '@/components/SectionWrapper';
 
 const ProjectsSection = () => {
   const sectionRef = useRef(null);
@@ -142,7 +143,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-20 md:py-28 bg-white overflow-hidden">
+    <section ref={sectionRef} className="relative py-20 md:py-28 ">
       {/* Background Decorative Elements */}
       <div className="absolute top-20 left-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-20 right-0 w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-20 -z-10"></div>
@@ -163,7 +164,7 @@ const ProjectsSection = () => {
           >
             OUR PORTFOLIO
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Featured <span className="text-amber-600">Projects</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">

@@ -12,6 +12,7 @@ import {
   FiCheckCircle
 } from 'react-icons/fi';
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import SectionWrapper from '@/components/SectionWrapper';
 
 const ContactSection = () => {
   const sectionRef = useRef(null);
@@ -119,7 +120,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-amber-50/20 overflow-hidden">
+    <section  ref={sectionRef} className="relative py-20 md:py-28 ">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-20 -z-10"></div>
@@ -140,7 +141,7 @@ const ContactSection = () => {
           >
             GET IN TOUCH
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Contact <span className="text-amber-600">Us</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">

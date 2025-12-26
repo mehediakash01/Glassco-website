@@ -16,6 +16,7 @@ import {
 } from 'react-icons/fi';
 import { BsDoorOpen, BsBuilding, BsGrid3X3Gap } from 'react-icons/bs';
 import Link from 'next/link';
+import SectionWrapper from '@/components/SectionWrapper';
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
@@ -155,7 +156,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-amber-50/30 overflow-hidden">
+    <section ref={sectionRef}  className=" py-20 md:py-28 ">
       {/* Background Decorative Elements */}
       <div className="absolute top-20 right-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 -z-10"></div>
@@ -176,7 +177,7 @@ const ServicesSection = () => {
           >
             WHAT WE DO
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Our <span className="text-amber-600">Services</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
