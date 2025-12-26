@@ -1,33 +1,53 @@
-import { NextResponse } from "next/server";
-import { pool } from "@/config/db";
+// app/api/projects/page.js
+import { NextResponse } from 'next/server';
+import { pool } from '@/config/db';
+import { ApiResponse } from '@/lib/utils/apiResponse';
 
-export async function GET() {
+export async function GET(request) {
   try {
-    const { rows } = await pool.query(
-      "SELECT * FROM projects ORDER BY created_at DESC"
-    );
-    return NextResponse.json(rows);
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category');
+
+    let query = 'SELECT * FROM projects';
+    const values = [];
+
+    if (category && category !== 'all') {
+      query += ' WHERE category = $1';
+      values.push(category);
+    }
+
+    query += ' ORDER BY created_at DESC';
+
+    const { rows } = await pool.query(query, values);
+
+    return NextResponse.json(ApiResponse.success(rows, 'Projects fetched successfully'));
   } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to fetch projects" },
-      { status: 500 }
-    );
+    console.error('GET /projects error:', error);
+    return NextResponse.json(ApiResponse.error('Failed to fetch projects', 500), { status: 500 });
   }
 }
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const body = await req.json();
-    const {
-      title,
-      category,
-      location,
-      year,
-      service,
-      image,
-      description,
-      client_type
-    } = body;
+    const formData = await request.formData();
+
+    const title = formData.get('title');
+    const category = formData.get('category');
+    const location = formData.get('location');
+    const year = parseInt(formData.get('year'), 10);
+    const service = formData.get('service');
+    const description = formData.get('description');
+    const client_type = formData.get('client_type');
+
+    // Image upload (if provided as File)
+    let image = formData.get('image');
+    let imageUrl = null;
+
+    if (image && image.size > 0) {
+      // Use your existing cloudinary upload function
+      const { uploadToCloudinary } = await import('@/lib/cloudinary');
+      imageUrl = await uploadToCloudinary(image);
+    }
 
     const query = `
       INSERT INTO projects
@@ -36,24 +56,12 @@ export async function POST(req) {
       RETURNING *
     `;
 
-    const values = [
-      title,
-      category,
-      location,
-      year,
-      service,
-      image,
-      description,
-      client_type
-    ];
-
+    const values = [title, category, location, year, service, imageUrl, description, client_type];
     const { rows } = await pool.query(query, values);
 
-    return NextResponse.json(rows[0], { status: 201 });
+    return NextResponse.json(ApiResponse.success(rows[0], 'Project created successfully'), { status: 201 });
   } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to create project" },
-      { status: 500 }
-    );
+    console.error('POST /projects error:', error);
+    return NextResponse.json(ApiResponse.error('Failed to create project', 500), { status: 500 });
   }
 }
