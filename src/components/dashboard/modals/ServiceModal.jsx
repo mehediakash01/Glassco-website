@@ -1,9 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiSave, FiPlus, FiTrash2, FiUpload } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiX, FiSave, FiPlus, FiTrash2, FiUpload, FiLoader } from 'react-icons/fi';
+import toast from 'react-hot-toast';
+import { servicesAPI } from '../../../lib/serviceApi';
 
 export default function ServiceModal({ service, onClose, onSave }) {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -19,7 +22,6 @@ export default function ServiceModal({ service, onClose, onSave }) {
     applications: ['']
   });
 
-  // Load existing service data for editing
   useEffect(() => {
     if (service) {
       setFormData({
@@ -28,18 +30,25 @@ export default function ServiceModal({ service, onClose, onSave }) {
         tagline: service.tagline || '',
         category: service.category || '',
         description: service.description || '',
-        fullDescription: service.fullDescription || '',
+        fullDescription: service.full_description || service.fullDescription || '',
         icon: service.icon || '',
-        image: service.image || null,
-        features: service.features || [{ title: '', description: '', icon: '' }],
-        specifications: service.specifications || [''],
-        benefits: service.benefits || [''],
-        applications: service.applications || ['']
+        image: service.image_url || service.image || null,
+        features: service.features && service.features.length > 0 
+          ? service.features 
+          : [{ title: '', description: '', icon: '' }],
+        specifications: service.specifications && service.specifications.length > 0 
+          ? service.specifications 
+          : [''],
+        benefits: service.benefits && service.benefits.length > 0 
+          ? service.benefits 
+          : [''],
+        applications: service.applications && service.applications.length > 0 
+          ? service.applications 
+          : ['']
       });
     }
   }, [service]);
 
-  // Auto-generate slug from title
   const handleTitleChange = (value) => {
     setFormData({
       ...formData,
@@ -48,12 +57,10 @@ export default function ServiceModal({ service, onClose, onSave }) {
     });
   };
 
-  // Handle basic field changes
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
 
-  // Handle array field changes (specs, benefits, applications)
   const handleArrayChange = (field, index, value) => {
     const newArray = [...formData[field]];
     newArray[index] = value;
@@ -69,7 +76,6 @@ export default function ServiceModal({ service, onClose, onSave }) {
     setFormData({ ...formData, [field]: newArray });
   };
 
-  // Handle feature changes
   const handleFeatureChange = (index, field, value) => {
     const newFeatures = [...formData.features];
     newFeatures[index][field] = value;
@@ -88,23 +94,94 @@ export default function ServiceModal({ service, onClose, onSave }) {
     setFormData({ ...formData, features: newFeatures });
   };
 
-  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('File size must be less than 5MB');
+        return;
+      }
+      
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload a valid image file');
+        return;
+      }
+      
       setFormData({ ...formData, image: file });
+      toast.success('Image selected successfully');
     }
   };
 
-  // Handle form submission
-  const handleSubmit = () => {
-    // Validation
-    if (!formData.title || !formData.slug || !formData.description) {
-      alert('Please fill in required fields');
+  const validateForm = () => {
+    if (!formData.title.trim()) {
+      toast.error('Please enter a service title');
+      return false;
+    }
+
+    if (!formData.slug.trim()) {
+      toast.error('Slug is required');
+      return false;
+    }
+
+    if (!formData.description.trim()) {
+      toast.error('Please enter a service description');
+      return false;
+    }
+
+    if (!formData.category) {
+      toast.error('Please select a category');
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) {
       return;
     }
 
-    onSave(formData);
+    setLoading(true);
+    const loadingToast = toast.loading(
+      service ? 'Updating service...' : 'Creating service...'
+    );
+
+    try {
+      let result;
+      
+      if (service) {
+        result = await servicesAPI.update(service.slug, formData);
+      } else {
+        result = await servicesAPI.create(formData);
+      }
+
+      toast.dismiss(loadingToast);
+
+      if (result.success) {
+        toast.success(result.message || (service ? 'Service updated successfully!' : 'Service created successfully!'), {
+          duration: 3000,
+          icon: '✅',
+        });
+        
+        onSave(result.data);
+        
+        setTimeout(() => {
+          onClose();
+        }, 500);
+      } else {
+        toast.error(result.error || 'Something went wrong', {
+          duration: 4000,
+        });
+      }
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      console.error('Error saving service:', error);
+      toast.error('An unexpected error occurred. Please try again.', {
+        duration: 4000,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -122,14 +199,14 @@ export default function ServiceModal({ service, onClose, onSave }) {
         onClick={(e) => e.stopPropagation()}
         className="bg-white rounded-2xl max-w-4xl w-full p-8 my-8 max-h-[90vh] overflow-y-auto"
       >
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4 border-b">
+        <div className="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4 border-b z-10">
           <h3 className="text-2xl font-bold text-slate-900">
             {service ? 'Edit Service' : 'Add New Service'}
           </h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl"
+            className="text-gray-400 hover:text-gray-600 text-2xl transition-colors disabled:opacity-50"
+            disabled={loading}
           >
             <FiX />
           </button>
@@ -152,8 +229,9 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   type="text"
                   value={formData.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none transition-colors disabled:bg-gray-100"
                   placeholder="e.g., Aluminum Doors and Windows"
+                  disabled={loading}
                 />
               </div>
 
@@ -164,9 +242,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
                 <input
                   type="text"
                   value={formData.slug}
-                  onChange={(e) => handleChange('slug', e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none bg-gray-50"
-                  placeholder="auto-generated"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50"
                   readOnly
                 />
               </div>
@@ -179,8 +255,9 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   type="text"
                   value={formData.tagline}
                   onChange={(e) => handleChange('tagline', e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
                   placeholder="e.g., PREMIUM QUALITY"
+                  disabled={loading}
                 />
               </div>
 
@@ -191,7 +268,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
                 <select
                   value={formData.category}
                   onChange={(e) => handleChange('category', e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
+                  disabled={loading}
                 >
                   <option value="">Select category</option>
                   <option value="aluminum">Aluminum Works</option>
@@ -213,9 +291,10 @@ export default function ServiceModal({ service, onClose, onSave }) {
                 rows="3"
                 value={formData.description}
                 onChange={(e) => handleChange('description', e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none resize-none"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none resize-none disabled:bg-gray-100"
                 placeholder="Brief description for listing pages"
-              ></textarea>
+                disabled={loading}
+              />
             </div>
 
             <div className="mt-4">
@@ -226,36 +305,40 @@ export default function ServiceModal({ service, onClose, onSave }) {
                 rows="5"
                 value={formData.fullDescription}
                 onChange={(e) => handleChange('fullDescription', e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none resize-none"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none resize-none disabled:bg-gray-100"
                 placeholder="Detailed description for service detail page"
-              ></textarea>
+                disabled={loading}
+              />
             </div>
 
             <div className="mt-4">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Service Image
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-amber-500 transition-colors cursor-pointer">
+              <div className={`border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-amber-500 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleImageUpload}
                   className="hidden"
                   id="image-upload"
+                  disabled={loading}
                 />
-                <label htmlFor="image-upload" className="cursor-pointer">
+                <label htmlFor="image-upload" className={loading ? 'cursor-not-allowed' : 'cursor-pointer'}>
                   <FiUpload className="mx-auto text-4xl text-gray-400 mb-2" />
                   <p className="text-gray-600">Click to upload image</p>
                   <p className="text-sm text-gray-400 mt-1">PNG, JPG up to 5MB</p>
                   {formData.image && (
-                    <p className="text-sm text-green-600 mt-2">Image selected: {formData.image.name || 'Image uploaded'}</p>
+                    <p className="text-sm text-green-600 mt-2 font-medium">
+                      ✓ {formData.image.name || 'Image uploaded'}
+                    </p>
                   )}
                 </label>
               </div>
             </div>
           </section>
 
-          {/* Features Section */}
+          {/* Features */}
           <section>
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -264,7 +347,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
               </h4>
               <button
                 onClick={addFeature}
-                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                disabled={loading}
               >
                 <FiPlus /> Add Feature
               </button>
@@ -277,7 +361,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   {formData.features.length > 1 && (
                     <button
                       onClick={() => removeFeature(index)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 disabled:opacity-50"
+                      disabled={loading}
                     >
                       <FiTrash2 />
                     </button>
@@ -288,22 +373,25 @@ export default function ServiceModal({ service, onClose, onSave }) {
                     type="text"
                     value={feature.title}
                     onChange={(e) => handleFeatureChange(index, 'title', e.target.value)}
-                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"
+                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
                     placeholder="Feature title"
+                    disabled={loading}
                   />
                   <input
                     type="text"
                     value={feature.icon}
                     onChange={(e) => handleFeatureChange(index, 'icon', e.target.value)}
-                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"
-                    placeholder="Icon name (optional)"
+                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
+                    placeholder="Icon (optional)"
+                    disabled={loading}
                   />
                   <input
                     type="text"
                     value={feature.description}
                     onChange={(e) => handleFeatureChange(index, 'description', e.target.value)}
-                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none md:col-span-3"
+                    className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none md:col-span-3 disabled:bg-gray-100"
                     placeholder="Feature description"
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -319,7 +407,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
               </h4>
               <button
                 onClick={() => addArrayItem('specifications')}
-                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                disabled={loading}
               >
                 <FiPlus /> Add Spec
               </button>
@@ -331,13 +420,15 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   type="text"
                   value={spec}
                   onChange={(e) => handleArrayChange('specifications', index, e.target.value)}
-                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"
+                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
                   placeholder="e.g., Premium-grade aluminium profiles"
+                  disabled={loading}
                 />
                 {formData.specifications.length > 1 && (
                   <button
                     onClick={() => removeArrayItem('specifications', index)}
-                    className="px-3 text-red-600 hover:text-red-700"
+                    className="px-3 text-red-600 hover:text-red-700 disabled:opacity-50"
+                    disabled={loading}
                   >
                     <FiTrash2 />
                   </button>
@@ -355,7 +446,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
               </h4>
               <button
                 onClick={() => addArrayItem('benefits')}
-                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                disabled={loading}
               >
                 <FiPlus /> Add Benefit
               </button>
@@ -367,13 +459,15 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   type="text"
                   value={benefit}
                   onChange={(e) => handleArrayChange('benefits', index, e.target.value)}
-                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"
-                  placeholder="e.g., Long-lasting durability and performance"
+                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
+                  placeholder="e.g., Long-lasting durability"
+                  disabled={loading}
                 />
                 {formData.benefits.length > 1 && (
                   <button
                     onClick={() => removeArrayItem('benefits', index)}
-                    className="px-3 text-red-600 hover:text-red-700"
+                    className="px-3 text-red-600 hover:text-red-700 disabled:opacity-50"
+                    disabled={loading}
                   >
                     <FiTrash2 />
                   </button>
@@ -391,7 +485,8 @@ export default function ServiceModal({ service, onClose, onSave }) {
               </h4>
               <button
                 onClick={() => addArrayItem('applications')}
-                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium"
+                className="px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                disabled={loading}
               >
                 <FiPlus /> Add Application
               </button>
@@ -403,13 +498,15 @@ export default function ServiceModal({ service, onClose, onSave }) {
                   type="text"
                   value={app}
                   onChange={(e) => handleArrayChange('applications', index, e.target.value)}
-                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none"
+                  className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none disabled:bg-gray-100"
                   placeholder="e.g., Residential Villas"
+                  disabled={loading}
                 />
                 {formData.applications.length > 1 && (
                   <button
                     onClick={() => removeArrayItem('applications', index)}
-                    className="px-3 text-red-600 hover:text-red-700"
+                    className="px-3 text-red-600 hover:text-red-700 disabled:opacity-50"
+                    disabled={loading}
                   >
                     <FiTrash2 />
                   </button>
@@ -419,19 +516,30 @@ export default function ServiceModal({ service, onClose, onSave }) {
           </section>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 pt-4 sticky bottom-0 bg-white border-t pb-4">
+          <div className="flex gap-3 pt-4 sticky bottom-0 bg-white border-t pb-4 z-10">
             <button
               onClick={onClose}
-              className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
+              className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors disabled:opacity-50"
+              disabled={loading}
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              disabled={loading}
             >
-              <FiSave />
-              {service ? 'Update Service' : 'Save Service'}
+              {loading ? (
+                <>
+                  <FiLoader className="animate-spin" />
+                  {service ? 'Updating...' : 'Saving...'}
+                </>
+              ) : (
+                <>
+                  <FiSave />
+                  {service ? 'Update Service' : 'Save Service'}
+                </>
+              )}
             </button>
           </div>
         </div>

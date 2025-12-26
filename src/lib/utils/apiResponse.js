@@ -1,32 +1,47 @@
+// lib/utils/apiResponse.js
+
 export class ApiResponse {
   static success(data, message = 'Success', statusCode = 200) {
     return {
-      status: 'success',
-      statusCode,
+      success: true,
       message,
-      data
+      data,
+      statusCode,
     };
   }
 
-  static error(message = 'Error', statusCode = 500, errors = null) {
+  static error(message = 'An error occurred', statusCode = 500, errors = null) {
     return {
-      status: 'error',
-      statusCode,
+      success: false,
       message,
-      ...(errors && { errors })
+      statusCode,
+      errors,
     };
   }
 
-  static paginated(data, page, limit, total) {
+  static paginated(data, page = 1, limit = 20, total = 0) {
+    const totalPages = Math.ceil(total / limit);
+    
     return {
-      status: 'success',
+      success: true,
       data,
       pagination: {
         page: parseInt(page),
         limit: parseInt(limit),
-        total,
-        pages: Math.ceil(total / limit)
-      }
+        total: parseInt(total),
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    };
+  }
+
+  static validation(errors) {
+    return {
+      success: false,
+      message: 'Validation failed',
+      statusCode: 400,
+      errors,
     };
   }
 }
