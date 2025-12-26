@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { BsBuilding, BsGear } from "react-icons/bs";
 import SectionWrapper from "@/components/SectionWrapper";
+import ThemeWrapper from "@/components/ThemeWrapper";
 
 const AboutSection = () => {
   const sectionRef = useRef(null);
@@ -79,7 +80,9 @@ const AboutSection = () => {
   };
 
   return (
-    <section
+    
+  <section
+
       ref={sectionRef}
    
       className="py-20 md:py-28 "
@@ -382,6 +385,8 @@ const AboutSection = () => {
         </motion.div>
       </div>
     </section>
+   
+  
   );
 };
 

@@ -4,22 +4,28 @@ import ServicesSection from "./services/page";
 import ProjectsSection from "./projects/page";
 import ContactSection from "./contact/page";
 import SectionWrapper from "@/components/SectionWrapper";
-
-
-
-
+import ThemeWrapper from "@/components/ThemeWrapper";
 
 export default function Home() {
   return (
-  <div>
-       <HeroBanner />
-       <SectionWrapper>
-         <AboutSection/>
-         <ServicesSection/>
-         <ProjectsSection/>
-         <ContactSection/>
-       </SectionWrapper>
-   
-  </div>
+    <div>
+      <ThemeWrapper>
+        <HeroBanner />
+        <SectionWrapper>
+          <AboutSection />
+        </SectionWrapper>
+        <SectionWrapper>
+          <ServicesSection />
+        </SectionWrapper>
+        <SectionWrapper>
+          <ContactSection />
+        </SectionWrapper>
+        <SectionWrapper>
+          <ProjectsSection />
+        </SectionWrapper>
+        
+       
+      </ThemeWrapper>
+    </div>
   );
 }

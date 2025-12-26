@@ -7,6 +7,7 @@ import Overview from './Overview';
 import ServicesManager from './ServicesManager';
 import ProjectsManager from './ProjectManager';
 import LoginForm from './LoginForm';
+import SectionWrapper from '../SectionWrapper';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,7 +31,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex  min-h-screen   bg-slate-50">
       {/* Sidebar */}
       <Sidebar
         activeTab={activeTab}
@@ -68,12 +69,12 @@ useEffect(() => {
         </div>
 
         {/* Dashboard content */}
-        <main className="flex-1 p-4 md:p-8 overflow-auto">
+        <SectionWrapper className="flex-1 p-4 md:p-8 overflow-auto">
           {activeTab === 'overview' && <Overview />}
           {activeTab === 'services' && <ServicesManager />}
           {activeTab === 'projects' && <ProjectsManager />}
           {activeTab === 'settings' && <div>Settings (Coming soon)</div>}
-        </main>
+        </SectionWrapper>
       </div>
     </div>
   );
