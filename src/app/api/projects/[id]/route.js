@@ -1,4 +1,4 @@
-// app/api/projects/[id]/route.js
+
 import { NextResponse } from 'next/server';
 import { pool } from '@/config/db';
 import { ApiResponse } from '@/lib/utils/apiResponse';
