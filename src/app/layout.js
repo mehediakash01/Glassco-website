@@ -3,6 +3,7 @@ import "./globals.css";
 
 import ToastProvider from "./providers/toastProvider";
 import ClientNavbarFooter from "./clientNavbarFooter";
+import CustomCursor from "@/components/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
       >
            <ClientNavbarFooter>
           {children}
-          
+            <CustomCursor />
         </ClientNavbarFooter>
         <ToastProvider />
         
