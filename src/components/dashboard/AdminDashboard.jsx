@@ -2,16 +2,16 @@
 import { useState, useEffect } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
-import Sidebar from './Sidebar';
+import Sidebar from '@/components/dashboard/Sidebar';
 import Overview from './Overview';
 import ServicesManager from './ServicesManager';
-import LoginForm from './LoginForm';
 import ProjectsManager from './ProjectManager';
+import LoginForm from './LoginForm';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
-  const [sidebarOpen, setSidebarOpen] = useState(false); // for mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('adminLoggedIn');
@@ -35,11 +35,11 @@ export default function AdminDashboard() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onLogout={handleLogout}
-        className={`fixed z-40 inset-y-0 left-0 transform bg-white shadow-lg w-64 transition-transform duration-300 ease-in-out
+        className={`fixed z-40 inset-y-0 left-0 w-64 transform bg-gradient-to-b from-slate-900 to-slate-800 transition-transform duration-300 ease-in-out
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:relative md:shadow-none`}
       />
 
-      {/* Overlay for mobile when sidebar is open */}
+      {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-30 md:hidden"
@@ -57,7 +57,7 @@ export default function AdminDashboard() {
           >
             <FiMenu />
           </button>
-          <span className="font-bold text-lg">Dashboard</span>
+          <span className="font-bold text-lg">GLASSCO Dashboard</span>
           <button
             onClick={handleLogout}
             className="px-3 py-1 bg-red-600 text-white rounded-lg text-sm"
@@ -66,13 +66,11 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {/* Main dashboard content */}
+        {/* Dashboard content */}
         <main className="flex-1 p-4 md:p-8 overflow-auto">
           {activeTab === 'overview' && <Overview />}
           {activeTab === 'services' && <ServicesManager />}
           {activeTab === 'projects' && <ProjectsManager />}
-          {/* {activeTab === 'gallery' && <GalleryManager />}
-              {activeTab === 'contacts' && <ContactsView />} */}
           {activeTab === 'settings' && <div>Settings (Coming soon)</div>}
         </main>
       </div>

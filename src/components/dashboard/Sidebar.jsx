@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import { FiLogOut, FiGrid, FiBriefcase, FiImage, FiMail, FiSettings } from 'react-icons/fi';
 
-export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
+export default function Sidebar({ activeTab, setActiveTab, onLogout, className }) {
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: <FiGrid /> },
     { id: 'services', label: 'Services', icon: <FiBriefcase /> },
@@ -12,7 +12,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-gradient-to-b from-slate-900 to-slate-800 p-6 overflow-y-auto z-50">
+    <aside className={`bg-gradient-to-b from-slate-900 to-slate-800 p-6 overflow-y-auto z-50 ${className}`}>
       {/* Logo */}
       <div className="mb-8">
         <div className="text-3xl font-bold">
@@ -40,7 +40,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout }) {
         ))}
       </nav>
 
-      {/* Logout Button */}
+      {/* Logout */}
       <button
         onClick={onLogout}
         className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-600 hover:text-white transition-all duration-300 mt-8"
