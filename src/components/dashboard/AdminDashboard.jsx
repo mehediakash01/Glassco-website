@@ -13,10 +13,11 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('adminLoggedIn');
-    if (isLoggedIn === 'true') setIsAuthenticated(true);
-  }, []);
+useEffect(() => {
+  const isLoggedIn = localStorage.getItem("adminLoggedIn");
+  if (isLoggedIn === "true") setIsAuthenticated(true);
+}, []);
+
 
   const handleLogout = () => {
     localStorage.removeItem('adminLoggedIn');
