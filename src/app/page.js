@@ -1,10 +1,11 @@
 import HeroBanner from "@/components/HeroBanner";
 import AboutSection from "./about/page";
-import ServicesSection from "./services/page";
+
 import ProjectsSection from "./projects/page";
 import ContactSection from "./contact/page";
 
-import ThemeWrapper from "@/components/ThemeWrapper";
+
+
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       <HeroBanner />
     
       <AboutSection />
-      <ServicesSection />
+      {/* <ServicesSection /> */}
+      
       <ProjectsSection />
       <ContactSection />
  

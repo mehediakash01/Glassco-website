@@ -1,12 +1,34 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { FiArrowRight, FiExternalLink, FiMapPin, FiCalendar, FiAward, FiLoader } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
+import { FiArrowRight, FiExternalLink, FiMapPin, FiCalendar, FiAward, FiLoader, FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 import { projectsAPI } from '@/lib/projectApi';
 
+const localImages = {
+  'ballroom': '/assets/projects/ballroom.jpg',
+  'boutique': '/assets/projects/boutique.jpg',
+  'creed': '/assets/projects/creed.jpg',
+  'dubai-creek': '/assets/projects/dubai-creek.jpg',
+  'feta': '/assets/projects/feta.jpg',
+  'frontGold': '/assets/projects/frontGold.jpg',
+  'huff': '/assets/projects/huff.jpg',
+  'i10': '/assets/projects/i10.jpg',
+  'khunji': '/assets/projects/khunji.jpg',
+  'manuel': '/assets/projects/manuel.jpg',
+  'padel': '/assets/projects/padel.jpg',
+  'urban': '/assets/projects/urban.jpg',
+  'view': '/assets/projects/view.jpg',
+};
+
+// Get all images as array
+const allImages = Object.values(localImages);
+
 const ProjectsSection = () => {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,17 +39,26 @@ const ProjectsSection = () => {
       try {
         setLoading(true);
         setError(null);
-        console.log('Fetching projects...');
         
         const res = await projectsAPI.getAll();
         
-        console.log('API Response:', res);
-        
         if (res.success && res.data) {
-          console.log('Projects fetched successfully:', res.data.length, 'items');
-          setProjects(res.data);
+          // Map projects with local images
+          const projectsWithImages = res.data.map((project, index) => ({
+            ...project,
+            // Assign images in a cycling pattern
+            mainImage: allImages[index % allImages.length],
+            // Each project gets 3-5 random images for gallery
+            galleryImages: [
+              allImages[index % allImages.length],
+              allImages[(index + 1) % allImages.length],
+              allImages[(index + 2) % allImages.length],
+              allImages[(index + 3) % allImages.length],
+            ]
+          }));
+          
+          setProjects(projectsWithImages);
         } else {
-          console.error('API returned unsuccessful response:', res);
           setError(res.error || 'Failed to fetch projects');
         }
       } catch (err) {
@@ -40,6 +71,34 @@ const ProjectsSection = () => {
     
     fetchProjects();
   }, []);
+
+  // Handle image navigation
+  const nextImage = (e) => {
+    e.stopPropagation();
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedProject.galleryImages.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = (e) => {
+    e.stopPropagation();
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedProject.galleryImages.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+  };
+
+  const handleContactRedirect = () => {
+    router.push('/contact');
+  };
 
   // Loading State
   if (loading) {
@@ -90,8 +149,6 @@ const ProjectsSection = () => {
     ? projects 
     : projects.filter(project => project.category === activeCategory);
 
-  console.log('Filtered projects:', filteredProjects.length, 'for category:', activeCategory);
-
   return (
     <section className="relative py-20 md:py-28 bg-black overflow-hidden">
       {/* Background Decorative Elements */}
@@ -135,30 +192,22 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-  
-
         {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                onClick={() => setSelectedProject(project)}
+                onClick={() => handleProjectClick(project)}
                 className="group bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 cursor-pointer hover:-translate-y-2"
               >
                 {/* Project Image */}
                 <div className="relative h-64 overflow-hidden bg-slate-900">
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
-                      <FiAward className="text-6xl text-amber-500/30" />
-                    </div>
-                  )}
+                  <img
+                    src={project.mainImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                   
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-10"></div>
@@ -167,6 +216,13 @@ const ProjectsSection = () => {
                   <div className="absolute top-4 right-4 z-20">
                     <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full shadow-lg capitalize">
                       {project.category}
+                    </span>
+                  </div>
+
+                  {/* Gallery indicator */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 bg-black/60 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
+                      {project.galleryImages.length} Photos
                     </span>
                   </div>
 
@@ -210,7 +266,7 @@ const ProjectsSection = () => {
                       {project.client_type}
                     </span>
                     <span className="text-amber-400 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                      View Details
+                      View Gallery
                       <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -249,11 +305,9 @@ const ProjectsSection = () => {
         {/* CTA Section */}
         <div className="text-center">
           <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-amber-500/20 overflow-hidden">
-            {/* Decorative blurs inside CTA */}
             <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             <div className="pointer-events-none absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             
-            {/* CTA Content */}
             <div className="relative z-10">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Ready to Start Your Project?
@@ -262,7 +316,10 @@ const ProjectsSection = () => {
                 Lets discuss your requirements and create something exceptional together. Our team is ready to bring your vision to life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl border border-amber-500/30 inline-flex items-center justify-center gap-2 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/40 transition-all duration-300 active:scale-95">
+                <button 
+                  onClick={handleContactRedirect}
+                  className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl border border-amber-500/30 inline-flex items-center justify-center gap-2 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/40 transition-all duration-300 active:scale-95"
+                >
                   Get Free Consultation
                   <span className="animate-pulse">→</span>
                 </button>
@@ -275,51 +332,119 @@ const ProjectsSection = () => {
         </div>
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Project Gallery Modal */}
       {selectedProject && (
         <div
           onClick={() => setSelectedProject(null)}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-slate-800 border-2 border-amber-500/30 rounded-2xl max-w-2xl w-full p-8 max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 hover:scale-100"
+            className="relative bg-slate-900 border-2 border-amber-500/30 rounded-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden"
           >
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h3 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
-                <p className="text-amber-400 font-medium">{selectedProject.service}</p>
-              </div>
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="text-gray-400 hover:text-white text-3xl leading-none w-8 h-8 flex items-center justify-center hover:rotate-90 transition-transform duration-300"
-              >
-                ×
-              </button>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center gap-2 text-gray-300">
-                <FiMapPin className="text-amber-400" />
-                <span>{selectedProject.location}</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <FiCalendar className="text-amber-400" />
-                <span>Completed in {selectedProject.year}</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <FiAward className="text-amber-400" />
-                <span>{selectedProject.client_type}</span>
-              </div>
-            </div>
-
-            <p className="text-gray-300 leading-relaxed mb-6">
-              {selectedProject.description}
-            </p>
-
-            <button className="w-full px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300 active:scale-95">
-              Contact Us About This Project
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 z-50 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors"
+            >
+              <FiX size={24} />
             </button>
+
+            <div className="grid md:grid-cols-2 h-full max-h-[95vh]">
+              {/* Image Gallery Side */}
+              <div className="relative bg-black flex items-center justify-center p-4">
+                {/* Main Image */}
+                <img
+                  src={selectedProject.galleryImages[currentImageIndex]}
+                  alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                  className="max-w-full max-h-[70vh] object-contain rounded-lg"
+                />
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110"
+                >
+                  <FiChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110"
+                >
+                  <FiChevronRight size={24} />
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
+                  {currentImageIndex + 1} / {selectedProject.galleryImages.length}
+                </div>
+
+                {/* Thumbnail Navigation */}
+                <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-2 px-4">
+                  {selectedProject.galleryImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(idx);
+                      }}
+                      className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                        idx === currentImageIndex 
+                          ? 'border-amber-500 scale-110' 
+                          : 'border-white/30 hover:border-white/60'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Project Details Side */}
+              <div className="p-8 overflow-y-auto max-h-[95vh]">
+                <div className="mb-6">
+                  <span className="inline-block px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full mb-3 capitalize">
+                    {selectedProject.category}
+                  </span>
+                  <h3 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
+                  <p className="text-amber-400 font-medium text-lg">{selectedProject.service}</p>
+                </div>
+
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                    <FiMapPin className="text-amber-400 flex-shrink-0" size={20} />
+                    <span>{selectedProject.location}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                    <FiCalendar className="text-amber-400 flex-shrink-0" size={20} />
+                    <span>Completed in {selectedProject.year}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                    <FiAward className="text-amber-400 flex-shrink-0" size={20} />
+                    <span>{selectedProject.client_type}</span>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-xl font-bold text-white mb-3">Project Description</h4>
+                  <p className="text-gray-300 leading-relaxed">
+                    {selectedProject.description}
+                  </p>
+                </div>
+
+                <button 
+                  onClick={handleContactRedirect}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300 active:scale-95 flex items-center justify-center gap-2"
+                >
+                  Contact Us About This Project
+                  <FiArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -12,7 +12,7 @@ import {
   FiCheckCircle
 } from 'react-icons/fi';
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import SectionWrapper from '@/components/SectionWrapper';
+
 
 const ContactSection = () => {
   const sectionRef = useRef(null);
@@ -31,14 +31,14 @@ const ContactSection = () => {
     {
       icon: <FiPhone />,
       title: 'Phone',
-      details: ['+971 XX XXX XXXX', '+971 XX XXX XXXX'],
-      link: 'tel:+971XXXXXXXX',
+      details: ['025557229', '048858814'],
+      link: 'tel:048858814',
       color: 'from-blue-500 to-blue-600'
     },
     {
       icon: <FiMail />,
       title: 'Email',
-      details: ['info@glasscotrade.com', 'sales@glasscotrade.com'],
+      details: ['info@glasscotrade.com', 'info@amccompleteinteriors.com'],
       link: 'mailto:info@glasscotrade.com',
       color: 'from-amber-500 to-amber-600'
     },
@@ -58,19 +58,19 @@ const ContactSection = () => {
     }
   ];
 
-  const services = [
-    'Aluminum Doors and Windows',
-    'Curtain Walls',
-    'Spider Glazing',
-    'Composite Cladding',
-    'Pergolas & Canopy',
-    'Automatic Doors',
-    'Steel and Metal Decoration',
-    'Gates and Boundary Walls',
-    'Partition Glazing',
-    'Glass Processing',
-    'Other'
-  ];
+  // const services = [
+  //   'Aluminum Doors and Windows',
+  //   'Curtain Walls',
+  //   'Spider Glazing',
+  //   'Composite Cladding',
+  //   'Pergolas & Canopy',
+  //   'Automatic Doors',
+  //   'Steel and Metal Decoration',
+  //   'Gates and Boundary Walls',
+  //   'Partition Glazing',
+  //   'Glass Processing',
+  //   'Other'
+  // ];
 
   const handleChange = (e) => {
     setFormData({
@@ -263,7 +263,7 @@ const ContactSection = () => {
                 </div>
 
                 {/* Service Select */}
-                <div>
+                {/* <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Service Required *
                   </label>
@@ -279,7 +279,7 @@ const ContactSection = () => {
                       <option key={index} value={service}>{service}</option>
                     ))}
                   </select>
-                </div>
+                </div> */}
 
                 {/* Message Textarea */}
                 <div>
@@ -389,7 +389,7 @@ const ContactSection = () => {
               <p className="text-gray-700 mb-6">Call us directly or send a WhatsApp message for quick response.</p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <motion.a
-                  href="tel:+971XXXXXXXX"
+                  href="tel:048858814"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold text-center hover:bg-slate-800 transition-all duration-300 flex items-center justify-center gap-2"
@@ -398,7 +398,7 @@ const ContactSection = () => {
                   Call Now
                 </motion.a>
                 <motion.a
-                  href="https://wa.me/971XXXXXXXX"
+                  href="https://wa.me/048858814"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex-1 px-6 py-3 bg-green-600 text-white rounded-xl font-semibold text-center hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
