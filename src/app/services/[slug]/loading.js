@@ -1,5 +1,5 @@
-import LoadingScreen from '@/components/LoadingScreen';
+import {LoadingSpinner}  from '@/components/LoadingScreen';
 
 export default function Loading() {
-  return <LoadingScreen message="Loading serviceDetails..." />;
+  return <LoadingSpinner  message="Loading serviceDetails..." />;
 }
