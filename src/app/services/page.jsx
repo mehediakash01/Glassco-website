@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { 
   FiArrowRight, 
   FiCheckCircle, 
@@ -33,8 +32,6 @@ const iconMap = {
 };
 
 const ServicesSection = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState('all');
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,7 +45,7 @@ const ServicesSection = () => {
         const res = await servicesAPI.getAll();
         
         if (res.success) {
-          console.log('Services fetched:', res.data); // Debug log
+          console.log('Services fetched:', res.data);
           setServices(res.data);
         } else {
           console.error('Failed to fetch services', res.error);
@@ -119,84 +116,49 @@ const ServicesSection = () => {
     ? normalizedServices
     : normalizedServices.filter(s => s.category === activeTab);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
-  };
-
   return (
-    <section ref={sectionRef} id="services" className="py-20 md:py-28">
+    <section id="services" className="py-20 md:py-28 bg-black">
       <div className="container mx-auto px-4 md:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-2 bg-amber-600/30 border-2 border-amber-500 rounded-full text-amber-400 text-sm font-bold tracking-wider mb-4"
-          >
+        <div className="text-center mb-12 opacity-100">
+          <span className="inline-block px-4 py-2 bg-amber-600/30 border-2 border-amber-500 rounded-full text-amber-400 text-sm font-bold tracking-wider mb-4">
             WHAT WE DO
-          </motion.span>
+          </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Our <span className="text-amber-400">Services</span>
           </h2>
-          <p className="text-gray-200 max-w-2xl mx-auto text-lg mb-6">
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg mb-6">
             Comprehensive aluminium and glass solutions tailored to your project needs with precision engineering and expert craftsmanship.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto rounded-full"></div>
-        </motion.div>
+        </div>
 
         {/* Category Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
-        >
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
           {categories.map(category => (
-            <motion.button
+            <button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 ${
                 activeTab === category.id
                   ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/50 border-2 border-amber-400'
-                  : 'bg-slate-700/80 text-white hover:bg-slate-600/80 border-2 border-slate-600 hover:border-amber-500/50'
+                  : 'bg-slate-700/80 text-gray-200 hover:bg-slate-600/80 border-2 border-slate-600 hover:border-amber-500/50'
               }`}
             >
               {category.label}
-              <span className={`ml-2 text-sm ${activeTab === category.id ? 'text-amber-100' : 'text-gray-500'}`}>
+              <span className={`ml-2 text-sm ${activeTab === category.id ? 'text-amber-100' : 'text-gray-400'}`}>
                 ({category.count})
               </span>
-            </motion.button>
+            </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Services Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
-            <motion.div
+            <div
               key={service.id}
-              variants={itemVariants}
-              layout
-              whileHover={{ y: -10 }}
-              className="group bg-slate-700/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400"
+              className="group bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 hover:-translate-y-2"
             >
               {/* Service Image */}
               <div className="relative h-56 overflow-hidden">
@@ -218,11 +180,11 @@ const ServicesSection = () => {
               </div>
 
               {/* Card content */}
-              <div className="p-6 relative z-20 bg-slate-800/90">
+              <div className="p-6 bg-slate-800">
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-300 transition-colors duration-300">
                   {service.title}
                 </h3>
-                <p className="text-gray-100 text-base leading-relaxed mb-4">
+                <p className="text-gray-300 text-base leading-relaxed mb-4">
                   {service.description}
                 </p>
 
@@ -230,7 +192,7 @@ const ServicesSection = () => {
                 {service.features && service.features.length > 0 && (
                   <div className="grid grid-cols-2 gap-2 mb-6">
                     {service.features.slice(0, 4).map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm text-white">
+                      <div key={idx} className="flex items-center gap-2 text-sm text-gray-300">
                         <FiCheckCircle className="text-amber-400 flex-shrink-0" size={16} />
                         <span className="truncate">{feature.title || feature}</span>
                       </div>
@@ -239,21 +201,18 @@ const ServicesSection = () => {
                 )}
 
                 <Link href={`/services/${service.slug}`}>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 text-amber-300 font-bold hover:gap-3 transition-all duration-300 group cursor-pointer text-base"
-                  >
+                  <div className="flex items-center gap-2 text-amber-400 font-bold hover:gap-3 transition-all duration-300 cursor-pointer text-base group/link">
                     Learn More
-                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </motion.div>
+                    <FiArrowRight className="group-hover/link:translate-x-1 transition-transform" />
+                  </div>
                 </Link>
               </div>
 
               {/* Bottom Accent Line */}
               <div className="h-1 bg-gradient-to-r from-amber-500 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Empty State */}
         {filteredServices.length === 0 && (
@@ -263,15 +222,10 @@ const ServicesSection = () => {
         )}
 
         {/* Bottom CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20"
-        >
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 relative overflow-hidden border border-amber-500/20">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="mt-20">
+          <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 overflow-hidden border border-amber-500/20">
+            <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
+            <div className="pointer-events-none absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             <div className="relative z-10 text-center">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Can not Find What You are Looking For?
@@ -280,53 +234,35 @@ const ServicesSection = () => {
                 We offer custom solutions tailored to your specific needs. Contact us to discuss your project requirements.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl shadow-amber-500/30 border border-amber-500/30 inline-flex items-center justify-center gap-2"
-                >
+                <button className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl shadow-amber-500/30 border border-amber-500/30 inline-flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 active:scale-95 hover:shadow-2xl hover:shadow-amber-500/40">
                   Request Custom Quote
-                  <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-                    →
-                  </motion.span>
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-transparent text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:border-amber-500 hover:bg-white/5 transition-all duration-300"
-                >
+                  <span className="animate-pulse">→</span>
+                </button>
+                <button className="px-8 py-4 bg-transparent text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:border-amber-500 hover:bg-white/5 transition-all duration-300 hover:scale-105 active:scale-95">
                   View All Projects
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Stats Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { number: `${services.length}+`, label: 'Services Offered' },
             { number: '500+', label: 'Projects Completed' },
             { number: '100%', label: 'Quality Guaranteed' },
             { number: '24/7', label: 'Support Available' }
           ].map((stat, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-              className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300"
+              className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 hover:scale-105"
             >
               <div className="text-3xl md:text-4xl font-bold text-amber-500 mb-2">{stat.number}</div>
-              <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
-            </motion.div>
+              <div className="text-gray-300 text-sm font-medium">{stat.label}</div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
