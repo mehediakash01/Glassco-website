@@ -12,7 +12,6 @@ const GalleryPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Your 15 images from public/assets/gallery
   const localImages = [
     '/assets/gellary/IMG_4424.JPG',
     '/assets/gellary/IMG_4443.JPG',
