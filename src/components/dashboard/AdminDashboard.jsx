@@ -14,11 +14,13 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-useEffect(() => {
-  const isLoggedIn = localStorage.getItem("adminLoggedIn");
-  if (isLoggedIn === "true") setIsAuthenticated(true);
-}, []);
-
+  // Fix: avoid direct sync setState inside effect
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("adminLoggedIn");
+    if (isLoggedIn === "true") {
+      setTimeout(() => setIsAuthenticated(true), 0);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('adminLoggedIn');
@@ -31,8 +33,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="flex  min-h-screen   bg-slate-50">
-      {/* Sidebar */}
+    <div className="flex min-h-screen bg-slate-50">
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -41,7 +42,6 @@ useEffect(() => {
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:relative md:shadow-none`}
       />
 
-      {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-30 md:hidden"
@@ -49,9 +49,7 @@ useEffect(() => {
         />
       )}
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col min-h-screen md:ml-64">
-        {/* Mobile navbar */}
         <div className="flex items-center justify-between bg-white p-4 shadow md:hidden">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -68,7 +66,6 @@ useEffect(() => {
           </button>
         </div>
 
-        {/* Dashboard content */}
         <SectionWrapper className="flex-1 p-4 md:p-8 overflow-auto">
           {activeTab === 'overview' && <Overview />}
           {activeTab === 'services' && <ServicesManager />}
