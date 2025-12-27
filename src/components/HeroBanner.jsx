@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import Link from "next/link";
 
 const HeroBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,31 +10,25 @@ const HeroBanner = () => {
 
   const slides = [
     {
-      image: "assets/images/banner-1.jpg", 
-      tagline: "TIMELESS ELEGANCE",
-      title: "Custom Glass Solutions for Every Project",
-      subtitle: "State-Of-Art Manufacturing facility",
-      description:
-        "Our Glass solutions combine style, strength, and sustainability to transform your architectural vision into reality.",
-      cta: "Explore Services",
+      image: "/assets/images/banner-1.jpg", 
+      title: "Precision in Glass & Aluminium",
+      subtitle: "Crafting excellence for modern architecture",
+      cta: "Explore Our Work",
+      link: "/projects"
     },
     {
-      image: "assets/images/banner-2.jpg",
-      tagline: "PREMIUM QUALITY",
-      title: "Delivering Excellence Across GCC Regions",
-      subtitle: "Expert Craftsmanship & Innovation",
-      description:
-        "With cutting-edge technology and skilled artisans, we deliver aluminium and glass solutions that exceed expectations.",
-      cta: "View Projects",
+      image: "/assets/images/banner-2.jpg",
+      title: "Transforming Spaces with Quality",
+      subtitle: "Premium solutions across the GCC",
+      cta: "View Services",
+      link: "/services/glass-services"
     },
     {
       image: "/assets/images/banner-3.jpg",
-      tagline: "INNOVATIVE DESIGN",
-      title: "Where Precision Meets Perfection",
-      subtitle: "Our Designs Enhance both Style & Strength",
-      description:
-        "From concept to installation, we ensure every detail reflects quality, durability, and modern aesthetics.",
-      cta: "Get Quote",
+      title: "Where Innovation Meets Design",
+      subtitle: "15+ years of trusted expertise",
+      cta: "Get Started",
+      link: "/contact"
     },
   ];
 
@@ -43,7 +38,7 @@ const HeroBanner = () => {
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, slides.length]);
@@ -72,46 +67,40 @@ const HeroBanner = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
-          <div className="absolute inset-0">
+          {/* Background Image with Ken Burns Effect */}
+          <motion.div 
+            className="absolute inset-0"
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.1 }}
+            transition={{ duration: 6, ease: "linear" }}
+          >
             <img
               src={slides[currentSlide].image}
               alt={slides[currentSlide].title}
               className="w-full h-full object-cover"
             />
-            {/* Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-          </div>
+            {/* Sophisticated Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </motion.div>
 
-          {/* Content */}
-          <div className="relative z-10 h-full flex items-center">
+          {/* Minimal Content - Centered */}
+          <div className="relative z-10 h-full flex items-center justify-center">
             <div className="container mx-auto px-4 md:px-8">
-              <div className="max-w-3xl">
-                {/* Tagline */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                  className="mb-4"
-                >
-                  <span className="inline-block px-4 py-2 bg-amber-600/20 backdrop-blur-sm border border-amber-500/30 rounded-full text-amber-400 text-xs md:text-sm font-semibold tracking-wider">
-                    {slides[currentSlide].tagline}
-                  </span>
-                </motion.div>
-
+              <div className="max-w-4xl mx-auto text-center">
+                
                 {/* Main Title */}
                 <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight"
+                  transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight"
                 >
                   {slides[currentSlide].title}
                 </motion.h1>
@@ -120,64 +109,46 @@ const HeroBanner = () => {
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-xl md:text-2xl text-amber-400 font-medium mb-6"
+                  transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                  className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-12 font-light"
                 >
                   {slides[currentSlide].subtitle}
                 </motion.p>
 
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-300 mb-8 leading-relaxed max-w-2xl"
-                >
-                  {slides[currentSlide].description}
-                </motion.p>
-
-                {/* CTA Buttons */}
+                {/* Single CTA Button */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="flex flex-col sm:flex-row gap-4"
+                  transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
                 >
-                  <motion.button
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 0 40px rgba(217, 119, 6, 0.5)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-lg font-semibold text-lg shadow-xl border border-amber-500/30 overflow-hidden"
-                  >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      {slides[currentSlide].cta}
-                      <motion.span
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ repeat: Infinity, duration: 1.5 }}
-                      >
-                        <FiArrowRight />
-                      </motion.span>
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-amber-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-transparent text-white rounded-lg font-semibold text-lg border-2 border-white/30 hover:border-amber-500 hover:bg-white/5 backdrop-blur-sm transition-all duration-300"
-                  >
-                    Learn More
-                  </motion.button>
+                  <Link href={slides[currentSlide].link}>
+                    <motion.button
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 0 50px rgba(217, 119, 6, 0.6)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className="group relative px-10 py-5 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-full font-semibold text-base md:text-lg shadow-2xl border border-amber-500/30 overflow-hidden"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-3">
+                        {slides[currentSlide].cta}
+                        <motion.span
+                          className="group-hover:translate-x-1 transition-transform duration-300"
+                        >
+                          <FiArrowRight size={20} />
+                        </motion.span>
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-amber-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                    </motion.button>
+                  </Link>
                 </motion.div>
 
-                {/* Decorative Line */}
+                {/* Minimal Decorative Element */}
                 <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: 0.8, duration: 0.8 }}
-                  className="h-1 bg-gradient-to-r from-amber-500 via-amber-600 to-transparent mt-12 max-w-md"
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: "120px", opacity: 1 }}
+                  transition={{ delay: 1, duration: 1 }}
+                  className="h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent mt-16 mx-auto"
                 ></motion.div>
               </div>
             </div>
@@ -185,107 +156,108 @@ const HeroBanner = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 z-20 pointer-events-none">
+      {/* Minimal Navigation Arrows */}
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 z-20 pointer-events-none">
         <motion.button
-          whileHover={{ scale: 1.1, x: -5 }}
+          whileHover={{ scale: 1.15, backgroundColor: "rgba(217, 119, 6, 0.9)" }}
           whileTap={{ scale: 0.9 }}
           onClick={prevSlide}
-          className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-amber-600/80 hover:border-amber-500 transition-all duration-300 flex items-center justify-center shadow-lg"
+          className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white hover:border-amber-500/50 transition-all duration-300 flex items-center justify-center shadow-2xl"
         >
           <FiChevronLeft size={24} />
         </motion.button>
 
         <motion.button
-          whileHover={{ scale: 1.1, x: 5 }}
+          whileHover={{ scale: 1.15, backgroundColor: "rgba(217, 119, 6, 0.9)" }}
           whileTap={{ scale: 0.9 }}
           onClick={nextSlide}
-          className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-amber-600/80 hover:border-amber-500 transition-all duration-300 flex items-center justify-center shadow-lg"
+          className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white hover:border-amber-500/50 transition-all duration-300 flex items-center justify-center shadow-2xl"
         >
           <FiChevronRight size={24} />
         </motion.button>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+      {/* Elegant Slide Indicators */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
         {slides.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => goToSlide(index)}
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.9 }}
-            className={`relative h-1 rounded-full transition-all duration-500 ${
+            className={`relative transition-all duration-500 ${
               currentSlide === index
-                ? "w-12 bg-amber-500"
-                : "w-8 bg-white/40 hover:bg-white/60"
+                ? "w-12 h-1.5 bg-amber-500 rounded-full"
+                : "w-8 h-1.5 bg-white/30 hover:bg-white/50 rounded-full"
             }`}
           >
             {currentSlide === index && (
               <motion.div
-                layoutId="activeSlide"
-                className="absolute inset-0 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"
+                layoutId="activeIndicator"
+                className="absolute inset-0 bg-amber-500 rounded-full shadow-lg shadow-amber-500/60"
+                transition={{ duration: 0.3 }}
               />
             )}
           </motion.button>
         ))}
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Minimal Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 right-8 z-20 hidden md:flex flex-col items-center gap-2"
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-12 right-8 md:right-12 z-20 hidden md:block"
       >
-        <span className="text-white/60 text-xs font-medium tracking-wider rotate-90 origin-center">
-          SCROLL
-        </span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-px h-12 bg-gradient-to-b from-amber-500 to-transparent"
-        ></motion.div>
+          animate={{ y: [0, 12, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
+        >
+          <div className="w-px h-16 bg-gradient-to-b from-transparent via-amber-500 to-transparent"></div>
+          <span className="text-white/40 text-xs font-light tracking-widest">SCROLL</span>
+        </motion.div>
       </motion.div>
 
-      {/* Stats/Features Bar */}
+      {/* Minimalist Stats Bar - Bottom */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-r from-slate-900/90 via-slate-900/80 to-transparent backdrop-blur-md border-t border-amber-600/20"
+        transition={{ delay: 1, duration: 0.8 }}
+        className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-r from-black/60 via-black/40 to-black/60 backdrop-blur-xl border-t border-white/5"
       >
         <div className="container mx-auto px-4 md:px-8 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            <div className="text-center md:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-amber-500 mb-1">
+          <div className="grid grid-cols-4 gap-4 md:gap-8">
+            <div className="text-center">
+              <div className="text-xl md:text-3xl font-bold text-amber-500 mb-1">
                 5000+
               </div>
-              <div className="text-xs md:text-sm text-gray-300">
+              <div className="text-xs text-gray-400 font-light">
                 Sq.ft Facility
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-amber-500 mb-1">
+            <div className="text-center">
+              <div className="text-xl md:text-3xl font-bold text-amber-500 mb-1">
                 15+
               </div>
-              <div className="text-xs md:text-sm text-gray-300">
-                Years Experience
+              <div className="text-xs text-gray-400 font-light">
+                Years
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-amber-500 mb-1">
+            <div className="text-center">
+              <div className="text-xl md:text-3xl font-bold text-amber-500 mb-1">
                 500+
               </div>
-              <div className="text-xs md:text-sm text-gray-300">
-                Projects Completed
+              <div className="text-xs text-gray-400 font-light">
+                Projects
               </div>
             </div>
-            <div className="text-center md:text-left">
-              <div className="text-2xl md:text-3xl font-bold text-amber-500 mb-1">
+            <div className="text-center">
+              <div className="text-xl md:text-3xl font-bold text-amber-500 mb-1">
                 100%
               </div>
-              <div className="text-xs md:text-sm text-gray-300">
-                Client Satisfaction
+              <div className="text-xs text-gray-400 font-light">
+                Satisfaction
               </div>
             </div>
           </div>
