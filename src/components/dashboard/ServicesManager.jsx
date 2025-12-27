@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiPlus, FiEdit, FiTrash2, FiEye, FiLoader, FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
 import toast from 'react-hot-toast';
@@ -13,25 +13,41 @@ export default function ServicesManager() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchServices();
-  }, []);
+  // Memoized fetchServices to avoid production setState errors
+  const fetchServices = useCallback(async () => {
+    let mounted = true; // prevent state update if component unmounts
 
-  const fetchServices = async () => {
     setLoading(true);
     setError(null);
-    
-    const result = await servicesAPI.getAll();
-    
-    if (result.success) {
-      setServices(result.data);
-    } else {
-      setError(result.error);
+
+    try {
+      const result = await servicesAPI.getAll();
+
+      if (!mounted) return;
+
+      if (result.success) {
+        setServices(result.data);
+      } else {
+        setError(result.error);
+        toast.error('Failed to load services');
+      }
+    } catch (err) {
+      if (!mounted) return;
+      setError(err.message || 'Something went wrong');
       toast.error('Failed to load services');
+    } finally {
+      if (mounted) setLoading(false);
     }
-    
-    setLoading(false);
-  };
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Call fetchServices on mount
+  useEffect(() => {
+    fetchServices();
+  }, [fetchServices]);
 
   const handleAdd = () => {
     setSelectedService(null);
@@ -52,13 +68,13 @@ export default function ServicesManager() {
           <button
             onClick={async () => {
               toast.dismiss(t.id);
-              
+
               const loadingToast = toast.loading('Deleting service...');
-              
+
               const result = await servicesAPI.delete(slug);
-              
+
               toast.dismiss(loadingToast);
-              
+
               if (result.success) {
                 toast.success('Service deleted successfully!', {
                   icon: '🗑️',
