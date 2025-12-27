@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiChevronDown, FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
+import Link from 'next/link';
+import { BsBuilding, BsGlobe } from 'react-icons/bs';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,61 +52,32 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs md:text-sm gap-2 md:gap-0">
-          <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center md:justify-start">
-            <span className="flex items-center gap-2 hover:text-amber-500 transition-colors">
-              <FiMail className="text-amber-500" />
-              info@glasscotrade.com
-            </span>
-            <span className="flex items-center gap-2 hover:text-amber-500 transition-colors">
-              <FiPhone className="text-amber-500" />
-              +971 XX XXX XXXX
-            </span>
-            <span className="flex items-center gap-2 hover:text-amber-500 transition-colors">
-              <FiMapPin className="text-amber-500" />
-              UAE
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              <a href="#" className="text-white hover:text-amber-500 transition-colors">
-                <FaFacebookF size={14} />
-              </a>
-              <a href="#" className="text-white hover:text-amber-500 transition-colors">
-                <FaInstagram size={14} />
-              </a>
-              <a href="#" className="text-white hover:text-amber-500 transition-colors">
-                <FaLinkedinIn size={14} />
-              </a>
-              <a href="#" className="text-white hover:text-amber-500 transition-colors">
-                <FaWhatsapp size={14} />
-              </a>
+        <div className="flex items-center justify-center gap-4 text-xs">
+            <div className="flex flex-col items-start">
+              <div className="flex items-center gap-2">
+                <FiMapPin className="w-3 h-3 text-amber-500" />
+                <span>Abu Dhabi</span>
+              </div>
+              <div className="flex items-center gap-2 ">
+                <FiPhone className="w-3 h-3 text-amber-500" />
+                <span>+971 02 443 9943</span>
+              </div>
             </div>
-            <div className="h-4 w-px bg-amber-600/50"></div>
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setLanguage('EN')}
-                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
-                  language === 'EN' 
-                    ? 'bg-amber-600 text-white' 
-                    : 'text-gray-300 hover:text-amber-500'
-                }`}
-              >
-                EN
-              </button>
-              <button 
-                onClick={() => setLanguage('AR')}
-                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
-                  language === 'AR' 
-                    ? 'bg-amber-600 text-white' 
-                    : 'text-gray-300 hover:text-amber-500'
-                }`}
-              >
-                AR
-              </button>
+            <div className="h-8 w-px bg-gray-700"></div>
+            <div className="flex items-center gap-2">
+              <FiMail className="w-3 h-3 text-amber-500" />
+              <span>info@glasscotrade.com</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <BsGlobe className="w-3 h-3 text-amber-500" />
+              <span>www.glasscotrade.com</span>
+            </div>
+            <div className="h-8 w-px bg-gray-700"></div>
+            <div className="flex items-center gap-2">
+              <BsBuilding className="w-3 h-3 text-amber-500" />
+              <span>glassco general trading LLC</span>
             </div>
           </div>
-        </div>
       </motion.div>
 
       {/* Main Navbar - Transparent Overlay */}
@@ -294,12 +267,12 @@ const Navbar = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden bg-slate-800/50 rounded-lg mb-3"
                               >
-                                <a
+                                <Link
                                   href="/services"
                                   className="block px-4 py-3 text-sm text-amber-400 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-amber-500 font-semibold"
                                 >
                                   View All Services
-                                </a>
+                                </Link>
                                 <div className="border-t border-gray-700 mx-4 my-2"></div>
                                 {services.map((service, idx) => (
                                   <a
