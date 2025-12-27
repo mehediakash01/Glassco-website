@@ -3,6 +3,7 @@ import AboutSection from "./about/page";
 
 import ProjectsSection from "./projects/page";
 import ContactSection from "./contact/page";
+import GalleryPage from "./gallery/page";
 
 
 
@@ -17,6 +18,7 @@ export default function Home() {
       {/* <ServicesSection /> */}
       
       <ProjectsSection />
+      <GalleryPage></GalleryPage>
       <ContactSection />
  
     </div>
