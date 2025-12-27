@@ -10,6 +10,7 @@ import {
   FiSend
 } from 'react-icons/fi';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaTwitter } from 'react-icons/fa';
+import Link from 'next/link';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -174,7 +175,7 @@ const Footer = () => {
                   className="flex items-center gap-3 text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   <FiPhone className="text-amber-500" size={18} />
-                  <span className="text-sm">+971 XX XXX XXXX</span>
+                  <span className="text-sm">+971 488 58814</span>
                 </a>
               </li>
               <li>
@@ -261,7 +262,7 @@ const Footer = () => {
 
           {/* Made By */}
           <div className="text-center mt-4 text-xs text-gray-500">
-            Designed & Developed with <span className="text-red-500">❤</span> for Excellence
+            Designed & Developed By <Link href="https://www.royallipstech.com"> Royallips Technologies</Link>
           </div>
         </div>
       </div>
