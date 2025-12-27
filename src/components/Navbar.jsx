@@ -1,10 +1,9 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiChevronDown, FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
+import { Menu, X, ChevronDown, Phone, Mail, MapPin, Globe, Building2 } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link';
-import { BsBuilding, BsGlobe } from 'react-icons/bs';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -45,75 +44,96 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top Bar with Gold Accent */}
+      {/* Top Bar - Hidden on mobile, slides up on scroll for desktop */}
       <motion.div 
-        className="bg-slate-900 text-white py-2.5 px-4 border-b border-amber-600/30"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        className="hidden lg:block bg-slate-900 text-white border-b border-amber-600/30 fixed top-0 left-0 right-0 z-50"
+        initial={{ y: 0 }}
+        animate={{ y: isScrolled ? -60 : 0 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <div className="flex items-center justify-center gap-4 text-xs">
-            <div className="flex flex-col items-start">
-              <div className="flex items-center gap-2">
-                <FiMapPin className="w-3 h-3 text-amber-500" />
-                <span>Abu Dhabi</span>
+        <div className="container mx-auto px-4 py-2.5">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2 xl:gap-4 text-xs flex-wrap">
+              <div className="flex flex-col items-start min-w-fit">
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Abu Dhabi</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <span className="whitespace-nowrap">+971 02 443 9943</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 ">
-                <FiPhone className="w-3 h-3 text-amber-500" />
-                <span>+971 02 443 9943</span>
+              <div className="h-8 w-px bg-gray-700 hidden xl:block"></div>
+              <div className="flex items-center gap-1.5 min-w-fit">
+                <Mail className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                <span className="whitespace-nowrap truncate max-w-[150px] xl:max-w-none">info@glasscotrade.com</span>
+              </div>
+              <div className="flex items-center gap-1.5 min-w-fit">
+                <Globe className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                <span className="whitespace-nowrap truncate max-w-[150px] xl:max-w-none">www.glasscotrade.com</span>
+              </div>
+              <div className="h-8 w-px bg-gray-700 hidden xl:block"></div>
+              <div className="flex items-center gap-1.5 min-w-fit">
+                <Building2 className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                <span className="whitespace-nowrap">glassco general trading LLC</span>
               </div>
             </div>
-            <div className="h-8 w-px bg-gray-700"></div>
-            <div className="flex items-center gap-2">
-              <FiMail className="w-3 h-3 text-amber-500" />
-              <span>info@glasscotrade.com</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <BsGlobe className="w-3 h-3 text-amber-500" />
-              <span>www.glasscotrade.com</span>
-            </div>
-            <div className="h-8 w-px bg-gray-700"></div>
-            <div className="flex items-center gap-2">
-              <BsBuilding className="w-3 h-3 text-amber-500" />
-              <span>glassco general trading LLC</span>
+            
+            {/* Language Switcher */}
+            <div className="flex items-center gap-2 ml-auto">
+              <button
+                onClick={() => setLanguage('EN')}
+                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                  language === 'EN' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage('AR')}
+                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                  language === 'AR' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
+                }`}
+              >
+                AR
+              </button>
             </div>
           </div>
+        </div>
       </motion.div>
 
-      {/* Main Navbar - Transparent Overlay */}
+      {/* Main Navbar - Moves to top on scroll */}
       <motion.nav
-        className={`fixed top-[42px] md:top-[48px] left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-slate-900/95 backdrop-blur-md shadow-xl py-4 border-b border-amber-600/20' 
-            : 'bg-transparent py-6'
+            ? 'top-0 bg-slate-900/98 backdrop-blur-md shadow-xl py-3 lg:py-4 border-b border-amber-600/20' 
+            : 'top-0 lg:top-[60px] bg-slate-900/95 lg:bg-black/50 py-3 lg:py-6'
         }`}
-        initial={{ y: -100 }}
+        initial={{ y: 0 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.3 }}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="flex items-center justify-between gap-2">
             {/* Logo */}
             <motion.div 
-              className="flex items-center gap-3"
+              className="flex items-center gap-2 lg:gap-3 flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="relative">
-                <div className="text-3xl md:text-4xl font-bold tracking-tight">
-                  <span className="text-white">GLASS</span>
-                  <span className="text-amber-500">CO</span>
-                </div>
-                <div className="h-0.5 w-full bg-gradient-to-r from-amber-500 to-transparent mt-1"></div>
+              <div className="relative w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
+                <img 
+                  src="/assets/images/glasscoLogo.png" 
+                  alt="Glassco Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <div className="hidden lg:block text-xs text-gray-300 ml-2 border-l border-amber-600/30 pl-3">
-                Aluminium & Glass<br/>
-                <span className="text-amber-500">Workshop LLC</span>
-              </div>
+             
             </motion.div>
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-8">
               {menuItems.map((item, index) => (
                 <div 
                   key={index}
@@ -123,13 +143,11 @@ const Navbar = () => {
                 >
                   <motion.a
                     href={item.link}
-                    className={`font-medium transition-all duration-300 flex items-center gap-1 py-2 relative ${
-                      isScrolled ? 'text-white hover:text-amber-500' : 'text-white hover:text-amber-400'
-                    }`}
+                    className="font-medium transition-all duration-300 flex items-center gap-1 py-2 relative text-white hover:text-amber-500 text-sm xl:text-base whitespace-nowrap"
                     whileHover={{ y: -2 }}
                   >
                     {item.name}
-                    {item.hasDropdown && <FiChevronDown className="text-sm" />}
+                    {item.hasDropdown && <ChevronDown className="text-sm w-4 h-4" />}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300"></span>
                   </motion.a>
 
@@ -174,7 +192,7 @@ const Navbar = () => {
 
             {/* CTA Button - Desktop */}
             <motion.button
-              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-3 rounded-lg font-medium shadow-lg hover:shadow-amber-600/50 transition-all duration-300 border border-amber-500/30"
+              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 xl:px-6 py-2.5 xl:py-3 rounded-lg font-medium shadow-lg hover:shadow-amber-600/50 transition-all duration-300 border border-amber-500/30 text-sm xl:text-base whitespace-nowrap flex-shrink-0"
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(217, 119, 6, 0.4)' }}
               whileTap={{ scale: 0.95 }}
             >
@@ -189,14 +207,18 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden text-white text-2xl p-2 hover:text-amber-500 transition-colors"
+              className="lg:hidden text-white text-2xl p-2 hover:text-amber-500 transition-colors flex-shrink-0"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <FiX /> : <FiMenu />}
+              {isMobileMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
       </motion.nav>
+
+      {/* Spacer for fixed navbar - only on desktop */}
+      <div className="hidden lg:block h-[120px]"></div>
+      <div className="lg:hidden h-[72px]"></div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -225,16 +247,35 @@ const Navbar = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="absolute top-6 right-6 text-white text-2xl hover:text-amber-500 transition-colors"
                 >
-                  <FiX />
+                  <X />
                 </button>
 
                 {/* Logo */}
                 <div className="mb-8 mt-2">
-                  <div className="text-2xl font-bold">
-                    <span className="text-white">GLASS</span>
-                    <span className="text-amber-500">CO</span>
+                  <div className="w-32 h-32 mx-auto mb-4">
+                    <img 
+                      src="/assets/images/glasscoLogo.png" 
+                      alt="Glassco Logo" 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">Aluminium & Glass Workshop</div>
+                 
+                </div>
+
+                {/* Contact Info - Mobile */}
+                <div className="mb-6 p-4 bg-slate-800/50 rounded-lg space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-gray-300">
+                    <MapPin className="w-3 h-3 text-amber-500" />
+                    <span>Abu Dhabi</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-300">
+                    <Phone className="w-3 h-3 text-amber-500" />
+                    <span>+971 02 443 9943</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-300">
+                    <Mail className="w-3 h-3 text-amber-500" />
+                    <span>info@glasscotrade.com</span>
+                  </div>
                 </div>
 
                 {/* Menu Items */}
@@ -256,7 +297,7 @@ const Navbar = () => {
                               animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
                               transition={{ duration: 0.2 }}
                             >
-                              <FiChevronDown />
+                              <ChevronDown className="w-4 h-4" />
                             </motion.div>
                           </button>
                           <AnimatePresence>
@@ -299,6 +340,27 @@ const Navbar = () => {
                   </div>
                 ))}
 
+                {/* Language Switcher - Mobile */}
+                <div className="flex items-center gap-2 mt-6 pt-4 border-t border-gray-800">
+                  <span className="text-xs text-gray-400">Language:</span>
+                  <button
+                    onClick={() => setLanguage('EN')}
+                    className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                      language === 'EN' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => setLanguage('AR')}
+                    className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                      language === 'AR' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
+                    }`}
+                  >
+                    AR
+                  </button>
+                </div>
+
                 {/* CTA Button - Mobile */}
                 <motion.button
                   className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-3 rounded-lg font-medium shadow-lg mt-6 border border-amber-500/30"
@@ -327,6 +389,8 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
+
+    
     </>
   );
 };
