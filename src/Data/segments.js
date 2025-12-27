@@ -1,4 +1,4 @@
-export const segments =  [
+export const segmentsData =  [
     {
       "segmentId": 1,
       "name": "Glass Services",
@@ -158,7 +158,7 @@ export const segments =  [
     },
     {
       "segmentId": 2,
-      "name": "Aluminum & Installation Services",
+      "name": "Aluminum and Installation Services",
       "overview": "Glassco Aluminium and Glass Co. LLC provides advanced, reliable, and custom-engineered aluminium and glass façade solutions. We deliver superior workmanship for commercial, industrial, and residential developments, supported by a team of 190+ professionals.",
       "installationServices": [
         {

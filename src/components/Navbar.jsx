@@ -36,7 +36,7 @@ const Navbar = () => {
   // Segments Dropdown
   const segments = [
     { name: 'Glass Services', slug: 'glass-services' },
-    { name: 'Aluminum & Installation Services', slug: 'aluminum-installation-services' }
+    { name: 'Aluminum and Installation Services', slug: 'aluminum-and-installation-services' }
   ];
 
   const menuItems = [
