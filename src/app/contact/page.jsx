@@ -31,7 +31,7 @@ const ContactSection = () => {
     {
       icon: <FiPhone />,
       title: 'Phone',
-      details: ['025557229', '048858814'],
+      details: ['+971 2 555 7229', '+971 488 58814'],
       link: 'tel:048858814',
       color: 'from-blue-500 to-blue-600'
     },
@@ -45,7 +45,7 @@ const ContactSection = () => {
     {
       icon: <FiMapPin />,
       title: 'Location',
-      details: ['Glassco Aluminium & Glass Workshop LLC', 'UAE'],
+      details: ['Abu Dhabi, United Arab Emirates (Headquarters Abu Dhabi )', 'Dubai, United Arab Emirates(Dubai Branch)'],
       link: '#map',
       color: 'from-green-500 to-green-600'
     },
@@ -336,7 +336,7 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold mb-6">Why Choose Glassco?</h3>
               <div className="space-y-4">
                 {[
-                  '15+ Years of Industry Experience',
+                  '20+ Years of Industry Experience',
                   '5,000 Sq.ft State-of-the-Art Facility',
                   'Certified & Skilled Professionals',
                   '500+ Successfully Completed Projects',
@@ -398,7 +398,7 @@ const ContactSection = () => {
                   Call Now
                 </motion.a>
                 <motion.a
-                  href="https://wa.me/048858814"
+                  href="https://wa.me/+971 2 555 7229"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex-1 px-6 py-3 bg-green-600 text-white rounded-xl font-semibold text-center hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
