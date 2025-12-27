@@ -1,7 +1,23 @@
 import { NextResponse } from 'next/server';
-import { pool } from '../../../../lib/db';
-import { ApiResponse } from '../../../../lib/utils/apiResponse';
-import { uploadToCloudinary } from '../../../../lib/cloudinary';
+import { pool } from '@/lib/db';
+import { uploadToCloudinary } from '@/lib/cloudinary';
+
+// Force this route to use Node.js runtime
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+// Helper functions
+const success = (data, message = 'Success') => ({ 
+  success: true, 
+  message, 
+  data 
+});
+
+const error = (message, code = 500) => ({ 
+  success: false, 
+  message, 
+  statusCode: code 
+});
 
 // GET - Fetch single service by slug
 export async function GET(request, { params }) {
@@ -11,7 +27,6 @@ export async function GET(request, { params }) {
     const query = `
       SELECT
         s.*,
-
         COALESCE(
           (
             SELECT json_agg(
@@ -28,7 +43,6 @@ export async function GET(request, { params }) {
           ),
           '[]'
         ) AS features,
-
         COALESCE(
           (
             SELECT json_agg(ss.specification ORDER BY ss.display_order)
@@ -37,7 +51,6 @@ export async function GET(request, { params }) {
           ),
           '[]'
         ) AS specifications,
-
         COALESCE(
           (
             SELECT json_agg(sb.benefit ORDER BY sb.display_order)
@@ -46,7 +59,6 @@ export async function GET(request, { params }) {
           ),
           '[]'
         ) AS benefits,
-
         COALESCE(
           (
             SELECT json_agg(sa.application ORDER BY sa.display_order)
@@ -55,7 +67,6 @@ export async function GET(request, { params }) {
           ),
           '[]'
         ) AS applications
-
       FROM services s
       WHERE s.slug = $1
       LIMIT 1
@@ -64,21 +75,13 @@ export async function GET(request, { params }) {
     const result = await pool.query(query, [slug]);
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        ApiResponse.error('Service not found', 404),
-        { status: 404 }
-      );
+      return NextResponse.json(error('Service not found', 404), { status: 404 });
     }
 
-    return NextResponse.json(
-      ApiResponse.success(result.rows[0], 'Service fetched successfully')
-    );
-  } catch (error) {
-    console.error('GET Service Error:', error);
-    return NextResponse.json(
-      ApiResponse.error('Failed to fetch service', 500),
-      { status: 500 }
-    );
+    return NextResponse.json(success(result.rows[0], 'Service fetched successfully'));
+  } catch (err) {
+    console.error('GET Service Error:', err);
+    return NextResponse.json(error('Failed to fetch service', 500), { status: 500 });
   }
 }
 
@@ -90,27 +93,21 @@ export async function PUT(request, { params }) {
     const { slug } = params;
     const formData = await request.formData();
 
-    const check = await client.query(
-      'SELECT id FROM services WHERE slug = $1',
-      [slug]
-    );
+    const check = await client.query('SELECT id FROM services WHERE slug = $1', [slug]);
 
     if (check.rows.length === 0) {
-      return NextResponse.json(
-        ApiResponse.error('Service not found', 404),
-        { status: 404 }
-      );
+      return NextResponse.json(error('Service not found', 404), { status: 404 });
     }
 
     const serviceId = check.rows[0].id;
 
     const title = formData.get('title');
     const newSlug = formData.get('slug');
-    const tagline = formData.get('tagline');
+    const tagline = formData.get('tagline') || '';
     const category = formData.get('category');
     const description = formData.get('description');
-    const fullDescription = formData.get('fullDescription');
-    const icon = formData.get('icon');
+    const fullDescription = formData.get('fullDescription') || '';
+    const icon = formData.get('icon') || '';
     const image = formData.get('image');
 
     const features = JSON.parse(formData.get('features') || '[]');
@@ -124,45 +121,23 @@ export async function PUT(request, { params }) {
         [newSlug, serviceId]
       );
       if (exists.rows.length) {
-        return NextResponse.json(
-          ApiResponse.error('Slug already exists', 400),
-          { status: 400 }
-        );
+        return NextResponse.json(error('Slug already exists', 400), { status: 400 });
       }
     }
 
     let imageUrl = formData.get('existingImage');
     if (image && image.size > 0) {
-      imageUrl = await uploadToCloudinary(image);
+      imageUrl = await uploadToCloudinary(image, 'glassco/services');
     }
 
     await client.query('BEGIN');
 
     const updated = await client.query(
-      `
-      UPDATE services SET
-        slug = $1,
-        title = $2,
-        tagline = $3,
-        category = $4,
-        description = $5,
-        full_description = $6,
-        icon = $7,
-        image_url = $8
-      WHERE id = $9
-      RETURNING *
-      `,
-      [
-        newSlug,
-        title,
-        tagline,
-        category,
-        description,
-        fullDescription,
-        icon,
-        imageUrl,
-        serviceId,
-      ]
+      `UPDATE services SET
+        slug = $1, title = $2, tagline = $3, category = $4,
+        description = $5, full_description = $6, icon = $7, image_url = $8
+      WHERE id = $9 RETURNING *`,
+      [newSlug, title, tagline, category, description, fullDescription, icon, imageUrl, serviceId]
     );
 
     await client.query('DELETE FROM service_features WHERE service_id = $1', [serviceId]);
@@ -176,13 +151,13 @@ export async function PUT(request, { params }) {
         await client.query(
           `INSERT INTO service_features (service_id, title, description, icon, display_order)
            VALUES ($1, $2, $3, $4, $5)`,
-          [serviceId, f.title, f.description, f.icon, i]
+          [serviceId, f.title, f.description || '', f.icon || '', i]
         );
       }
     }
 
     for (let i = 0; i < specifications.length; i++) {
-      if (specifications[i]) {
+      if (specifications[i] && specifications[i].trim()) {
         await client.query(
           `INSERT INTO service_specifications (service_id, specification, display_order)
            VALUES ($1, $2, $3)`,
@@ -192,7 +167,7 @@ export async function PUT(request, { params }) {
     }
 
     for (let i = 0; i < benefits.length; i++) {
-      if (benefits[i]) {
+      if (benefits[i] && benefits[i].trim()) {
         await client.query(
           `INSERT INTO service_benefits (service_id, benefit, display_order)
            VALUES ($1, $2, $3)`,
@@ -202,7 +177,7 @@ export async function PUT(request, { params }) {
     }
 
     for (let i = 0; i < applications.length; i++) {
-      if (applications[i]) {
+      if (applications[i] && applications[i].trim()) {
         await client.query(
           `INSERT INTO service_applications (service_id, application, display_order)
            VALUES ($1, $2, $3)`,
@@ -213,16 +188,11 @@ export async function PUT(request, { params }) {
 
     await client.query('COMMIT');
 
-    return NextResponse.json(
-      ApiResponse.success(updated.rows[0], 'Service updated successfully')
-    );
-  } catch (error) {
+    return NextResponse.json(success(updated.rows[0], 'Service updated successfully'));
+  } catch (err) {
     await client.query('ROLLBACK');
-    console.error('PUT Service Error:', error);
-    return NextResponse.json(
-      ApiResponse.error('Failed to update service', 500),
-      { status: 500 }
-    );
+    console.error('PUT Service Error:', err);
+    return NextResponse.json(error('Failed to update service', 500), { status: 500 });
   } finally {
     client.release();
   }
@@ -239,20 +209,12 @@ export async function DELETE(request, { params }) {
     );
 
     if (!result.rows.length) {
-      return NextResponse.json(
-        ApiResponse.error('Service not found', 404),
-        { status: 404 }
-      );
+      return NextResponse.json(error('Service not found', 404), { status: 404 });
     }
 
-    return NextResponse.json(
-      ApiResponse.success(null, 'Service deleted successfully')
-    );
-  } catch (error) {
-    console.error('DELETE Service Error:', error);
-    return NextResponse.json(
-      ApiResponse.error('Failed to delete service', 500),
-      { status: 500 }
-    );
+    return NextResponse.json(success(null, 'Service deleted successfully'));
+  } catch (err) {
+    console.error('DELETE Service Error:', err);
+    return NextResponse.json(error('Failed to delete service', 500), { status: 500 });
   }
 }

@@ -10,8 +10,8 @@ import {
   FiShield,
 } from "react-icons/fi";
 import { BsBuilding, BsGear } from "react-icons/bs";
-import SectionWrapper from "@/components/SectionWrapper";
-import ThemeWrapper from "@/components/ThemeWrapper";
+
+import PageGlow from "@/components/PageGlow";
 
 const AboutSection = () => {
   const sectionRef = useRef(null);

@@ -1,166 +1,136 @@
 'use client'
-import React, { useState, useRef } from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
   FiArrowRight, 
   FiCheckCircle, 
   FiLayers,
-  FiGrid,
-  FiBox,
   FiHome,
   FiZap,
   FiSettings,
   FiLock,
   FiMaximize2,
-  FiTool
+  FiTool,
+  FiLoader
 } from 'react-icons/fi';
 import { BsDoorOpen, BsBuilding, BsGrid3X3Gap } from 'react-icons/bs';
 import Link from 'next/link';
 import SectionWrapper from '@/components/SectionWrapper';
+import { servicesAPI } from '../../lib/serviceApi'; 
+
+const iconMap = {
+  BsDoorOpen,
+  BsBuilding,
+  BsGrid3X3Gap,
+  FiLayers,
+  FiHome,
+  FiZap,
+  FiSettings,
+  FiLock,
+  FiMaximize2,
+  FiTool,
+};
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState('all');
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const services = [
-    {
-      id: 1,
-      icon: <BsDoorOpen />,
-      title: 'Aluminum Doors and Windows',
-      category: 'aluminum',
-      description: 'High-performance aluminium doors and windows designed for durability, insulation, and aesthetic appeal with premium-grade profiles.',
-      features: ['Weather Resistant', 'Thermal Efficiency', 'Custom Designs', 'High Security'],
-      image: '/services/aluminum-windows.jpg',
-     slug: 'aluminum-doors-windows' 
-    },
-    {
-      id: 2,
-      icon: <BsBuilding />,
-      title: 'Curtain Walls',
-      category: 'glazing',
-      description: 'Architectural elegance with superior engineering. Maximize natural light while maintaining structural integrity and energy efficiency.',
-      features: ['Structural Glazing', 'Energy Efficient', 'Weatherproofing', 'Modern Aesthetics'],
-      image: '/services/curtain-walls.jpg',
-      slug: 'curtain-walls' 
-    },
-    {
-      id: 3,
-      icon: <BsGrid3X3Gap />,
-      title: 'Spider Glazing',
-      category: 'glazing',
-      description: 'Seamless all-glass look using high-grade stainless steel spider fittings for maximum transparency and modern appeal.',
-      features: ['Point-Load System', 'Maximum Transparency', 'Wind Load Resistant', 'Premium Fittings'],
-      image: '/services/spider-glazing.jpg',
-      slug: 'spider-glazing'
-    },
-    {
-      id: 4,
-      icon: <FiLayers />,
-      title: 'Composite Cladding',
-      category: 'cladding',
-      description: 'Contemporary appearance with insulation, fire safety, and weather resistance. Wide range of colors and textures available.',
-      features: ['Fire Resistant', 'Weather Protection', 'Lightweight', 'Easy Installation'],
-      image: '/services/composite-cladding.jpg',
-      slug: 'composite-cladding'
-    },
-    {
-      id: 5,
-      icon: <FiHome />,
-      title: 'Pergolas & Canopies',
-      category: 'outdoor',
-      description: 'Premium outdoor structures adding style, shade, and protection with durable aluminium and optional glass roofing.',
-      features: ['Custom Designs', 'Durable Structure', 'Weather Resistant', 'Elegant Finish'],
-      image: '/services/pergolas.jpg',
-      slug: 'pergolas-canopy'
-    },
-    {
-      id: 6,
-      icon: <FiZap />,
-      title: 'Automatic Doors',
-      category: 'automation',
-      description: 'Advanced automatic door systems with precision sensors and robust motors for smooth, quiet, and reliable operation.',
-      features: ['Sensor Technology', 'Smooth Operation', 'High Safety', 'Low Maintenance'],
-      image: '/services/automatic-doors.jpg',
-      slug: 'automatic-doors'
-    },
-    {
-      id: 7,
-      icon: <FiSettings />,
-      title: 'Steel and Metal Decoration',
-      category: 'metalwork',
-      description: 'Custom steel and metal decorative works including railings, screens, and architectural accents with precision craftsmanship.',
-      features: ['Custom Fabrication', 'Artistic Design', 'Premium Finish', 'Corrosion Resistant'],
-      image: '/services/metal-decoration.jpg',
-      slug: 'steel-metal-decoration'
-    },
-    {
-      id: 8,
-      icon: <FiLock />,
-      title: 'Gates and Boundary Walls',
-      category: 'metalwork',
-      description: 'Strong and stylish gate systems with optional automation. Corrosion-resistant and designed for smooth operation.',
-      features: ['Security First', 'Automation Ready', 'Weather Proof', 'Premium Materials'],
-      image: '/services/gates.jpg',
-      slug: 'gates-boundary-walls'
-    },
-    {
-      id: 9,
-      icon: <FiMaximize2 />,
-      title: 'Partition Glazing',
-      category: 'glazing',
-      description: 'Modern glass partition systems for offices and homes. Improve space efficiency while maintaining light flow and acoustic comfort.',
-      features: ['Space Efficient', 'Acoustic Comfort', 'Privacy Options', 'Modern Look'],
-      image: '/services/partition-glazing.jpg',
-      slug: 'partition-glazing'
-    },
-    {
-      id: 10,
-      icon: <FiTool />,
-      title: 'Glass Processing',
-      category: 'processing',
-      description: 'Comprehensive glass processing including cutting, tempering, lamination, and insulated glass production with strict quality standards.',
-      features: ['Precision Cutting', 'Tempering', 'Lamination', 'Quality Assured'],
-      image: '/services/glass-processing.jpg',
-      lug: 'glass-processing'
+  // Fetch services from API
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const res = await servicesAPI.getAll();
+        
+        if (res.success) {
+          console.log('Services fetched:', res.data); // Debug log
+          setServices(res.data);
+        } else {
+          console.error('Failed to fetch services', res.error);
+          setError(res.error);
+        }
+      } catch (err) {
+        console.error('Error fetching services', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return (
+      <SectionWrapper id="services">
+        <div className="container mx-auto px-4 py-20 text-center">
+          <FiLoader className="animate-spin text-6xl text-amber-500 mx-auto mb-4" />
+          <p className="text-white text-lg">Loading services...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper id="services">
+        <div className="container mx-auto px-4 py-20 text-center">
+          <p className="text-red-400 text-lg">Error loading services: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  // Normalize services data
+  const normalizedServices = services.map(service => {
+    // Parse features if they're a string
+    let features = service.features || [];
+    if (typeof features === 'string') {
+      try {
+        features = JSON.parse(features);
+      } catch (e) {
+        features = [];
+      }
     }
-  ];
+
+    // Get icon component
+    const IconComponent = iconMap[service.icon] || FiLayers;
+
+    return {
+      ...service,
+      features: Array.isArray(features) ? features : [],
+      IconComponent,
+    };
+  });
 
   const categories = [
-    { id: 'all', label: 'All Services', count: services.length },
-    { id: 'aluminum', label: 'Aluminum Works', count: services.filter(s => s.category === 'aluminum').length },
-    { id: 'glazing', label: 'Glazing Systems', count: services.filter(s => s.category === 'glazing').length },
-    { id: 'metalwork', label: 'Metal Works', count: services.filter(s => s.category === 'metalwork').length },
-    { id: 'outdoor', label: 'Outdoor Solutions', count: services.filter(s => s.category === 'outdoor').length }
+    { id: 'all', label: 'All Services', count: normalizedServices.length },
+    { id: 'aluminum', label: 'Aluminum Works', count: normalizedServices.filter(s => s.category === 'aluminum').length },
+    { id: 'glazing', label: 'Glazing Systems', count: normalizedServices.filter(s => s.category === 'glazing').length },
+    { id: 'metalwork', label: 'Metal Works', count: normalizedServices.filter(s => s.category === 'metalwork').length },
+    { id: 'outdoor', label: 'Outdoor Solutions', count: normalizedServices.filter(s => s.category === 'outdoor').length }
   ];
 
-  const filteredServices = activeTab === 'all' 
-    ? services 
-    : services.filter(service => service.category === activeTab);
+  const filteredServices = activeTab === 'all'
+    ? normalizedServices
+    : normalizedServices.filter(s => s.category === activeTab);
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
   };
 
   return (
-    <section ref={sectionRef}  className=" py-20 md:py-28 ">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20 -z-10"></div>
-
+    <section ref={sectionRef} id="services" className="py-20 md:py-28">
       <div className="container mx-auto px-4 md:px-8">
         {/* Section Header */}
         <motion.div
@@ -173,14 +143,14 @@ const ServicesSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-2 bg-amber-100 rounded-full text-amber-700 text-sm font-semibold tracking-wider mb-4"
+            className="inline-block px-4 py-2 bg-amber-600/30 border-2 border-amber-500 rounded-full text-amber-400 text-sm font-bold tracking-wider mb-4"
           >
             WHAT WE DO
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Our <span className="text-amber-600">Services</span>
+            Our <span className="text-amber-400">Services</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
+          <p className="text-gray-200 max-w-2xl mx-auto text-lg mb-6">
             Comprehensive aluminium and glass solutions tailored to your project needs with precision engineering and expert craftsmanship.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto rounded-full"></div>
@@ -193,7 +163,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
-          {categories.map((category) => (
+          {categories.map(category => (
             <motion.button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
@@ -201,8 +171,8 @@ const ServicesSection = () => {
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 activeTab === category.id
-                  ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg shadow-amber-600/30'
-                  : 'bg-white text-gray-700 hover:bg-amber-50 border border-gray-200 hover:border-amber-300'
+                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/50 border-2 border-amber-400'
+                  : 'bg-slate-700/80 text-white hover:bg-slate-600/80 border-2 border-slate-600 hover:border-amber-500/50'
               }`}
             >
               {category.label}
@@ -220,66 +190,63 @@ const ServicesSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredServices.map((service, index) => (
+          {filteredServices.map((service) => (
             <motion.div
               key={service.id}
               variants={itemVariants}
               layout
               whileHover={{ y: -10 }}
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-amber-300"
+              className="group bg-slate-700/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400"
             >
               {/* Service Image */}
-              <div className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-10"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-6xl text-amber-500/20">
-                    {service.icon}
+              <div className="relative h-56 overflow-hidden">
+                {service.image_url ? (
+                  <img
+                    src={service.image_url}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+                    <service.IconComponent className="text-6xl text-amber-500/50" />
                   </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10"></div>
+                <div className="absolute top-4 left-4 z-20 w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg shadow-amber-500/30">
+                  <service.IconComponent />
                 </div>
-                
-                {/* Icon Badge */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                  className="absolute top-4 left-4 w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg z-20"
-                >
-                  {service.icon}
-                </motion.div>
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-amber-600/0 group-hover:bg-amber-600/10 transition-all duration-500 z-10"></div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors duration-300">
+              {/* Card content */}
+              <div className="p-6 relative z-20 bg-slate-800/90">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-300 transition-colors duration-300">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                <p className="text-gray-100 text-base leading-relaxed mb-4">
                   {service.description}
                 </p>
 
                 {/* Features */}
-                <div className="grid grid-cols-2 gap-2 mb-6">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs text-gray-700">
-                      <FiCheckCircle className="text-amber-600 flex-shrink-0" size={14} />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                {service.features && service.features.length > 0 && (
+                  <div className="grid grid-cols-2 gap-2 mb-6">
+                    {service.features.slice(0, 4).map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-sm text-white">
+                        <FiCheckCircle className="text-amber-400 flex-shrink-0" size={16} />
+                        <span className="truncate">{feature.title || feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-                {/* CTA Button */}
-                <motion.button
-                
-                  whileHover={{ x: 5 }}
-                 
-                  className="flex items-center gap-2 text-amber-600 font-semibold hover:gap-3 transition-all duration-300 group"
-                >
-                  <Link href={`/services/${service?.slug}`} >Learn More</Link>
-                  <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                <Link href={`/services/${service.slug}`}>
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-2 text-amber-300 font-bold hover:gap-3 transition-all duration-300 group cursor-pointer text-base"
+                  >
+                    Learn More
+                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </motion.div>
+                </Link>
               </div>
 
               {/* Bottom Accent Line */}
@@ -288,19 +255,24 @@ const ServicesSection = () => {
           ))}
         </motion.div>
 
+        {/* Empty State */}
+        {filteredServices.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-400 text-lg">No services found in this category.</p>
+          </div>
+        )}
+
         {/* Bottom CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20 text-center"
+          className="mt-20"
         >
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 md:p-16 relative overflow-hidden">
-            {/* Decorative Elements */}
+          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 relative overflow-hidden border border-amber-500/20">
             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10">
+            <div className="relative z-10 text-center">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Can not Find What You are Looking For?
               </h3>
@@ -309,15 +281,12 @@ const ServicesSection = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(217, 119, 6, 0.4)' }}
+                  whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(245, 158, 11, 0.4)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl border border-amber-500/30 inline-flex items-center justify-center gap-2"
+                  className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl shadow-amber-500/30 border border-amber-500/30 inline-flex items-center justify-center gap-2"
                 >
                   Request Custom Quote
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
+                  <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
                     →
                   </motion.span>
                 </motion.button>
@@ -341,7 +310,7 @@ const ServicesSection = () => {
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {[
-            { number: '10+', label: 'Services Offered' },
+            { number: `${services.length}+`, label: 'Services Offered' },
             { number: '500+', label: 'Projects Completed' },
             { number: '100%', label: 'Quality Guaranteed' },
             { number: '24/7', label: 'Support Available' }
@@ -351,10 +320,10 @@ const ServicesSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-              className="bg-white rounded-2xl p-6 text-center border border-gray-200 hover:border-amber-300 hover:shadow-lg transition-all duration-300"
+              className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300"
             >
-              <div className="text-3xl md:text-4xl font-bold text-amber-600 mb-2">{stat.number}</div>
-              <div className="text-gray-600 text-sm font-medium">{stat.label}</div>
+              <div className="text-3xl md:text-4xl font-bold text-amber-500 mb-2">{stat.number}</div>
+              <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

@@ -5,6 +5,7 @@ import ToastProvider from "./providers/toastProvider";
 import ClientNavbarFooter from "./clientNavbarFooter";
 import CustomCursor from "@/components/CustomCursor";
 import ThemeWrapper from "@/components/ThemeWrapper";
+import Providers from "./providers/queryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +28,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-           <ClientNavbarFooter>
-     <ThemeWrapper>{children}</ThemeWrapper>
+       <Providers>
+          <ClientNavbarFooter>
+            <ThemeWrapper>{children}</ThemeWrapper>
             <CustomCursor />
-        </ClientNavbarFooter>
-        <ToastProvider />
+          </ClientNavbarFooter>
+          <ToastProvider />
+        </Providers>
         
         
       </body>
