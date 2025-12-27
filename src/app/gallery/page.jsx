@@ -2,50 +2,60 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { FiX, FiChevronLeft, FiChevronRight, FiZoomIn, FiDownload } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 const GalleryPage = () => {
+  const router = useRouter();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Your 15 images from public/assets/gallery
+  const localImages = [
+    '/assets/gellary/IMG_4424.JPG',
+    '/assets/gellary/IMG_4443.JPG',
+    '/assets/gellary/IMG_4455.JPG',
+    '/assets/gellary/IMG_4459.JPG',
+    '/assets/gellary/IMG_4487.JPG',
+    '/assets/gellary/IMG_4490.JPG',
+    '/assets/gellary/IMG_4507.JPG',
+    '/assets/gellary/IMG_4517.JPG',
+    '/assets/gellary/IMG_4521.JPG',
+    '/assets/gellary/IMG_4575.JPG',
+    '/assets/gellary/IMG_4527.JPG',
+    '/assets/gellary/IMG_4528.JPG',
+    '/assets/gellary/IMG_4529.JPG',
+    '/assets/gellary/IMG_4534.JPG',
+    '/assets/gellary/IMG_4552.JPG',
+  ];
+
   const galleryImages = [
-    // Aluminum Doors & Windows
-    { id: 1, category: 'aluminum', title: 'Modern Aluminum Windows', location: 'Dubai Marina', image: '/gallery/aluminum-1.jpg' },
-    { id: 2, category: 'aluminum', title: 'Premium Door Installation', location: 'Abu Dhabi', image: '/gallery/aluminum-2.jpg' },
-    { id: 3, category: 'aluminum', title: 'Thermal Efficient Windows', location: 'Sharjah', image: '/gallery/aluminum-3.jpg' },
-    { id: 4, category: 'aluminum', title: 'Custom Aluminum Doors', location: 'Ajman', image: '/gallery/aluminum-4.jpg' },
+    // Aluminum Doors & Windows (images 0-3)
+    { id: 1, category: 'aluminum', title: 'Modern Aluminum Windows', location: 'Dubai Marina', image: localImages[0] },
+    { id: 2, category: 'aluminum', title: 'Premium Door Installation', location: 'Abu Dhabi', image: localImages[1] },
+    { id: 3, category: 'aluminum', title: 'Thermal Efficient Windows', location: 'Sharjah', image: localImages[2] },
     
-    // Curtain Walls
-    { id: 5, category: 'curtain-walls', title: 'Glass Facade Tower', location: 'Dubai', image: '/gallery/curtain-1.jpg' },
-    { id: 6, category: 'curtain-walls', title: 'Commercial Building Facade', location: 'Abu Dhabi', image: '/gallery/curtain-2.jpg' },
-    { id: 7, category: 'curtain-walls', title: 'Structural Glazing', location: 'Sharjah', image: '/gallery/curtain-3.jpg' },
-    { id: 8, category: 'curtain-walls', title: 'Office Tower Curtain Wall', location: 'Dubai', image: '/gallery/curtain-4.jpg' },
+    // Curtain Walls (images 3-6)
+    { id: 4, category: 'curtain-walls', title: 'Glass Facade Tower', location: 'Dubai', image: localImages[3] },
+    { id: 5, category: 'curtain-walls', title: 'Commercial Building Facade', location: 'Abu Dhabi', image: localImages[4] },
+    { id: 6, category: 'curtain-walls', title: 'Structural Glazing', location: 'Sharjah', image: localImages[5] },
     
-    // Spider Glazing
-    { id: 9, category: 'spider-glazing', title: 'Entrance Spider Glass', location: 'Dubai Mall', image: '/gallery/spider-1.jpg' },
-    { id: 10, category: 'spider-glazing', title: 'Atrium Glass Installation', location: 'Abu Dhabi', image: '/gallery/spider-2.jpg' },
-    { id: 11, category: 'spider-glazing', title: 'Point-Fixed Glazing', location: 'Sharjah', image: '/gallery/spider-3.jpg' },
-    { id: 12, category: 'spider-glazing', title: 'Lobby Spider System', location: 'Dubai', image: '/gallery/spider-4.jpg' },
+    // Spider Glazing (images 6-9)
+    { id: 7, category: 'spider-glazing', title: 'Entrance Spider Glass', location: 'Dubai Mall', image: localImages[6] },
+    { id: 8, category: 'spider-glazing', title: 'Atrium Glass Installation', location: 'Abu Dhabi', image: localImages[7] },
+    { id: 9, category: 'spider-glazing', title: 'Point-Fixed Glazing', location: 'Sharjah', image: localImages[8] },
     
-    // Pergolas & Canopies
-    { id: 13, category: 'pergolas', title: 'Outdoor Pergola Design', location: 'Palm Jumeirah', image: '/gallery/pergola-1.jpg' },
-    { id: 14, category: 'pergolas', title: 'Restaurant Canopy', location: 'Dubai Marina', image: '/gallery/pergola-2.jpg' },
-    { id: 15, category: 'pergolas', title: 'Villa Garden Pergola', location: 'Al Ain', image: '/gallery/pergola-3.jpg' },
-    { id: 16, category: 'pergolas', title: 'Pool Area Canopy', location: 'Ras Al Khaimah', image: '/gallery/pergola-4.jpg' },
+    // Pergolas & Canopies (images 9-11)
+    { id: 10, category: 'pergolas', title: 'Outdoor Pergola Design', location: 'Palm Jumeirah', image: localImages[9] },
+    { id: 11, category: 'pergolas', title: 'Restaurant Canopy', location: 'Dubai Marina', image: localImages[10] },
+    { id: 12, category: 'pergolas', title: 'Villa Garden Pergola', location: 'Al Ain', image: localImages[11] },
     
-    // Gates & Metalwork
-    { id: 17, category: 'gates', title: 'Automated Main Gate', location: 'Dubai Hills', image: '/gallery/gates-1.jpg' },
-    { id: 18, category: 'gates', title: 'Decorative Metal Gate', location: 'Abu Dhabi', image: '/gallery/gates-2.jpg' },
-    { id: 19, category: 'gates', title: 'Boundary Wall Design', location: 'Sharjah', image: '/gallery/gates-3.jpg' },
-    { id: 20, category: 'gates', title: 'Security Gate System', location: 'Ajman', image: '/gallery/gates-4.jpg' },
-    
-    // Glass Processing
-    { id: 21, category: 'glass-processing', title: 'Custom Glass Cutting', location: 'Factory', image: '/gallery/glass-1.jpg' },
-    { id: 22, category: 'glass-processing', title: 'Tempered Glass Production', location: 'Workshop', image: '/gallery/glass-2.jpg' },
-    { id: 23, category: 'glass-processing', title: 'Laminated Glass', location: 'Factory', image: '/gallery/glass-3.jpg' },
-    { id: 24, category: 'glass-processing', title: 'Glass Polishing', location: 'Workshop', image: '/gallery/glass-4.jpg' }
+    // Gates & Metalwork (images 12-14)
+    { id: 13, category: 'gates', title: 'Automated Main Gate', location: 'Dubai Hills', image: localImages[12] },
+    { id: 14, category: 'gates', title: 'Decorative Metal Gate', location: 'Abu Dhabi', image: localImages[13] },
+    { id: 15, category: 'gates', title: 'Boundary Wall Design', location: 'Sharjah', image: localImages[14] },
   ];
 
   const categories = [
@@ -55,7 +65,6 @@ const GalleryPage = () => {
     { id: 'spider-glazing', label: 'Spider Glazing', count: galleryImages.filter(img => img.category === 'spider-glazing').length },
     { id: 'pergolas', label: 'Pergolas & Canopies', count: galleryImages.filter(img => img.category === 'pergolas').length },
     { id: 'gates', label: 'Gates & Metalwork', count: galleryImages.filter(img => img.category === 'gates').length },
-    { id: 'glass-processing', label: 'Glass Processing', count: galleryImages.filter(img => img.category === 'glass-processing').length }
   ];
 
   const filteredImages = activeCategory === 'all' 
@@ -81,6 +90,17 @@ const GalleryPage = () => {
     const prevIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length;
     setCurrentImageIndex(prevIndex);
     setSelectedImage(filteredImages[prevIndex]);
+  };
+
+  const handleDownload = () => {
+    if (selectedImage) {
+      const link = document.createElement('a');
+      link.href = selectedImage.image;
+      link.download = `${selectedImage.title}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const containerVariants = {
@@ -178,27 +198,27 @@ const GalleryPage = () => {
                   variants={itemVariants}
                   layout
                   onClick={() => openLightbox(image, index)}
-                  className="group relative aspect-square bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className="group relative aspect-square bg-slate-900 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
                 >
-                  {/* Image Placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900"></div>
+                  {/* Image */}
+                  <img
+                    src={image.image}
+                    alt={image.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                   
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
                   
                   {/* Hover Icon */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileHover={{ opacity: 1, scale: 1 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center shadow-xl transform scale-0 group-hover:scale-100 transition-transform duration-300">
                       <FiZoomIn className="text-white text-2xl" />
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Image Info */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
                     <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
                     <p className="text-amber-400 text-sm">{image.location}</p>
                   </div>
@@ -246,7 +266,7 @@ const GalleryPage = () => {
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors"
+              className="absolute left-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-10"
             >
               <FiChevronLeft />
             </button>
@@ -257,7 +277,7 @@ const GalleryPage = () => {
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors"
+              className="absolute right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-10"
             >
               <FiChevronRight />
             </button>
@@ -271,7 +291,13 @@ const GalleryPage = () => {
               className="max-w-6xl w-full"
             >
               {/* Image */}
-              <div className="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl overflow-hidden mb-4 aspect-video"></div>
+              <div className="bg-slate-900 rounded-2xl overflow-hidden mb-4">
+                <img
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  className="w-full max-h-[70vh] object-contain"
+                />
+              </div>
 
               {/* Image Info */}
               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-white">
@@ -280,7 +306,10 @@ const GalleryPage = () => {
                     <h3 className="text-2xl font-bold mb-1">{selectedImage.title}</h3>
                     <p className="text-amber-400">{selectedImage.location}</p>
                   </div>
-                  <button className="px-4 py-2 bg-amber-600 hover:bg-amber-700 rounded-lg font-medium transition-colors flex items-center gap-2">
+                  <button 
+                    onClick={handleDownload}
+                    className="px-4 py-2 bg-amber-600 hover:bg-amber-700 rounded-lg font-medium transition-colors flex items-center gap-2"
+                  >
                     <FiDownload />
                     Download
                   </button>
@@ -310,6 +339,7 @@ const GalleryPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
+                onClick={() => router.push('/contact')}
                 whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(217, 119, 6, 0.4)' }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold text-lg shadow-xl border border-amber-500/30"
@@ -317,6 +347,7 @@ const GalleryPage = () => {
                 Request a Quote
               </motion.button>
               <motion.button
+                onClick={() => router.push('/projects')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all"
