@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiPlus, FiEdit, FiTrash2, FiRefreshCw, FiLoader } from 'react-icons/fi';
 import toast from 'react-hot-toast';
@@ -12,25 +12,38 @@ export default function ProjectsManager() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const fetchProjects = async () => {
+  // Memoized fetchProjects to prevent cascading renders
+  const fetchProjects = useCallback(async () => {
+    let mounted = true;
+
     setLoading(true);
+
     try {
       const res = await projectsAPI.getAll();
+      if (!mounted) return;
+
       if (res.success || Array.isArray(res)) {
         setProjects(Array.isArray(res) ? res : res.data);
       } else {
         toast.error(res.error || 'Failed to load projects');
       }
     } catch (err) {
+      if (!mounted) return;
       console.error(err);
       toast.error('Failed to load projects');
+    } finally {
+      if (mounted) setLoading(false);
     }
-    setLoading(false);
-  };
 
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // Call fetchProjects on mount
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [fetchProjects]);
 
   const handleAdd = () => {
     setSelectedProject(null);
