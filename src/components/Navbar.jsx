@@ -19,28 +19,27 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // const services = [
-  //   { name: 'Aluminum doors and windows', slug: 'aluminum-doors-windows' },
-  //   { name: 'Curtain walls', slug: 'curtain-walls' },
-  //   { name: 'Spider glazing', slug: 'spider-glazing' },
-  //   { name: 'Composite cladding', slug: 'composite-cladding' },
-  //   { name: 'Pergolas & canopy', slug: 'pergolas-canopy' },
-  //   { name: 'Automatic doors', slug: 'automatic-doors' },
-  //   { name: 'Steel and metal decoration works', slug: 'steel-metal-decoration' },
-  //   { name: 'Gates and boundary walls', slug: 'gates-boundary-walls' },
-  //   { name: 'Partition glazing', slug: 'partition-glazing' },
-  //   { name: 'Glass processing', slug: 'glass-processing' }
-  // ];
+  // Segments Dropdown
+  const segments = [
+    { name: 'Glass Services', slug: 'glass-services' },
+    { name: 'Aluminum and Installation Services', slug: 'aluminum-and-installation-services' }
+  ];
 
   const menuItems = [
     { name: 'Home', link: '/' },
     { name: 'About Us', link: '/about' },
-    // { name: 'Services', link: '#', hasDropdown: true }, 
+    { name: 'Segments', link: '#', hasDropdown: true, type: 'segments' },
     { name: 'Projects', link: '/projects' },
     { name: 'Gallery', link: '/gallery' },
     { name: 'Careers', link: '/careers' },
     { name: 'Contact Us', link: '/contact' }
   ];
+
+  // Determine which dropdown to show
+  const getDropdownItems = (type) => {
+    if(type === 'segments') return segments;
+    return [];
+  }
 
   return (
     <>
@@ -108,11 +107,11 @@ const Navbar = () => {
         className={`fixed left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled 
             ? 'top-0 bg-slate-900/98 backdrop-blur-md shadow-xl py-2 lg:py-3 border-b border-amber-600/20' 
-            : 'top-0 lg:top-10 bg-slate-900/98 lg:bg-transparent py-2 lg:py-4'
+            : 'top-0 lg:top-[48px] bg-slate-900/95 lg:bg-transparent py-2 lg:py-4'
         }`}
       >
         <div className="container mx-auto px-3 sm:px-4">
-          <div className="flex items-center lg:justify-between gap-[70px] md:gap-40 lg:gap-2">
+          <div className="flex items-center justify-between gap-2">
             {/* Logo */}
             <motion.div 
               className="flex items-center gap-2 flex-shrink-0"
@@ -217,7 +216,7 @@ const Navbar = () => {
       </motion.nav>
 
       {/* Spacer for fixed navbar */}
-      <div className="h-[56px] sm:h-[64px] lg:h-[8px]"></div>
+      <div className="h-[56px] sm:h-[64px] lg:h-[12px]"></div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -389,7 +388,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-    
+     
     </>
   );
 };
