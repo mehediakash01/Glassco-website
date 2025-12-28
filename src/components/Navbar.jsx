@@ -102,23 +102,23 @@ const Navbar = () => {
         </div>
       </motion.div>
 
-      {/* Main Navbar - Moves to top on scroll */}
+      {/* Main Navbar - Moves to top on scroll - FIXED WIDTH ISSUES */}
       <motion.nav
-        className={`fixed left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed left-0 right-0 z-40 transition-all duration-300 w-full lg:px-32 ${
           isScrolled 
             ? 'top-0 bg-slate-900/98 backdrop-blur-md shadow-xl py-2 lg:py-3 border-b border-amber-600/20' 
             : 'top-0 lg:top-[48px] bg-slate-900/95 lg:bg-transparent py-2 lg:py-4'
         }`}
       >
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="flex items-center justify-between gap-2">
-            {/* Logo */}
+        <div className="w-full max-w-full px-2 sm:px-3 md:px-4 mx-auto">
+          <div className="flex items-center justify-between gap-1 sm:gap-2">
+            {/* Logo - FIXED SIZE FOR SMALL DEVICES */}
             <motion.div 
               className="flex items-center gap-2 flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Link href="/" className="relative w-12 h-12 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16">
+              <Link href="/" className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16">
                 <img 
                   src="/assets/images/glasscoLogo.png" 
                   alt="Glassco Logo" 
@@ -204,9 +204,9 @@ const Navbar = () => {
               </motion.button>
             </Link>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - FIXED PADDING */}
             <button
-              className="lg:hidden text-white text-2xl p-2 hover:text-amber-500 transition-colors flex-shrink-0 z-50"
+              className="lg:hidden text-white text-xl sm:text-2xl p-1.5 sm:p-2 hover:text-amber-500 transition-colors flex-shrink-0 z-50"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
@@ -216,7 +216,7 @@ const Navbar = () => {
       </motion.nav>
 
       {/* Spacer for fixed navbar */}
-      <div className="h-[56px] sm:h-[64px] lg:h-[12px]"></div>
+      <div className="h-[60px] xs:h-[64px] sm:h-[64px] lg:h-[12px]"></div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -231,52 +231,52 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             
-            {/* Menu Panel */}
+            {/* Menu Panel - FIXED WIDTH FOR SMALL DEVICES */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 z-50 lg:hidden overflow-y-auto shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-[280px] xs:w-[300px] sm:w-80 max-w-[85vw] bg-slate-900 z-50 lg:hidden overflow-y-auto shadow-2xl"
             >
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {/* Close Button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute top-6 right-6 text-white text-2xl hover:text-amber-500 transition-colors"
+                  className="absolute top-4 sm:top-6 right-4 sm:right-6 text-white text-xl sm:text-2xl hover:text-amber-500 transition-colors"
                 >
                   <X />
                 </button>
 
                 {/* Logo */}
-                <div className="mb-8 mt-2">
-                  <div className="w-32 h-32 mx-auto mb-4">
+                <div className="mb-6 sm:mb-8 mt-2">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-3 sm:mb-4">
                     <img 
                       src="/assets/images/glasscoLogo.png" 
                       alt="Glassco Logo" 
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="text-center text-xs text-gray-400">Aluminium & Glass Workshop LLC</div>
+                  <div className="text-center text-[10px] sm:text-xs text-gray-400">Aluminium & Glass Workshop LLC</div>
                 </div>
 
                 {/* Contact Info - Mobile */}
-                <div className="mb-6 p-4 bg-slate-800/50 rounded-lg space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-gray-300">
-                    <MapPin className="w-3 h-3 text-amber-500" />
+                <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-slate-800/50 rounded-lg space-y-2">
+                  <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
+                    <MapPin className="w-3 h-3 text-amber-500 flex-shrink-0" />
                     <span>Abu Dhabi</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-300">
-                    <Phone className="w-3 h-3 text-amber-500" />
+                  <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
+                    <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
                     <span>+971 02 443 9943</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-300">
-                    <Mail className="w-3 h-3 text-amber-500" />
+                  <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300 break-all">
+                    <Mail className="w-3 h-3 text-amber-500 flex-shrink-0" />
                     <span>info@glasscotrade.com</span>
                   </div>
                 </div>
 
-                {/* Menu Items */}
+                {/* Menu Items - FIXED SEGMENTS ERROR */}
                 {menuItems.map((item, index) => (
                   <div key={index} className="border-b border-gray-800 last:border-0">
                     <motion.div
@@ -288,7 +288,7 @@ const Navbar = () => {
                         <div>
                           <button
                             onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                            className="w-full flex items-center justify-between py-4 text-white font-medium hover:text-amber-500 transition-colors"
+                            className="w-full flex items-center justify-between py-3 sm:py-4 text-sm sm:text-base text-white font-medium hover:text-amber-500 transition-colors"
                           >
                             {item.name}
                             <motion.div
@@ -306,44 +306,39 @@ const Navbar = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden bg-slate-800/50 rounded-lg mb-3"
                               >
-                                <Link
-                                  href="/services"
-                                  className="block px-4 py-3 text-sm text-amber-400 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-amber-500 font-semibold"
-                                >
-                                  View All Services
-                                </Link>
-                                <div className="border-t border-gray-700 mx-4 my-2"></div>
-                                {services.map((service, idx) => (
-                                  <a
+                                {getDropdownItems(item.type).map((subItem, idx) => (
+                                  <Link
                                     key={idx}
-                                    href={`/services/${service.slug}`}
-                                    className="block px-4 py-3 text-sm text-gray-300 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-transparent hover:border-amber-500"
+                                    href={`/${item.type}/${subItem.slug}`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-gray-300 hover:text-amber-500 hover:bg-amber-600/10 transition-colors border-l-2 border-transparent hover:border-amber-500"
                                   >
-                                    {service.name}
-                                  </a>
+                                    {subItem.name}
+                                  </Link>
                                 ))}
                               </motion.div>
                             )}
                           </AnimatePresence>
                         </div>
                       ) : (
-                        <a
+                        <Link
                           href={item.link}
-                          className="block py-4 text-white font-medium hover:text-amber-500 transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block py-3 sm:py-4 text-sm sm:text-base text-white font-medium hover:text-amber-500 transition-colors"
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       )}
                     </motion.div>
                   </div>
                 ))}
 
                 {/* Language Switcher - Mobile */}
-                <div className="flex items-center gap-2 mt-6 pt-4 border-t border-gray-800">
-                  <span className="text-xs text-gray-400">Language:</span>
+                <div className="flex items-center gap-2 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-800">
+                  <span className="text-[10px] sm:text-xs text-gray-400">Language:</span>
                   <button
                     onClick={() => setLanguage('EN')}
-                    className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded text-[10px] sm:text-xs font-medium transition-all ${
                       language === 'EN' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
                     }`}
                   >
@@ -351,7 +346,7 @@ const Navbar = () => {
                   </button>
                   <button
                     onClick={() => setLanguage('AR')}
-                    className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded text-[10px] sm:text-xs font-medium transition-all ${
                       language === 'AR' ? 'bg-amber-600 text-white' : 'text-gray-300 hover:text-amber-500'
                     }`}
                   >
@@ -360,26 +355,28 @@ const Navbar = () => {
                 </div>
 
                 {/* CTA Button - Mobile */}
-                <motion.button
-                  className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-3 rounded-lg font-medium shadow-lg mt-6 border border-amber-500/30"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Get Quote
-                </motion.button>
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <motion.button
+                    className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium shadow-lg mt-4 sm:mt-6 border border-amber-500/30 text-sm sm:text-base"
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Get Quote
+                  </motion.button>
+                </Link>
 
                 {/* Social Links - Mobile */}
-                <div className="flex items-center justify-center gap-4 mt-8 pt-6 border-t border-gray-800">
+                <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
                   <a href="#" className="text-gray-400 hover:text-amber-500 transition-colors">
-                    <FaFacebookF size={18} />
+                    <FaFacebookF size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </a>
                   <a href="#" className="text-gray-400 hover:text-amber-500 transition-colors">
-                    <FaInstagram size={18} />
+                    <FaInstagram size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </a>
                   <a href="#" className="text-gray-400 hover:text-amber-500 transition-colors">
-                    <FaLinkedinIn size={18} />
+                    <FaLinkedinIn size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </a>
                   <a href="#" className="text-gray-400 hover:text-amber-500 transition-colors">
-                    <FaWhatsapp size={18} />
+                    <FaWhatsapp size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </a>
                 </div>
               </div>

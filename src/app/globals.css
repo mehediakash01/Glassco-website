@@ -1,13 +1,42 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* CRITICAL: Prevent horizontal overflow on all screen sizes */
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body > * {
+  max-width: 100vw;
+}
+
+/* Custom cursor styles */
 * {
   cursor: none;
 }
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -20,12 +49,6 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
@@ -53,4 +76,74 @@ body {
 
 .loading-bar {
   animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+/* Container with max-width for large screens */
+.container {
+  max-width: 100vw !important;
+  overflow-x: hidden;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Responsive container max-widths */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px !important; /* 2xl */
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .container {
+    max-width: 1280px !important; /* xl */
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .container {
+    max-width: 1024px !important; /* lg */
+  }
+}
+
+/* Small device optimizations */
+@media (max-width: 374px) {
+  body {
+    font-size: 14px;
+  }
+  
+  [class*="px-"] {
+    padding-left: clamp(0.5rem, 3vw, 1rem) !important;
+    padding-right: clamp(0.5rem, 3vw, 1rem) !important;
+  }
+}
+
+/* Utility class for content sections */
+.content-wrapper {
+  width: 100%;
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content-wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .content-wrapper {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }

@@ -9,7 +9,7 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`relative w-full overflow-hidden ${className}`}
+      className={`relative w-full max-w-full overflow-hidden ${className}`}
     >
       {/* Glow effects - behind content (z-0 default) */}
       {glow && (

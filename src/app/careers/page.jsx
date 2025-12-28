@@ -274,9 +274,9 @@ const CareersPage = () => {
     : jobOpenings.filter(job => job.category === activeCategory);
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-amber-50/20">
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-r from-black to-amber-500/45">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-black to-amber-500/45 py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
@@ -336,10 +336,10 @@ const CareersPage = () => {
             <span className="inline-block px-4 py-2 bg-amber-100 rounded-full text-amber-700 text-sm font-semibold tracking-wider mb-4">
               WHY GLASSCO
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Why Work <span className="text-amber-600">With Us?</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-white/50 max-w-2xl mx-auto text-lg">
               We offer more than just a job – we provide a platform for growth, learning, and success.
             </p>
           </motion.div>
@@ -366,7 +366,7 @@ const CareersPage = () => {
       </section>
 
       {/* Job Openings */}
-      <section id="openings" className="py-20 bg-white">
+      <section id="openings" className="py-20 bg-gradient-to-r from-black to-amber-500/45">
         <div className="container mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -377,10 +377,10 @@ const CareersPage = () => {
             <span className="inline-block px-4 py-2 bg-amber-100 rounded-full text-amber-700 text-sm font-semibold tracking-wider mb-4">
               CURRENT OPENINGS
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Available <span className="text-amber-600">Positions</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-white/50 max-w-2xl mx-auto text-lg">
               Explore our current job openings and find the perfect role for your skills and ambitions.
             </p>
           </motion.div>
@@ -532,7 +532,7 @@ const CareersPage = () => {
       </section>
 
       {/* Application CTA */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+      <section className="py-20 bg-gradient-to-r from-black to-amber-500/75">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div

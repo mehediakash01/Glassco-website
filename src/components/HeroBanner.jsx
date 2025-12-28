@@ -62,7 +62,7 @@ const HeroBanner = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-slate-900">
+    <section className="relative h-screen w-full  overflow-hidden bg-slate-900">
       {/* Slides */}
       <AnimatePresence mode="wait">
         <motion.div
