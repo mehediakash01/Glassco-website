@@ -41,7 +41,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-r from-black to-amber-500/85 text-white ">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl"></div>
@@ -57,12 +57,15 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="mb-6">
-              <div className="text-3xl font-bold mb-2">
-                <span className="text-white">GLASS</span>
-                <span className="text-amber-500">CO</span>
-              </div>
+           <div className="w-32 h-32 mx-auto mb-4">
+                    <img 
+                      src="/assets/images/glasscoLogo.png" 
+                      alt="Glassco Logo" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
               <div className="h-1 w-20 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full mb-4"></div>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-white/75 text-sm leading-relaxed">
                 Industry-leading aluminium and glass solutions provider in UAE with 15+ years of excellence in delivering premium quality installations.
               </p>
             </div>
@@ -131,7 +134,7 @@ const Footer = () => {
                 <li key={index}>
                   <a
                     href={service.link}
-                    className="text-gray-400 hover:text-amber-500 transition-colors duration-300 flex items-center gap-2 group"
+                    className="text-white/70 hover:text-amber-500 transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <FiArrowRight className="text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" size={14} />
                     <span>{service.name}</span>
@@ -158,7 +161,7 @@ const Footer = () => {
                   href="https://maps.google.com/?q=24.339201,54.481352"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-gray-400 hover:text-amber-500 transition-colors duration-300 group"
+                  className="flex items-start gap-3 text-white/75 hover:text-amber-500 transition-colors duration-300 group"
                 >
                   <FiMapPin className="text-amber-500 mt-1 flex-shrink-0" size={18} />
                   <span className="text-sm leading-relaxed">
@@ -171,8 +174,8 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="tel:+971XXXXXXXX"
-                  className="flex items-center gap-3 text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                  href="tel:+971 488 58814"
+                  className="flex items-center gap-3 text-white/75 hover:text-amber-500 transition-colors duration-300"
                 >
                   <FiPhone className="text-amber-500" size={18} />
                   <span className="text-sm">+971 488 58814</span>
@@ -181,14 +184,14 @@ const Footer = () => {
               <li>
                 <a 
                   href="mailto:info@glasscotrade.com"
-                  className="flex items-center gap-3 text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                  className="flex items-center gap-3 text-white/75 hover:text-amber-500 transition-colors duration-300"
                 >
                   <FiMail className="text-amber-500" size={18} />
                   <span className="text-sm">info@glasscotrade.com</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-gray-400">
+                <div className="flex items-start gap-3 text-white/75">
                   <FiClock className="text-amber-500 mt-1 flex-shrink-0" size={18} />
                   <div className="text-sm">
                     {workingHours.map((schedule, index) => (
@@ -215,7 +218,7 @@ const Footer = () => {
         >
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="text-2xl font-bold text-white mb-2">Stay Updated</h3>
-            <p className="text-gray-400 mb-6">Subscribe to our newsletter for latest updates, projects, and exclusive offers.</p>
+            <p className="text-white/75 mb-6">Subscribe to our newsletter for latest updates, projects, and exclusive offers.</p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <div className="relative flex-1">
                 <input
@@ -240,29 +243,29 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
-            <div className="text-gray-400 text-sm text-center md:text-left">
+            <div className="text-white/75 text-sm text-center md:text-left">
               © {currentYear} <span className="text-amber-500 font-semibold">Glassco Aluminium & Glass Workshop LLC</span>. All rights reserved.
             </div>
 
             {/* Legal Links */}
             <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <a href="/privacy-policy" className="text-gray-400 hover:text-amber-500 transition-colors duration-300">
+              <a href="/privacy-policy" className="text-white/75 hover:text-amber-500 transition-colors duration-300">
                 Privacy Policy
               </a>
               <span className="text-gray-600">|</span>
-              <a href="/terms-conditions" className="text-gray-400 hover:text-amber-500 transition-colors duration-300">
+              <a href="/terms-conditions" className="text-white/75 hover:text-amber-500 transition-colors duration-300">
                 Terms & Conditions
               </a>
               <span className="text-gray-600">|</span>
-              <a href="/sitemap" className="text-gray-400 hover:text-amber-500 transition-colors duration-300">
+              <a href="/sitemap" className="text-white/75 hover:text-amber-500 transition-colors duration-300">
                 Sitemap
               </a>
             </div>
           </div>
 
           {/* Made By */}
-          <div className="text-center mt-4 text-xs text-gray-500">
-            Designed & Developed By <Link href="https://www.royallipstech.com"> Royallips Technologies</Link>
+          <div className="text-center mt-4 text-xs text-white/75">
+            Designed & Developed By <Link href="https://www.royallipstech.com" className='text-blue-400 underline'> Royallips Technologies</Link>
           </div>
         </div>
       </div>

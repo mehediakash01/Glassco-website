@@ -81,7 +81,8 @@ export default function SegmentPage() {
   const services = segment[servicesKey] || [];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-r from-black to-amber-500/45">
+      
       {/* Breadcrumb */}
       <div className="bg-slate-50 border-b border-slate-200">
         <div className="container mx-auto px-4 md:px-8 py-4">
@@ -99,8 +100,8 @@ export default function SegmentPage() {
       {/* Overview */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">{segment.name}</h1>
-          <p className="text-lg text-gray-700 mb-12 leading-relaxed">{segment.overview}</p>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">{segment.name}</h1>
+          <p className="text-lg text-white/50 mb-12 leading-relaxed">{segment.overview}</p>
 
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -180,9 +181,9 @@ export default function SegmentPage() {
 
       {/* Related Segments */}
       {relatedSegments.length > 0 && (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-gradient-to-r from-black to-amber-500/45">
           <div className="container mx-auto px-4 md:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
               Explore Other <span className="text-amber-600">Segments</span>
             </h2>
             <div className="grid md:grid-cols-3 gap-8">

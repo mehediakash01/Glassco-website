@@ -120,9 +120,9 @@ const GalleryPage = () => {
   };
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-amber-50/20">
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-r from-black to-amber-500/45">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 md:py-28 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-black to-amber-500/45 py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
@@ -323,7 +323,7 @@ const GalleryPage = () => {
       </AnimatePresence>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+      <section className="py-20 bg-gradient-to-br bg-gradient-to-r from-black to-amber-500/45">
         <div className="container mx-auto px-4 md:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

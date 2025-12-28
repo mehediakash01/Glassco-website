@@ -117,7 +117,7 @@ const ProjectsSection = () => {
   // Error State
   if (error) {
     return (
-      <section className="relative py-20 md:py-28 bg-black min-h-screen">
+      <section className="relative py-20 md:py-28 bg-gradient-to-r from-black to-amber-500/45 min-h-screen">
         <div className="container mx-auto px-4 py-20">
           <div className="flex flex-col items-center justify-center min-h-[400px] bg-red-500/10 border border-red-500/30 rounded-2xl p-8">
             <div className="text-red-400 text-6xl mb-4">⚠️</div>
@@ -150,7 +150,7 @@ const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section className="relative py-20 md:py-28 bg-black overflow-hidden">
+    <section className="relative py-20 md:py-28 bg-gradient-to-r from-black to-amber-500/45 overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="pointer-events-none absolute top-20 left-0 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl -z-10"></div>
       <div className="pointer-events-none absolute bottom-20 right-0 w-96 h-96 bg-amber-600/20 rounded-full blur-3xl -z-10"></div>

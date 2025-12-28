@@ -144,7 +144,7 @@ const ContactSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Contact <span className="text-amber-600">Us</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
+          <p className="text-white/70 max-w-2xl mx-auto text-lg mb-6">
             Have a project in mind? Lets discuss how we can help bring your vision to life with our premium aluminium and glass solutions.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto rounded-full"></div>
