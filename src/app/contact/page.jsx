@@ -105,7 +105,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative content-wrapper overflow-x-hidden py-12 sm:py-16 md:py-20 lg:py-28">
+    <section ref={sectionRef} className="relative  overflow-x-hidden py-12 sm:py-16 md:py-20 lg:py-28">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-slate-100 rounded-full blur-3xl opacity-20 -z-10"></div>

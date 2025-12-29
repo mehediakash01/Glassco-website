@@ -48,7 +48,7 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center justify-center flex-wrap gap-2">
             <div className="flex items-center gap-2 xl:gap-4 text-xs flex-wrap">
               <div className="flex flex-col items-start min-w-fit">
                 <div className="flex items-center gap-1.5">
@@ -77,7 +77,7 @@ const Navbar = () => {
             </div>
             
             {/* Language Switcher */}
-            <div className="flex items-center gap-2 ml-auto">
+            {/* <div className="flex items-center gap-2 ml-auto">
               <button
                 onClick={() => setLanguage('EN')}
                 className={`px-2 py-1 rounded text-xs font-medium transition-all ${
@@ -94,7 +94,7 @@ const Navbar = () => {
               >
                 AR
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@ const Navbar = () => {
       </nav>
 
       {/* Spacer */}
-      <div className="h-[60px] xs:h-[64px] sm:h-[64px] lg:h-[112px]"></div>
+      <div className="h-[60px] xs:h-[64px] sm:h-[64px] lg:h-[12px]"></div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
@@ -298,7 +298,7 @@ const Navbar = () => {
               ))}
 
               {/* Language Switcher - Mobile */}
-              <div className="flex items-center gap-2 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-800">
+              {/* <div className="flex items-center gap-2 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-800">
                 <span className="text-[10px] sm:text-xs text-gray-400">Language:</span>
                 <button
                   onClick={() => setLanguage('EN')}
@@ -316,7 +316,7 @@ const Navbar = () => {
                 >
                   AR
                 </button>
-              </div>
+              </div> */}
 
               {/* CTA Button - Mobile */}
               <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
