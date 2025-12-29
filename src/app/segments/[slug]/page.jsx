@@ -26,17 +26,13 @@ const createSlug = (name) => {
 export default function SegmentPage() {
   const { slug } = useParams();
 
-  // ✅ Derive segment synchronously (NO useEffect, NO setState)
+  // Derive segment synchronously
   const segment = useMemo(() => {
     if (!slug) return null;
-    return (
-      segmentsData.find(
-        (s) => createSlug(s.name) === slug
-      ) || null
-    );
+    return segmentsData.find((s) => createSlug(s.name) === slug) || null;
   }, [slug]);
 
-  // ✅ Derive related segments
+  // Derive related segments
   const relatedSegments = useMemo(() => {
     if (!segment) return [];
     return segmentsData
@@ -69,10 +65,10 @@ export default function SegmentPage() {
             {error || 'The segment you are looking for does not exist.'}
           </p>
           <Link
-            href="/#services"
+            href="/"
             className="px-6 py-3 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-colors inline-block"
           >
-            Back to Services
+            Back to Home
           </Link>
         </div>
       </div>
@@ -113,7 +109,7 @@ export default function SegmentPage() {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             {segment.name}
           </h1>
-          <p className="text-lg text-white/50 mb-12 leading-relaxed">
+          <p className="text-lg text-white/80 mb-12 leading-relaxed max-w-4xl">
             {segment.overview}
           </p>
 
@@ -155,6 +151,7 @@ export default function SegmentPage() {
                       {service.description}
                     </p>
 
+                    {/* Show first 3 benefits if available */}
                     {service.benefits?.length > 0 && (
                       <ul className="text-gray-700 text-sm mb-4 space-y-2">
                         {service.benefits
@@ -176,6 +173,7 @@ export default function SegmentPage() {
                       </ul>
                     )}
 
+                    {/* Show types if available */}
                     {service.types?.length > 0 && (
                       <div className="mb-4">
                         <p className="text-xs text-gray-500 mb-2">
@@ -192,6 +190,11 @@ export default function SegmentPage() {
                                 {type}
                               </span>
                             ))}
+                          {service.types.length > 3 && (
+                            <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded">
+                              +{service.types.length - 3} more
+                            </span>
+                          )}
                         </div>
                       </div>
                     )}
@@ -208,16 +211,23 @@ export default function SegmentPage() {
               );
             })}
           </div>
+
+          {/* Empty State */}
+          {services.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-white text-lg">No services available in this segment.</p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Related Segments */}
       {relatedSegments.length > 0 && (
-        <section className="py-20 bg-gradient-to-r from-black to-amber-500/45">
+        <section className="py-20 bg-slate-900">
           <div className="container mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
               Explore Other{' '}
-              <span className="text-amber-600">Segments</span>
+              <span className="text-amber-400">Segments</span>
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -225,23 +235,23 @@ export default function SegmentPage() {
                 <Link
                   key={rel.segmentId}
                   href={`/segments/${createSlug(rel.name)}`}
-                  className="bg-white border-2 border-slate-200 rounded-2xl p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
+                  className="bg-slate-800 border-2 border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
+                    <div className="w-12 h-12 bg-amber-600/20 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">
                       <FiPackage
-                        className="text-amber-600 group-hover:text-white transition-colors"
+                        className="text-amber-400 group-hover:text-white transition-colors"
                         size={24}
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
+                    <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
                       {rel.name}
                     </h3>
                   </div>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className="text-gray-400 text-sm line-clamp-3">
                     {rel.overview}
                   </p>
-                  <div className="mt-4 inline-flex items-center gap-2 text-amber-600 font-semibold text-sm">
+                  <div className="mt-4 inline-flex items-center gap-2 text-amber-400 font-semibold text-sm">
                     View Segment
                     <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </div>
