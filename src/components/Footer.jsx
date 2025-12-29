@@ -59,7 +59,7 @@ const Footer = () => {
             <div className="mb-6">
            <div className="w-32 h-32 mx-auto mb-4">
                     <img 
-                      src="/assets/images/glasscoLogo.png" 
+                   src="/assets/images/glassco-logo.png"
                       alt="Glassco Logo" 
                       className="w-full h-full object-contain"
                     />

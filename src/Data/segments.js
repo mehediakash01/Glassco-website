@@ -7,7 +7,7 @@ export const segmentsData =  [
         {
           "glassServiceId": 101,
           "name": "Tempered Glass (Heat-Treated Glass)",
-          "image": "/assets/gellary/IMG_4487.JPG",
+          "image": "/assets/gellary/Temper-glass.jpg",
           "description": "Premium heat-treated glass designed to enhance strength, safety, and performance for residential and commercial applications.",
           "solutions": [
             {
@@ -59,8 +59,8 @@ export const segmentsData =  [
         {
           "glassServiceId": 102,
           "name": "Laminated Glass",
-          "status": "Upcoming Service",
-          "image": "/assets/gellary/IMG_4490.JPG",
+
+          "image": "/assets/gellary/lamination .jpg",
           "description": "Premium laminated glass combining aesthetic appeal with enhanced safety and security using PVB, EVA, SGP, and specialized interlayers.",
           "specifications": {
             "maxGlassSize": "2400 x 3660 mm",
@@ -90,7 +90,7 @@ export const segmentsData =  [
         {
           "glassServiceId": 103,
           "name": "Insulated Glass (IGUs) / Double Glazing Glass",
-          "image": "/assets/gellary/IMG_4517.JPG",
+          "image": "/assets/gellary/insulted-glass.JPG",
           "description": "High-performance insulated glass units designed for thermal insulation, energy efficiency, and noise reduction.",
           "glassOptions": [
             "Annealed Glass",
@@ -113,7 +113,7 @@ export const segmentsData =  [
         {
           "glassServiceId": 104,
           "name": "Polishing",
-          "image": "/assets/gellary/IMG_4507.JPG",
+          "image": "/assets/gellary/polishing.JPG",
           "description": "Advanced glass polishing services delivering smooth edges, clarity, and premium finish.",
           "types": [
             "Clean Cut Edges",
@@ -136,7 +136,7 @@ export const segmentsData =  [
         {
           "glassServiceId": 105,
           "name": "Drilling: Custom Holes & Cut-Outs",
-          "image": "/assets/gellary/IMG_4459.JPG",
+          "image": "/assets/gellary/drilling.JPG",
           "description": "Precision drilling solutions for customized glass installations.",
           "capabilities": [
             "Standard holes",

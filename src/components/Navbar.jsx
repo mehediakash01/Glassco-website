@@ -103,8 +103,8 @@ const Navbar = () => {
       <nav
         className={`fixed left-0 right-0 z-40 transition-all duration-300 w-full lg:px-32 ${
           isScrolled 
-            ? 'top-0 bg-slate-900/98 backdrop-blur-md shadow-xl py-2 lg:py-3 border-b border-amber-600/20' 
-            : 'top-0 lg:top-[48px] bg-slate-900/95 lg:bg-transparent py-2 lg:py-4'
+            ? 'top-0 bg-gradient-to-r from-black to-amber-500/75 backdrop-blur-md shadow-xl py-2 lg:py-3 border-b border-amber-600/20' 
+            : 'top-0 lg:top-[48px] bg-gradient-to-r from-black to-amber-500/75 lg:bg-transparent py-2 lg:py-4'
         }`}
       >
         <div className="w-full max-w-full px-2 sm:px-3 md:px-4 mx-auto">
@@ -113,7 +113,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2 flex-shrink-0 hover:scale-105 transition-transform duration-200">
               <Link href="/" className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-16 sm:h-16 md:w-14 md:h-14 lg:w-24 lg:h-20">
                 <img 
-                  src="/assets/images/glasscoLogo.png" 
+                  src="/assets/images/glassco-logo.png" 
                   alt="Glassco Logo" 
                   className="w-full h-full object-contain"
                 />
@@ -196,7 +196,7 @@ const Navbar = () => {
       </nav>
 
       {/* Spacer */}
-      <div className="h-[60px] xs:h-[64px] sm:h-[64px] lg:h-[12px]"></div>
+      <div className="h-[60px] xs:h-[64px] sm:h-[64px] lg:h-[2px]"></div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
@@ -226,7 +226,7 @@ const Navbar = () => {
               <div className="mb-6 sm:mb-8 mt-2">
                 <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-3 sm:mb-4">
                   <img 
-                    src="/assets/images/glasscoLogo.png" 
+                    src="/assets/images/glassco-logo.png" 
                     alt="Glassco Logo" 
                     className="w-full h-full object-contain"
                   />
