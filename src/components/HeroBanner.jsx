@@ -65,7 +65,7 @@ const HeroBanner = () => {
   const pieces = Array.from({ length: 12 }, (_, i) => i);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-slate-900">
+    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-r from-black to-amber-500/75">
       {/* Slides with Puzzle Animation */}
       <AnimatePresence mode="wait">
         <motion.div
