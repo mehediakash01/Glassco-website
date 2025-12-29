@@ -123,10 +123,10 @@ const AboutSection = () => {
                 Industry Leading Excellence in{" "}
                 <span className="text-amber-500">Aluminium & Glass</span>
               </h3>
-              <div className="absolute -left-4 top-0 w-1 h-20 bg-gradient-to-b from-amber-500 to-amber-600 rounded-full"></div>
+              {/* <div className="absolute -left-4 top-0 w-1 h-20 bg-gradient-to-b from-amber-500 to-amber-600 rounded-full"></div> */}
             </div>
 
-            <p className="text-gray-300 leading-relaxed text-lg">
+            <p className="text-white leading-relaxed text-lg">
               <span className="font-semibold text-white">
                 Glassco Aluminium And Glass Workshop LLC
               </span>{" "}
@@ -135,7 +135,7 @@ const AboutSection = () => {
               machinery.
             </p>
 
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-white leading-relaxed">
               We operate across multiple dimensions with professionally
               qualified and experienced employees in the Aluminium & Glass
               sector, delivering premium solutions that combine innovation,

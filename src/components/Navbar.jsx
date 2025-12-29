@@ -70,7 +70,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center gap-1.5 min-w-fit">
                 <Globe className="w-3 h-3 text-amber-500 flex-shrink-0" />
-                <span className="whitespace-nowrap truncate max-w-[150px] xl:max-w-none">www.glasscotrade.com</span>
+                <Link href='https://amccompleteinteriors.com/' className="whitespace-nowrap truncate max-w-[150px] xl:max-w-none" target='blank'>www.amccompleteinteriors.com</Link>
               </div>
               <div className="h-8 w-px bg-gray-700 hidden xl:block"></div>
               <div className="flex items-center gap-1.5 min-w-fit">
@@ -118,7 +118,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Link href="/" className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16">
+              <Link href="/" className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-16 sm:h-16 md:w-14 md:h-14 lg:w-24 lg:h-20">
                 <img 
                   src="/assets/images/glasscoLogo.png" 
                   alt="Glassco Logo" 

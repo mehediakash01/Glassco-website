@@ -61,36 +61,86 @@ const HeroBanner = () => {
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
+  // Create puzzle pieces - 4x3 grid = 12 pieces
+  const pieces = Array.from({ length: 12 }, (_, i) => i);
+
   return (
-    <section className="relative h-screen w-full  overflow-hidden bg-slate-900">
-      {/* Slides */}
+    <section className="relative h-screen w-full overflow-hidden bg-slate-900">
+      {/* Slides with Puzzle Animation */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          {/* Background Image with Ken Burns Effect */}
-          <motion.div 
-            className="absolute inset-0"
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.1 }}
-            transition={{ duration: 6, ease: "linear" }}
-          >
-            <img
-              src={slides[currentSlide].image}
-              alt={slides[currentSlide].title}
-              className="w-full h-full object-cover"
-            />
-            {/* Sophisticated Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          </motion.div>
+          {/* Puzzle Pieces Grid */}
+          <div className="absolute inset-0 grid grid-cols-4 grid-rows-3">
+            {pieces.map((piece) => {
+              const row = Math.floor(piece / 4);
+              const col = piece % 4;
+              const delay = (row + col) * 0.05;
 
-          {/* Minimal Content - Centered */}
+              return (
+                <motion.div
+                  key={piece}
+                  initial={{ 
+                    opacity: 0,
+                    scale: 0,
+                    rotateY: -90,
+                    x: (col - 1.5) * 100,
+                    y: (row - 1) * 100
+                  }}
+                  animate={{ 
+                    opacity: 1,
+                    scale: 1,
+                    rotateY: 0,
+                    x: 0,
+                    y: 0
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    scale: 0.8,
+                    rotateY: 90
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: delay,
+                    ease: [0.43, 0.13, 0.23, 0.96]
+                  }}
+                  className="relative overflow-hidden"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    backfaceVisibility: "hidden"
+                  }}
+                >
+                  {/* Image piece */}
+                  <div 
+                    className="absolute inset-0 w-full h-full"
+                    style={{
+                      backgroundImage: `url(${slides[currentSlide].image})`,
+                      backgroundSize: "400% 300%",
+                      backgroundPosition: `${col * 33.33}% ${row * 50}%`,
+                    }}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Gradient Overlays */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60 pointer-events-none"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"
+          />
+
+          {/* Content */}
           <div className="relative z-10 h-full flex items-center justify-center">
             <div className="container mx-auto px-4 md:px-8">
               <div className="max-w-4xl mx-auto text-center">
@@ -99,7 +149,7 @@ const HeroBanner = () => {
                 <motion.h1
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                  transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
                   className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight"
                 >
                   {slides[currentSlide].title}
@@ -109,7 +159,7 @@ const HeroBanner = () => {
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                  transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
                   className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-12 font-light"
                 >
                   {slides[currentSlide].subtitle}
@@ -119,7 +169,7 @@ const HeroBanner = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
+                  transition={{ delay: 1.3, duration: 0.8, ease: "easeOut" }}
                 >
                   <Link href={slides[currentSlide].link}>
                     <motion.button
@@ -147,7 +197,7 @@ const HeroBanner = () => {
                 <motion.div
                   initial={{ width: 0, opacity: 0 }}
                   animate={{ width: "120px", opacity: 1 }}
-                  transition={{ delay: 1, duration: 1 }}
+                  transition={{ delay: 1.5, duration: 1 }}
                   className="h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent mt-16 mx-auto"
                 ></motion.div>
               </div>
@@ -206,7 +256,7 @@ const HeroBanner = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: 1.7, duration: 0.8 }}
         className="absolute bottom-12 right-8 md:right-12 z-20 hidden md:block"
       >
         <motion.div
@@ -223,7 +273,7 @@ const HeroBanner = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
         className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-r from-black/60 via-black/40 to-black/60 backdrop-blur-xl border-t border-white/5"
       >
         <div className="container mx-auto px-4 md:px-8 py-6">
