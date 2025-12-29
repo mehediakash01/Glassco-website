@@ -199,7 +199,7 @@ const ProjectsSection = () => {
               <div
                 key={project.id}
                 onClick={() => handleProjectClick(project)}
-                className="group bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 cursor-pointer hover:-translate-y-2"
+                className="group bg-black backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 cursor-pointer hover:-translate-y-2"
               >
                 {/* Project Image */}
                 <div className="relative h-64 overflow-hidden bg-slate-900">
@@ -210,7 +210,7 @@ const ProjectsSection = () => {
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
                   
                   {/* Category Badge */}
                   <div className="absolute top-4 right-4 z-20">
@@ -246,7 +246,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 bg-slate-800">
+                <div className="p-6 bg-black">
                   <h3 className="text-xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors duration-300">
                     {project.title}
                   </h3>
@@ -294,7 +294,7 @@ const ProjectsSection = () => {
           ].map((stat, index) => (
             <div
               key={index}
-              className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 hover:scale-105"
+              className="bg-black backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 hover:scale-105"
             >
               <div className="text-3xl md:text-4xl font-bold text-amber-500 mb-2">{stat.number}</div>
               <div className="text-gray-300 text-sm font-medium">{stat.label}</div>
