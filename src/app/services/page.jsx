@@ -142,7 +142,7 @@ const ServicesSection = () => {
               className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 ${
                 activeTab === category.id
                   ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/50 border-2 border-amber-400'
-                  : 'bg-slate-700/80 text-gray-200 hover:bg-slate-600/80 border-2 border-slate-600 hover:border-amber-500/50'
+                  : 'bg-black/80 text-gray-200 hover:bg-black/80 border-2 border-black hover:border-amber-500/50'
               }`}
             >
               {category.label}
@@ -158,7 +158,7 @@ const ServicesSection = () => {
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="group bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 hover:-translate-y-2"
+              className="group bg-black/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-black hover:border-amber-400 hover:-translate-y-2"
             >
               {/* Service Image */}
               <div className="relative h-56 overflow-hidden">
@@ -169,18 +169,18 @@ const ServicesSection = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-black to-black flex items-center justify-center">
                     <service.IconComponent className="text-6xl text-amber-500/50" />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10"></div>
                 <div className="absolute top-4 left-4 z-20 w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg shadow-amber-500/30">
                   <service.IconComponent />
                 </div>
               </div>
 
               {/* Card content */}
-              <div className="p-6 bg-slate-800">
+              <div className="p-6 bg-black">
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-amber-300 transition-colors duration-300">
                   {service.title}
                 </h3>
@@ -223,7 +223,7 @@ const ServicesSection = () => {
 
         {/* Bottom CTA Section */}
         <div className="mt-20">
-          <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 overflow-hidden border border-amber-500/20">
+          <div className="relative bg-gradient-to-br from-black/50 to-black/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 overflow-hidden border border-amber-500/20">
             <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             <div className="pointer-events-none absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             <div className="relative z-10 text-center">
@@ -256,7 +256,7 @@ const ServicesSection = () => {
           ].map((stat, index) => (
             <div
               key={index}
-              className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 hover:scale-105"
+              className="bg-black/30 backdrop-blur-sm rounded-2xl p-6 text-center border border-amber-500/20 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 hover:scale-105"
             >
               <div className="text-3xl md:text-4xl font-bold text-amber-500 mb-2">{stat.number}</div>
               <div className="text-gray-300 text-sm font-medium">{stat.label}</div>

@@ -287,7 +287,7 @@ const CareersPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center py-12"
           >
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
@@ -315,7 +315,7 @@ const CareersPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold hover:bg-gray-100 transition-all"
+                className="px-8 py-4 bg-white text-black rounded-xl font-semibold hover:bg-gray-100 transition-all"
               >
                 Submit Your CV
               </motion.button>
@@ -357,7 +357,7 @@ const CareersPage = () => {
                 <div className={`w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-xl flex items-center justify-center text-white text-3xl mb-6`}>
                   {benefit.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
+                <h3 className="text-2xl font-bold text-black mb-3">{benefit.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
@@ -396,11 +396,11 @@ const CareersPage = () => {
                 className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                   activeCategory === category.id
                     ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg shadow-amber-600/30'
-                    : 'bg-slate-50 text-gray-700 hover:bg-amber-50 border border-gray-200 hover:border-amber-300'
+                    : 'bg-black text-white/70 hover:bg-amber-700 border border-gray-200 hover:border-amber-300'
                 }`}
               >
                 {category.label}
-                <span className={`ml-2 text-sm ${activeCategory === category.id ? 'text-amber-100' : 'text-gray-500'}`}>
+                <span className={`ml-2 text-sm ${activeCategory === category.id ? 'text-amber-100' : 'text-white/70'}`}>
                   ({category.count})
                 </span>
               </motion.button>
@@ -424,7 +424,7 @@ const CareersPage = () => {
                         <FiBriefcase size={24} />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-2">{job.title}</h3>
+                        <h3 className="text-2xl font-bold text-black mb-2">{job.title}</h3>
                         <div className="flex flex-wrap gap-3 text-sm">
                           <span className="flex items-center gap-1 text-gray-600">
                             <FiBriefcase size={14} />
@@ -464,7 +464,7 @@ const CareersPage = () => {
                         className="mt-6 pt-6 border-t border-gray-200 space-y-6"
                       >
                         <div>
-                          <h4 className="text-lg font-bold text-slate-900 mb-3">Responsibilities:</h4>
+                          <h4 className="text-lg font-bold text-black mb-3">Responsibilities:</h4>
                           <ul className="space-y-2">
                             {job.responsibilities.map((resp, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-gray-700">
@@ -476,7 +476,7 @@ const CareersPage = () => {
                         </div>
 
                         <div>
-                          <h4 className="text-lg font-bold text-slate-900 mb-3">Requirements:</h4>
+                          <h4 className="text-lg font-bold text-black mb-3">Requirements:</h4>
                           <ul className="space-y-2">
                             {job.requirements.map((req, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-gray-700">
@@ -488,7 +488,7 @@ const CareersPage = () => {
                         </div>
 
                         <div>
-                          <h4 className="text-lg font-bold text-slate-900 mb-3">Benefits:</h4>
+                          <h4 className="text-lg font-bold text-black mb-3">Benefits:</h4>
                           <ul className="space-y-2">
                             {job.benefits.map((benefit, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-gray-700">
@@ -513,7 +513,7 @@ const CareersPage = () => {
                     </motion.button>
                     <button
                       onClick={() => setSelectedJob(selectedJob === job.id ? null : job.id)}
-                      className="px-6 py-3 bg-slate-100 text-slate-900 rounded-xl font-semibold whitespace-nowrap hover:bg-slate-200 transition-colors flex items-center justify-center gap-2"
+                      className="px-6 py-3 bg-black text-white rounded-xl font-semibold whitespace-nowrap hover:bg-black transition-colors flex items-center justify-center gap-2"
                     >
                       {selectedJob === job.id ? 'Hide' : 'View'} Details
                       <motion.div
@@ -541,7 +541,7 @@ const CareersPage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Don not See the Right Position?
+                Do not See the Right Position?
               </h2>
               <p className="text-gray-300 text-lg mb-8">
                 We are always interested in meeting talented professionals. Send us your CV and we will keep you in mind for future opportunities.

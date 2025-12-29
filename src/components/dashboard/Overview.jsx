@@ -12,7 +12,7 @@ export default function Overview() {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-slate-900 mb-8">Dashboard Overview</h2>
+      <h2 className="text-3xl font-bold text-black mb-8">Dashboard Overview</h2>
       
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -28,14 +28,14 @@ export default function Overview() {
               {stat.icon}
             </div>
             <p className="text-gray-600 text-sm mb-1">{stat.label}</p>
-            <p className="text-3xl font-bold text-slate-900">{stat.value}</p>
+            <p className="text-3xl font-bold text-black">{stat.value}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Recent Activity */}
       <div className="bg-white rounded-2xl p-6 shadow-lg">
-        <h3 className="text-xl font-bold text-slate-900 mb-4">Recent Activity</h3>
+        <h3 className="text-xl font-bold text-black mb-4">Recent Activity</h3>
         <div className="space-y-4">
           {[1, 2, 3].map((item) => (
             <div key={item} className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
@@ -43,7 +43,7 @@ export default function Overview() {
                 <FiMail className="text-amber-600" />
               </div>
               <div className="flex-1">
-                <p className="font-semibold text-slate-900">New contact submission</p>
+                <p className="font-semibold text-black">New contact submission</p>
                 <p className="text-sm text-gray-600">2 hours ago</p>
               </div>
             </div>

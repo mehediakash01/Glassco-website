@@ -150,7 +150,7 @@ export default function ProjectModal({ project, onClose, onSave }) {
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4 border-b z-10">
-          <h3 className="text-2xl font-bold text-slate-900">
+          <h3 className="text-2xl font-bold text-black">
             {project ? 'Edit Project' : 'Add New Project'}
           </h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-2xl transition-colors disabled:opacity-50" disabled={loading}>
@@ -161,7 +161,7 @@ export default function ProjectModal({ project, onClose, onSave }) {
         <div className="space-y-8">
           {/* Basic Info */}
           <section>
-            <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <h4 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
               <span className="w-1 h-6 bg-amber-600 rounded"></span>Basic Information
             </h4>
 
@@ -268,7 +268,7 @@ export default function ProjectModal({ project, onClose, onSave }) {
           {['features', 'specifications', 'benefits', 'applications'].map((section) => (
             <section key={section}>
               <div className="flex justify-between items-center mb-4">
-                <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <h4 className="text-lg font-bold text-black flex items-center gap-2">
                   <span className="w-1 h-6 bg-amber-600 rounded"></span>
                   {section.charAt(0).toUpperCase() + section.slice(1)}
                 </h4>

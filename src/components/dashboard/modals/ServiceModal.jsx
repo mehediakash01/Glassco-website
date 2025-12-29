@@ -200,7 +200,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
         className="bg-white rounded-2xl max-w-4xl w-full p-8 my-8 max-h-[90vh] overflow-y-auto"
       >
         <div className="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4 border-b z-10">
-          <h3 className="text-2xl font-bold text-slate-900">
+          <h3 className="text-2xl font-bold text-black">
             {service ? 'Edit Service' : 'Add New Service'}
           </h3>
           <button
@@ -215,7 +215,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
         <div className="space-y-8">
           {/* Basic Information */}
           <section>
-            <h4 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <h4 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
               <span className="w-1 h-6 bg-amber-600 rounded"></span>
               Basic Information
             </h4>
@@ -341,7 +341,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
           {/* Features */}
           <section>
             <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h4 className="text-lg font-bold text-black flex items-center gap-2">
                 <span className="w-1 h-6 bg-amber-600 rounded"></span>
                 Key Features
               </h4>
@@ -401,7 +401,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
           {/* Specifications */}
           <section>
             <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h4 className="text-lg font-bold text-black flex items-center gap-2">
                 <span className="w-1 h-6 bg-amber-600 rounded"></span>
                 Technical Specifications
               </h4>
@@ -440,7 +440,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
           {/* Benefits */}
           <section>
             <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h4 className="text-lg font-bold text-black flex items-center gap-2">
                 <span className="w-1 h-6 bg-amber-600 rounded"></span>
                 Benefits
               </h4>
@@ -479,7 +479,7 @@ export default function ServiceModal({ service, onClose, onSave }) {
           {/* Applications */}
           <section>
             <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h4 className="text-lg font-bold text-black flex items-center gap-2">
                 <span className="w-1 h-6 bg-amber-600 rounded"></span>
                 Ideal Applications
               </h4>

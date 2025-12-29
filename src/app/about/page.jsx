@@ -24,7 +24,7 @@ const AboutSection = () => {
       suffix: "Sq.ft",
       label: "Factory Space",
     },
-    { icon: <BsGear />, value: "15", suffix: "+", label: "Years Experience" },
+    { icon: <BsGear />, value: "20", suffix: "+", label: "Years Experience" },
     {
       icon: <FiUsers />,
       value: "50",
@@ -93,7 +93,7 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 lg:py-12"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -143,7 +143,7 @@ const AboutSection = () => {
             </p>
 
             {/* Specializations */}
-            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-amber-500/20">
+            <div className="bg-gradient-to-br from-black/50 to-black/50 backdrop-blur-sm p-6 rounded-2xl border border-amber-500/20">
               <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-amber-500">●</span> Our Specializations
               </h4>
@@ -193,7 +193,7 @@ const AboutSection = () => {
                 alt="Glassco Factory"
                 className="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
 
               {/* Badge */}
               <motion.div
@@ -229,7 +229,7 @@ const AboutSection = () => {
                     y: -5,
                     boxShadow: "0 10px 30px rgba(245, 158, 11, 0.3)",
                   }}
-                  className="bg-slate-800/50 backdrop-blur-sm border border-amber-500/20 rounded-xl p-6 hover:border-amber-500/50 transition-all duration-300 cursor-pointer"
+                  className="bg-black/50 backdrop-blur-sm border border-amber-500/20 rounded-xl p-6 hover:border-amber-500/50 transition-all duration-300 cursor-pointer"
                 >
                   <div className="text-amber-500 text-2xl mb-3">
                     {stat.icon}
@@ -257,7 +257,7 @@ const AboutSection = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -10 }}
-              className="bg-slate-800/30 backdrop-blur-sm p-6 rounded-2xl border border-amber-500/20 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300"
+              className="bg-black/30 backdrop-blur-sm p-6 rounded-2xl border border-amber-500/20 hover:border-amber-500/50 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white text-2xl mb-4 shadow-lg shadow-amber-500/30">
                 {feature.icon}
@@ -279,7 +279,7 @@ const AboutSection = () => {
           transition={{ duration: 0.7, delay: 0.6 }}
           className="relative"
         >
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl border border-amber-500/20">
+          <div className="bg-gradient-to-br from-black/50 to-black/50 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl border border-amber-500/20">
             <div className="grid lg:grid-cols-3 gap-0">
               {/* MD Image */}
               <motion.div
@@ -293,7 +293,7 @@ const AboutSection = () => {
                   alt="Mr. Ajaz Ahmed"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
               </motion.div>
 
               {/* Content */}

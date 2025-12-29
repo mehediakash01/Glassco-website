@@ -29,7 +29,7 @@ export default function LoginForm({ onLogin }) {
     <div className="min-h-screen flex items-center justify-center bg-black">
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-900 p-8 rounded-xl w-96"
+        className="bg-black p-8 rounded-xl w-96"
       >
         <h2 className="text-white text-2xl font-bold mb-6">Admin Login</h2>
 
@@ -40,7 +40,7 @@ export default function LoginForm({ onLogin }) {
           placeholder="Admin Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 mb-4 rounded bg-slate-800 text-white"
+          className="w-full p-3 mb-4 rounded bg-black text-white"
           required
         />
 
@@ -49,7 +49,7 @@ export default function LoginForm({ onLogin }) {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-6 rounded bg-slate-800 text-white"
+          className="w-full p-3 mb-6 rounded bg-black text-white"
           required
         />
 

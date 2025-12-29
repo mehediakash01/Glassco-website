@@ -33,12 +33,12 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-black">
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onLogout={handleLogout}
-        className={`fixed z-40 inset-y-0 left-0 w-64 transform bg-gradient-to-b from-slate-900 to-slate-800 transition-transform duration-300 ease-in-out
+        className={`fixed z-40 inset-y-0 left-0 w-64 transform bg-gradient-to-b from-black to-black transition-transform duration-300 ease-in-out
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:relative md:shadow-none`}
       />
 

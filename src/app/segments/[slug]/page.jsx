@@ -58,7 +58,7 @@ export default function SegmentPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+          <h1 className="text-4xl font-bold text-black mb-4">
             Segment Not Found
           </h1>
           <p className="text-gray-600 mb-8">
@@ -85,7 +85,7 @@ export default function SegmentPage() {
   return (
     <div className="min-h-screen bg-gradient-to-r from-black to-amber-500/45">
       {/* Breadcrumb */}
-      <div className="bg-slate-50 border-b border-slate-200">
+      <div className="bg-black border-b border-black">
         <div className="container mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
             <Link
@@ -123,10 +123,10 @@ export default function SegmentPage() {
               return (
                 <div
                   key={serviceId}
-                  className="bg-white border-2 border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
+                  className="bg-white border-2 border-black rounded-2xl overflow-hidden hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
                 >
                   {service.image && (
-                    <div className="relative h-48 bg-slate-900 overflow-hidden">
+                    <div className="relative h-48 bg-black overflow-hidden">
                       <img
                         src={service.image}
                         alt={service.name}
@@ -143,7 +143,7 @@ export default function SegmentPage() {
                       </span>
                     )}
 
-                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
+                    <h3 className="text-xl font-bold text-black mb-2 group-hover:text-amber-600 transition-colors">
                       {service.name}
                     </h3>
 
@@ -185,7 +185,7 @@ export default function SegmentPage() {
                             .map((type, i) => (
                               <span
                                 key={i}
-                                className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded"
+                                className="px-2 py-1 bg-black text-white text-xs rounded"
                               >
                                 {type}
                               </span>
@@ -223,7 +223,7 @@ export default function SegmentPage() {
 
       {/* Related Segments */}
       {relatedSegments.length > 0 && (
-        <section className="py-20 bg-slate-900">
+        <section className="py-20 bg-black">
           <div className="container mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
               Explore Other{' '}
@@ -235,7 +235,7 @@ export default function SegmentPage() {
                 <Link
                   key={rel.segmentId}
                   href={`/segments/${createSlug(rel.name)}`}
-                  className="bg-slate-800 border-2 border-slate-700 rounded-2xl p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
+                  className="bg-black border-2 border-black rounded-2xl p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-amber-600/20 rounded-lg flex items-center justify-center group-hover:bg-amber-600 transition-colors">

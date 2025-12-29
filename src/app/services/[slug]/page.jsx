@@ -131,7 +131,7 @@ export default function ServiceDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">Service Not Found</h1>
+          <h1 className="text-4xl font-bold text-black mb-4">Service Not Found</h1>
           <p className="text-gray-600 mb-8">{error || 'The service you are looking for does not exist.'}</p>
           <Link href="/#services" className="px-6 py-3 bg-amber-600 text-white rounded-xl font-semibold hover:bg-amber-700 transition-colors inline-block">
             Back to Services
@@ -144,7 +144,7 @@ export default function ServiceDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="bg-slate-50 border-b border-slate-200">
+      <div className="bg-black border-b border-black">
         <div className="container mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
             <Link href="/" className="hover:text-amber-600 transition-colors flex items-center gap-1">
@@ -158,13 +158,13 @@ export default function ServiceDetailPage() {
             <span>/</span>
             <span className="text-amber-600 font-medium">{getCategoryLabel(service.category)}</span>
             <span>/</span>
-            <span className="text-slate-900 font-medium truncate">{service.title}</span>
+            <span className="text-black font-medium truncate">{service.title}</span>
           </div>
         </div>
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-[60vh] md:h-[70vh] bg-slate-900 overflow-hidden">
+      <section className="relative h-[60vh] md:h-[70vh] bg-black overflow-hidden">
         {service.image_url && (
           <div className="absolute inset-0">
             <img 
@@ -175,7 +175,7 @@ export default function ServiceDetailPage() {
           </div>
         )}
         
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
         
         {service.icon && (
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
@@ -188,7 +188,7 @@ export default function ServiceDetailPage() {
             <div className="max-w-3xl">
               {/* Category Badge */}
               <div className="flex items-center gap-3 mb-4 flex-wrap">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full text-slate-300 text-sm font-medium">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/50 backdrop-blur-sm border border-black rounded-full text-black text-sm font-medium">
                   <FiTag size={14} />
                   {getCategoryLabel(service.category)}
                 </span>
@@ -230,7 +230,7 @@ export default function ServiceDetailPage() {
               {/* Overview */}
               {service.full_description && (
                 <div className="mb-16">
-                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Overview
                   </h2>
@@ -243,7 +243,7 @@ export default function ServiceDetailPage() {
               {/* Features */}
               {service.features && service.features.length > 0 && (
                 <div className="mb-16">
-                  <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-8 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Key Features
                   </h2>
@@ -258,7 +258,7 @@ export default function ServiceDetailPage() {
                             {resolveIcon(feature.icon)}
                           </div>
                         )}
-                        <h3 className="text-lg font-bold text-slate-900 mb-2">{feature.title}</h3>
+                        <h3 className="text-lg font-bold text-black mb-2">{feature.title}</h3>
                         {feature.description && (
                           <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
                         )}
@@ -270,8 +270,8 @@ export default function ServiceDetailPage() {
 
               {/* Specifications */}
               {service.specifications && service.specifications.length > 0 && (
-                <div className="mb-16 bg-slate-50 p-8 rounded-2xl">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                <div className="mb-16 bg-black p-8 rounded-2xl">
+                  <h3 className="text-2xl font-bold text-black mb-6 flex items-center gap-3">
                     <FiPackage className="text-amber-600" size={24} />
                     Technical Specifications
                   </h3>
@@ -289,7 +289,7 @@ export default function ServiceDetailPage() {
               {/* Applications */}
               {service.applications && service.applications.length > 0 && (
                 <div className="mb-16">
-                  <h3 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <h3 className="text-3xl font-bold text-black mb-8 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Ideal Applications
                   </h3>
@@ -312,7 +312,7 @@ export default function ServiceDetailPage() {
               {/* Benefits Card */}
               {service.benefits && service.benefits.length > 0 && (
                 <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 p-8 rounded-2xl mb-8 lg:sticky lg:top-24 border border-amber-200">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h3 className="text-2xl font-bold text-black mb-6 flex items-center gap-3">
                     <FiCheckCircle className="text-amber-600" size={24} />
                     Benefits
                   </h3>
@@ -343,21 +343,21 @@ export default function ServiceDetailPage() {
               )}
 
               {/* Service Info Card */}
-              <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 mb-8">
-                <h4 className="text-lg font-bold text-slate-900 mb-4">Service Information</h4>
+              <div className="bg-white border-2 border-black rounded-2xl p-6 mb-8">
+                <h4 className="text-lg font-bold text-black mb-4">Service Information</h4>
                 <div className="space-y-3 text-sm">
-                  <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <div className="flex items-center justify-between py-2 border-b border-black">
                     <span className="text-gray-600">Category</span>
-                    <span className="font-semibold text-slate-900">{getCategoryLabel(service.category)}</span>
+                    <span className="font-semibold text-black">{getCategoryLabel(service.category)}</span>
                   </div>
-                  <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <div className="flex items-center justify-between py-2 border-b border-black">
                     <span className="text-gray-600">Service Code</span>
                     <span className="font-mono text-amber-600 font-semibold">#{service.id}</span>
                   </div>
                   {service.features && service.features.length > 0 && (
                     <div className="flex items-center justify-between py-2">
                       <span className="text-gray-600">Features</span>
-                      <span className="font-semibold text-slate-900">{service.features.length}</span>
+                      <span className="font-semibold text-black">{service.features.length}</span>
                     </div>
                   )}
                 </div>
@@ -367,8 +367,8 @@ export default function ServiceDetailPage() {
 
           {/* Related Services */}
           {relatedServices.length > 0 && (
-            <div className="mt-20 pt-20 border-t border-slate-200">
-              <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">
+            <div className="mt-20 pt-20 border-t border-black">
+              <h3 className="text-3xl font-bold text-black mb-12 text-center">
                 Related <span className="text-amber-600">Services</span>
               </h3>
               <div className="grid md:grid-cols-3 gap-8">
@@ -376,9 +376,9 @@ export default function ServiceDetailPage() {
                   <Link 
                     key={relatedService.id} 
                     href={`/services/${relatedService.slug}`}
-                    className="group bg-black border-2 border-slate-200 rounded-2xl overflow-hidden hover:border-amber-400 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                    className="group bg-black border-2 border-black rounded-2xl overflow-hidden hover:border-amber-400 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   >
-                    <div className="relative h-48 bg-slate-900 overflow-hidden">
+                    <div className="relative h-48 bg-black overflow-hidden">
                       {relatedService.image_url ? (
                         <img 
                           src={relatedService.image_url} 
@@ -386,13 +386,13 @@ export default function ServiceDetailPage() {
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-black to-black flex items-center justify-center">
                           <div className="text-5xl text-amber-500/30">
                             {resolveIcon(relatedService.icon)}
                           </div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                       <div className="absolute bottom-4 left-4 right-4">
                         <span className="inline-block px-3 py-1 bg-amber-600/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full capitalize">
                           {relatedService.category}
@@ -400,7 +400,7 @@ export default function ServiceDetailPage() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h4 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
+                      <h4 className="text-xl font-bold text-black mb-2 group-hover:text-amber-600 transition-colors">
                         {relatedService.title}
                       </h4>
                       <p className="text-gray-600 text-sm line-clamp-2 mb-4">

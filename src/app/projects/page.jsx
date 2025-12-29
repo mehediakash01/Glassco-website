@@ -159,7 +159,7 @@ const ProjectsSection = () => {
       <div className="relative z-10 container mx-auto px-4 md:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-12 opacity-100">
+        <div className="text-center lg:py-10 mb-12 opacity-100">
           <span className="inline-block px-4 py-2 bg-amber-600/30 border-2 border-amber-500 rounded-full text-amber-400 text-sm font-bold tracking-wider mb-4">
             OUR PORTFOLIO
           </span>
@@ -181,7 +181,7 @@ const ProjectsSection = () => {
               className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 ${
                 activeCategory === category.id
                   ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/50 border-2 border-amber-400'
-                  : 'bg-slate-700/80 text-gray-200 hover:bg-slate-600/80 border-2 border-slate-600 hover:border-amber-500/50'
+                  : 'bg-black/80 text-gray-200 hover:bg-black/80 border-2 border-black hover:border-amber-500/50'
               }`}
             >
               {category.label}
@@ -199,10 +199,10 @@ const ProjectsSection = () => {
               <div
                 key={project.id}
                 onClick={() => handleProjectClick(project)}
-                className="group bg-black backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-slate-600 hover:border-amber-400 cursor-pointer hover:-translate-y-2"
+                className="group bg-black backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-500 border-2 border-black hover:border-amber-400 cursor-pointer hover:-translate-y-2"
               >
                 {/* Project Image */}
-                <div className="relative h-64 overflow-hidden bg-slate-900">
+                <div className="relative h-64 overflow-hidden bg-black">
                   <img
                     src={project.mainImage}
                     alt={project.title}
@@ -262,7 +262,7 @@ const ProjectsSection = () => {
 
                   {/* Client Type Tag */}
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-400 bg-slate-700/50 px-3 py-1 rounded-full">
+                    <span className="text-xs text-gray-400 bg-black/50 px-3 py-1 rounded-full">
                       {project.client_type}
                     </span>
                     <span className="text-amber-400 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -278,7 +278,7 @@ const ProjectsSection = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-slate-800/30 rounded-2xl border border-slate-700">
+          <div className="text-center py-20 bg-black/30 rounded-2xl border border-black">
             <p className="text-gray-300 text-xl mb-2">No projects found in this category</p>
             <p className="text-gray-500 text-sm">Try selecting a different category</p>
           </div>
@@ -304,7 +304,7 @@ const ProjectsSection = () => {
 
         {/* CTA Section */}
         <div className="text-center">
-          <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-amber-500/20 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-black/50 to-black/50 backdrop-blur-sm rounded-3xl p-12 md:p-16 border border-amber-500/20 overflow-hidden">
             <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             <div className="pointer-events-none absolute bottom-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -z-10"></div>
             
@@ -340,7 +340,7 @@ const ProjectsSection = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-slate-900 border-2 border-amber-500/30 rounded-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden"
+            className="relative bg-black border-2 border-amber-500/30 rounded-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden"
           >
             {/* Close Button */}
             <button
@@ -405,7 +405,7 @@ const ProjectsSection = () => {
               </div>
 
               {/* Project Details Side */}
-              <div className="p-8 overflow-y-auto max-h-[95vh]">
+              <div className="p-8 overflow-y-auto max-h-[60vh]">
                 <div className="mb-6">
                   <span className="inline-block px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full mb-3 capitalize">
                     {selectedProject.category}
@@ -415,15 +415,15 @@ const ProjectsSection = () => {
                 </div>
 
                 <div className="space-y-4 mb-6">
-                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                  <div className="flex items-center gap-3 text-gray-300 bg-black/50 p-3 rounded-lg">
                     <FiMapPin className="text-amber-400 flex-shrink-0" size={20} />
                     <span>{selectedProject.location}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                  <div className="flex items-center gap-3 text-gray-300 bg-black/50 p-3 rounded-lg">
                     <FiCalendar className="text-amber-400 flex-shrink-0" size={20} />
                     <span>Completed in {selectedProject.year}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-gray-300 bg-slate-800/50 p-3 rounded-lg">
+                  <div className="flex items-center gap-3 text-gray-300 bg-black/50 p-3 rounded-lg">
                     <FiAward className="text-amber-400 flex-shrink-0" size={20} />
                     <span>{selectedProject.client_type}</span>
                   </div>

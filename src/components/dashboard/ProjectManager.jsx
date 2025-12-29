@@ -118,7 +118,7 @@ export default function ProjectsManager() {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full table-auto">
-              <thead className="bg-slate-50 border-b border-gray-200">
+              <thead className="bg-black border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Title</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Category</th>

@@ -108,7 +108,7 @@ export default function WorkDetails() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+          <h1 className="text-4xl font-bold text-black mb-4">
             Service Not Found
           </h1>
           <p className="text-gray-600 mb-8">
@@ -129,7 +129,7 @@ export default function WorkDetails() {
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="bg-slate-50 border-b border-slate-200">
+      <div className="bg-black border-b border-black">
         <div className="container mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
             <Link
@@ -161,7 +161,7 @@ export default function WorkDetails() {
       </div>
 
       {/* Hero Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-black via-black to-black">
         <div className="container mx-auto px-4 md:px-8">
           <Link
             href={
@@ -215,7 +215,7 @@ export default function WorkDetails() {
               {/* Solutions (for glass services) */}
               {service.solutions && service.solutions.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-8 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Available Solutions
                   </h2>
@@ -225,7 +225,7 @@ export default function WorkDetails() {
                         key={idx}
                         className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl border border-gray-200 hover:border-amber-300 hover:shadow-xl transition-all"
                       >
-                        <h3 className="text-lg font-bold text-slate-900 mb-4">{solution.type}</h3>
+                        <h3 className="text-lg font-bold text-black mb-4">{solution.type}</h3>
                         <ul className="space-y-2">
                           {solution.benefits.map((benefit, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
@@ -243,7 +243,7 @@ export default function WorkDetails() {
               {/* Types (generic types array) */}
               {service.types && service.types.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Available Types
                   </h2>
@@ -251,9 +251,9 @@ export default function WorkDetails() {
                     {service.types.map((type, idx) => (
                       <div
                         key={idx}
-                        className="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-amber-400 hover:shadow-md transition-all text-center"
+                        className="bg-black p-4 rounded-xl border border-black hover:border-amber-400 hover:shadow-md transition-all text-center"
                       >
-                        <span className="text-sm font-medium text-slate-900">{type}</span>
+                        <span className="text-sm font-medium text-black">{type}</span>
                       </div>
                     ))}
                   </div>
@@ -263,7 +263,7 @@ export default function WorkDetails() {
               {/* Available Glass Types */}
               {service.availableGlassTypes && service.availableGlassTypes.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Available Glass Types
                   </h2>
@@ -271,10 +271,10 @@ export default function WorkDetails() {
                     {service.availableGlassTypes.map((type, idx) => (
                       <div
                         key={idx}
-                        className="bg-white p-4 rounded-xl border-2 border-slate-200 hover:border-amber-400 hover:shadow-lg transition-all text-center"
+                        className="bg-white p-4 rounded-xl border-2 border-black hover:border-amber-400 hover:shadow-lg transition-all text-center"
                       >
                         <FiLayers className="mx-auto text-amber-600 mb-2" size={20} />
-                        <span className="text-sm font-medium text-slate-900">{type}</span>
+                        <span className="text-sm font-medium text-black">{type}</span>
                       </div>
                     ))}
                   </div>
@@ -284,7 +284,7 @@ export default function WorkDetails() {
               {/* Glass Options */}
               {service.glassOptions && service.glassOptions.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Glass Options
                   </h2>
@@ -292,9 +292,9 @@ export default function WorkDetails() {
                     {service.glassOptions.map((option, idx) => (
                       <div
                         key={idx}
-                        className="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-amber-400 transition-all text-center"
+                        className="bg-black p-4 rounded-xl border border-black hover:border-amber-400 transition-all text-center"
                       >
-                        <span className="text-sm font-medium text-slate-900">{option}</span>
+                        <span className="text-sm font-medium text-black">{option}</span>
                       </div>
                     ))}
                   </div>
@@ -303,8 +303,8 @@ export default function WorkDetails() {
 
               {/* Process / Manufacturing Process */}
               {(service.process || service.manufacturingProcess) && (
-                <div className="bg-slate-50 p-8 rounded-2xl">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                <div className="bg-black p-8 rounded-2xl">
+                  <h3 className="text-2xl font-bold text-black mb-6 flex items-center gap-3">
                     <FiSettings className="text-amber-600" size={24} />
                     {service.process ? 'Process' : 'Manufacturing Process'}
                   </h3>
@@ -324,7 +324,7 @@ export default function WorkDetails() {
               {/* Capabilities */}
               {service.capabilities && service.capabilities.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Capabilities
                   </h2>
@@ -332,7 +332,7 @@ export default function WorkDetails() {
                     {service.capabilities.map((cap, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 hover:border-amber-400 transition-all"
+                        className="flex items-start gap-3 bg-white p-4 rounded-xl border border-black hover:border-amber-400 transition-all"
                       >
                         <FiCheckCircle className="text-amber-600 mt-1 flex-shrink-0" size={20} />
                         <span className="text-gray-700">{cap}</span>
@@ -345,7 +345,7 @@ export default function WorkDetails() {
               {/* Benefits (from root level) */}
               {service.benefits && service.benefits.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Key Benefits
                   </h2>
@@ -353,7 +353,7 @@ export default function WorkDetails() {
                     {service.benefits.map((benefit, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 hover:border-amber-400 transition-all"
+                        className="flex items-start gap-3 bg-white p-4 rounded-xl border border-black hover:border-amber-400 transition-all"
                       >
                         <FiCheckCircle className="text-amber-600 mt-1 flex-shrink-0" size={20} />
                         <span className="text-gray-700">{benefit}</span>
@@ -366,7 +366,7 @@ export default function WorkDetails() {
               {/* Applications */}
               {service.applications && service.applications.length > 0 && (
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3">
                     <span className="w-1 h-10 bg-amber-600 rounded"></span>
                     Applications
                   </h2>
@@ -374,7 +374,7 @@ export default function WorkDetails() {
                     {service.applications.map((app, idx) => (
                       <div
                         key={idx}
-                        className="bg-white border-2 border-slate-200 hover:border-amber-400 rounded-xl p-4 text-center transition-all hover:shadow-lg"
+                        className="bg-white border-2 border-black hover:border-amber-400 rounded-xl p-4 text-center transition-all hover:shadow-lg"
                       >
                         <span className="text-sm font-medium text-gray-800">{app}</span>
                       </div>
@@ -389,7 +389,7 @@ export default function WorkDetails() {
               {/* Specifications Sidebar */}
               {service.specifications && (
                 <div className="bg-amber-50 border-2 border-amber-200 p-6 rounded-2xl mb-8 sticky top-24">
-                  <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                  <h3 className="text-xl font-bold text-black mb-6 flex items-center gap-3">
                     <FiPackage className="text-amber-600" size={24} />
                     Specifications
                   </h3>
@@ -399,7 +399,7 @@ export default function WorkDetails() {
                         <span className="text-gray-600 font-medium capitalize">
                           {key.replace(/([A-Z])/g, ' $1').trim()}
                         </span>
-                        <span className="font-semibold text-slate-900">{value}</span>
+                        <span className="font-semibold text-black">{value}</span>
                       </div>
                     ))}
                   </div>
@@ -416,15 +416,15 @@ export default function WorkDetails() {
               )}
 
               {/* Service Info Card */}
-              <div className="bg-white border-2 border-slate-200 rounded-2xl p-6">
-                <h4 className="text-lg font-bold text-slate-900 mb-4">Service Information</h4>
+              <div className="bg-white border-2 border-black rounded-2xl p-6">
+                <h4 className="text-lg font-bold text-black mb-4">Service Information</h4>
                 <div className="space-y-3 text-sm">
-                  <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <div className="flex items-center justify-between py-2 border-b border-black">
                     <span className="text-gray-600">Segment</span>
-                    <span className="font-semibold text-slate-900">{parentSegment?.name}</span>
+                    <span className="font-semibold text-black">{parentSegment?.name}</span>
                   </div>
                   {service.status && (
-                    <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                    <div className="flex items-center justify-between py-2 border-b border-black">
                       <span className="text-gray-600">Status</span>
                       <span className="font-semibold text-amber-600">{service.status}</span>
                     </div>
@@ -444,7 +444,7 @@ export default function WorkDetails() {
 
       {/* RELATED SERVICES */}
       {relatedServices.length > 0 && (
-        <section className="py-16 bg-slate-50">
+        <section className="py-16 bg-black">
           <div className="container mx-auto px-4 md:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Related{' '}
@@ -462,7 +462,7 @@ export default function WorkDetails() {
                     href={`/works/${createSlug(
                       related.name
                     )}`}
-                    className="bg-white border-2 border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-amber-300 transition-all group"
+                    className="bg-white border-2 border-black rounded-xl overflow-hidden hover:shadow-xl hover:border-amber-300 transition-all group"
                   >
                     {related.image && (
                       <div className="h-48 overflow-hidden">

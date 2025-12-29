@@ -133,7 +133,7 @@ const GalleryPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center lg:py-12"
           >
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
@@ -197,7 +197,7 @@ const GalleryPage = () => {
                   variants={itemVariants}
                   layout
                   onClick={() => openLightbox(image, index)}
-                  className="group relative aspect-square bg-slate-900 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className="group relative aspect-square bg-black rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
                 >
                   {/* Image */}
                   <img
@@ -207,7 +207,7 @@ const GalleryPage = () => {
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
                   
                   {/* Hover Icon */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -290,7 +290,7 @@ const GalleryPage = () => {
               className="max-w-6xl w-full"
             >
               {/* Image */}
-              <div className="bg-slate-900 rounded-2xl overflow-hidden mb-4">
+              <div className="bg-black rounded-2xl overflow-hidden mb-4">
                 <img
                   src={selectedImage.image}
                   alt={selectedImage.title}
@@ -349,7 +349,7 @@ const GalleryPage = () => {
                 onClick={() => router.push('/projects')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all"
+                className="px-8 py-4 bg-white text-black rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all"
               >
                 View All Projects
               </motion.button>

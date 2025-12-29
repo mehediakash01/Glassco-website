@@ -4,7 +4,7 @@ import AdminDashboardSidebar from "@/components/dashboard/Sidebar"; // your exis
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-black">
       {/* Sidebar */}
       {/* <AdminDashboardSidebar /> */}
 

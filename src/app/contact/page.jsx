@@ -108,7 +108,7 @@ const ContactSection = () => {
     <section ref={sectionRef} className="relative  overflow-x-hidden py-12 sm:py-16 md:py-20 lg:py-28">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-amber-100 rounded-full blur-3xl opacity-20 -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-slate-100 rounded-full blur-3xl opacity-20 -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-black rounded-full blur-3xl opacity-20 -z-10"></div>
 
       {/* FIXED: Changed from w-11/12 to w-full with proper padding */}
       <div className="w-full max-w-full px-3 sm:px-4 md:px-6 lg:px-8 mx-auto">
@@ -117,13 +117,13 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-12 lg:mb-16"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 lg:py-12"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-100 rounded-full text-amber-700 text-xs sm:text-sm font-semibold tracking-wider mb-3 sm:mb-4"
+            className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-500 rounded-full text-amber-700 text-xs sm:text-sm font-semibold tracking-wider mb-3 sm:mb-4"
           >
             GET IN TOUCH
           </motion.span>
@@ -154,7 +154,7 @@ const ContactSection = () => {
               <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br ${info.color} rounded-lg sm:rounded-xl flex items-center justify-center text-white text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
                 {info.icon}
               </div>
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2 sm:mb-3">{info.title}</h3>
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-black mb-2 sm:mb-3">{info.title}</h3>
               {info.details.map((detail, idx) => (
                 <p key={idx} className="text-gray-600 text-xs sm:text-sm mb-1 break-words">
                   {detail}
@@ -173,7 +173,7 @@ const ContactSection = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-10 border border-gray-100 w-full max-w-full"
           >
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">Send us a Message</h3>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-1 sm:mb-2">Send us a Message</h3>
             <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 md:mb-8">Fill out the form below and we will get back to you within 24 hours.</p>
 
             {isSubmitted ? (
@@ -185,7 +185,7 @@ const ContactSection = () => {
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <FiCheckCircle className="text-green-600 text-3xl sm:text-4xl" />
                 </div>
-                <h4 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Thank You!</h4>
+                <h4 className="text-xl sm:text-2xl font-bold text-black mb-2">Thank You!</h4>
                 <p className="text-gray-600 text-sm sm:text-base">Your message has been sent successfully. We will contact you soon.</p>
               </motion.div>
             ) : (
@@ -300,7 +300,7 @@ const ContactSection = () => {
             className="space-y-4 sm:space-y-6 lg:space-y-8"
           >
             {/* Why Choose Us */}
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 text-white">
+            <div className="bg-gradient-to-br from-black to-black rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 text-white">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6">Why Choose Glassco?</h3>
               <div className="space-y-2 sm:space-y-3 md:space-y-4">
                 {[
@@ -329,7 +329,7 @@ const ContactSection = () => {
 
             {/* Social Media */}
             <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg border border-gray-100">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 md:mb-6">Follow Us</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black mb-3 sm:mb-4 md:mb-6">Follow Us</h3>
               <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 md:mb-6">Stay connected with us on social media.</p>
               <div className="flex gap-2 sm:gap-3 md:gap-4">
                 {[
@@ -353,14 +353,14 @@ const ContactSection = () => {
 
             {/* Quick Contact */}
             <div className="bg-amber-50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-amber-200">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-2 sm:mb-3 md:mb-4">Need Immediate Assistance?</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black mb-2 sm:mb-3 md:mb-4">Need Immediate Assistance?</h3>
               <p className="text-gray-700 text-xs sm:text-sm mb-3 sm:mb-4 md:mb-6">Call us directly or send a WhatsApp message.</p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <motion.a
                   href="tel:048858814"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-slate-900 text-white rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm text-center hover:bg-slate-800 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-black text-white rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm text-center hover:bg-black transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <FiPhone />
                   Call Now
@@ -409,7 +409,7 @@ const ContactSection = () => {
                 viewport={{ once: true }}
                 className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-2xl"
               >
-                <h4 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2">
+                <h4 className="text-base sm:text-lg md:text-xl font-bold text-black mb-2 sm:mb-3 flex items-center gap-2">
                   <FiMapPin className="text-amber-600" />
                   Visit Our Workshop
                 </h4>

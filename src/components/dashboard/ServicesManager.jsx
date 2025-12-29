@@ -137,7 +137,7 @@ export default function ServicesManager() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-3xl font-bold text-slate-900">Services Management</h2>
+          <h2 className="text-3xl font-bold text-black">Services Management</h2>
           <p className="text-gray-600 mt-1">Manage your company services and offerings</p>
         </div>
         <div className="flex gap-3">
@@ -186,7 +186,7 @@ export default function ServicesManager() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-white rounded-xl p-4 shadow-md">
             <p className="text-gray-600 text-sm mb-1">Total Services</p>
-            <p className="text-2xl font-bold text-slate-900">{services.length}</p>
+            <p className="text-2xl font-bold text-black">{services.length}</p>
           </div>
           <div className="bg-white rounded-xl p-4 shadow-md">
             <p className="text-gray-600 text-sm mb-1">Categories</p>
@@ -230,7 +230,7 @@ export default function ServicesManager() {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50 border-b border-gray-200">
+              <thead className="bg-black border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Service</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Category</th>
@@ -264,7 +264,7 @@ export default function ServicesManager() {
                             )}
                           </div>
                           <div>
-                            <p className="font-semibold text-slate-900">{service.title}</p>
+                            <p className="font-semibold text-black">{service.title}</p>
                             <p className="text-sm text-gray-600">/{service.slug}</p>
                           </div>
                         </div>

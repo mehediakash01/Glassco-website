@@ -12,7 +12,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, className }
   ];
 
   return (
-    <aside className={`bg-gradient-to-b from-slate-900 to-slate-800 p-6 overflow-y-auto z-50 ${className}`}>
+    <aside className={`bg-gradient-to-b from-black to-black p-6 overflow-y-auto z-50 ${className}`}>
       {/* Logo */}
       <div className="mb-8">
         <div className="text-3xl font-bold">
@@ -31,7 +31,7 @@ export default function Sidebar({ activeTab, setActiveTab, onLogout, className }
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
               activeTab === item.id
                 ? 'bg-amber-600 text-white shadow-lg'
-                : 'text-gray-400 hover:bg-slate-700 hover:text-white'
+                : 'text-gray-400 hover:bg-black hover:text-white'
             }`}
           >
             <span className="text-xl">{item.icon}</span>
