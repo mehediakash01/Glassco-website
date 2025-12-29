@@ -52,7 +52,7 @@ const ContactSection = () => {
     {
       icon: <FiClock />,
       title: 'Working Hours',
-      details: ['mon-sat: 7AM - 6PM', 'Friday: Closed'],
+      details: ['mon-sat: 7AM - 6PM', 'Sunday: Closed'],
       link: null,
       color: 'from-purple-500 to-purple-600'
     }
