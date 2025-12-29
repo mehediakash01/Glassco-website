@@ -289,7 +289,7 @@ const AboutSection = () => {
                 className="relative h-64 lg:h-auto"
               >
                 <img
-                  src="/assets/images/md-image.JPG"
+                  src="/assets/images/owner.jpg"
                   alt="Mr. Ajaz Ahmed"
                   className="w-full h-full object-cover"
                 />
