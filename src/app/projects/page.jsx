@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowRight, FiExternalLink, FiMapPin, FiCalendar, FiAward, FiLoader, FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 import { projectsAPI } from '@/lib/projectApi';
+import PDFViewerButton from '@/components/PdfViewerButton';
 
 const localImages = {
   'ballroom': '/assets/projects/ballroom.jpg',
@@ -323,9 +324,7 @@ const ProjectsSection = () => {
                   Get Free Consultation
                   <span className="animate-pulse">→</span>
                 </button>
-                <button className="px-8 py-4 bg-transparent text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:border-amber-500 hover:bg-white/5 transition-all duration-300 hover:scale-105 active:scale-95">
-                  Download Portfolio
-                </button>
+               <PDFViewerButton></PDFViewerButton>
               </div>
             </div>
           </div>

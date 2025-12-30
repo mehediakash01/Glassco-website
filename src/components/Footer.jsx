@@ -9,7 +9,7 @@ import {
   FiArrowRight,
   FiSend
 } from 'react-icons/fi';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaTwitter, FaYoutube } from 'react-icons/fa';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -36,8 +36,8 @@ const Footer = () => {
   ];
 
   const workingHours = [
-    { day: 'Saturday - Thursday', time: '8:00 AM - 6:00 PM' },
-    { day: 'Friday', time: 'Closed' }
+    { day: 'Monday - Saturday', time: '7:00 AM - 6:00 PM' },
+    { day: 'sunday', time: 'Closed' }
   ];
 
   return (
@@ -73,11 +73,11 @@ const Footer = () => {
             {/* Social Media */}
             <div className="flex gap-3">
               {[
-                { icon: <FaFacebookF />, link: '#', color: 'hover:bg-blue-600' },
-                { icon: <FaInstagram />, link: '#', color: 'hover:bg-pink-600' },
-                { icon: <FaLinkedinIn />, link: '#', color: 'hover:bg-blue-700' },
-                { icon: <FaWhatsapp />, link: '#', color: 'hover:bg-green-600' },
-                { icon: <FaTwitter />, link: '#', color: 'hover:bg-sky-500' }
+                { icon: <FaFacebookF />, link: 'https://www.facebook.com/profile.php?id=61585352374632', color: 'hover:bg-blue-600' },
+                { icon: <FaInstagram />, link: 'https://www.instagram.com/glassco.uae/', color: 'hover:bg-pink-600' },
+                { icon: <FaLinkedinIn />, link: 'https://www.linkedin.com/in/glassco-aluminium-and-glass-workshop-llc-753374374/', color: 'hover:bg-blue-700' },
+                { icon: <FaYoutube />, link: 'https://www.youtube.com/@GlasscoAluminiumGlassWorkshop', color: 'hover:bg-green-600' },
+                { icon: <FaTwitter />, link: 'https://x.com/glassco_uae', color: 'hover:bg-sky-500' }
               ].map((social, index) => (
                 <motion.a
                   key={index}

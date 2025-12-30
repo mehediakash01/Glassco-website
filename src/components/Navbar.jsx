@@ -17,6 +17,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import Link from "next/link";
+import PDFViewerButton from "./PdfViewerButton";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -213,12 +214,10 @@ const Navbar = () => {
             </div>
 
             {/* CTA Button - Desktop */}
-            <Link href="/contact">
-              <button className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-3 xl:px-5 py-2 xl:py-2.5 rounded-lg font-medium shadow-lg hover:shadow-amber-600/50 transition-all duration-300 border border-amber-500/30 text-sm whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95">
-                <span>Get Quote</span>
-                <span className="animate-pulse">→</span>
-              </button>
-            </Link>
+        
+           <span className="hidden lg:block">
+   <PDFViewerButton></PDFViewerButton>
+           </span>
 
             {/* Mobile Menu Button */}
             <button
@@ -378,11 +377,7 @@ const Navbar = () => {
               </div> */}
 
               {/* CTA Button - Mobile */}
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium shadow-lg mt-4 sm:mt-6 border border-amber-500/30 text-sm sm:text-base active:scale-95 transition-transform">
-                  Get Quote
-                </button>
-              </Link>
+          <PDFViewerButton></PDFViewerButton>
 
               {/* Social Links - Mobile */}
               <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-800">
