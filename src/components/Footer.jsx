@@ -177,8 +177,15 @@ const Footer = () => {
                   href="tel:+971 488 58814"
                   className="flex items-center gap-3 text-white/75 hover:text-amber-500 transition-colors duration-300"
                 >
+                  <FiPhone className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <span>Glassco - +971 02 4439943</span>
+                </a>
+                <a 
+                  href="tel:+971 488 58814"
+                  className="flex items-center gap-3 text-white/75 hover:text-amber-500 transition-colors duration-300"
+                >
                   <FiPhone className="text-amber-500" size={18} />
-                  <span className="text-sm">+971 488 58814</span>
+                    <span>AMC - +971 2 555 7229</span>
                 </a>
               </li>
               <li>

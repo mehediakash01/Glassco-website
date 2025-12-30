@@ -31,7 +31,7 @@ const ContactSection = () => {
     {
       icon: <FiPhone />,
       title: 'Phone',
-      details: ['+971 2 555 7229', '+971 488 58814'],
+      details: ['Glassco - +971 02 4439943', 'AMC - +971 2 555 7229'],
       link: 'tel:048858814',
       color: 'from-blue-500 to-blue-600'
     },

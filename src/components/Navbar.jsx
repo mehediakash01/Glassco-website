@@ -72,9 +72,13 @@ const Navbar = () => {
                   <MapPin className="w-3 h-3 text-amber-500 flex-shrink-0" />
                   <span className="whitespace-nowrap">Abu Dhabi</span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
                   <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
-                  <span className="whitespace-nowrap">+971 02 443 9943</span>
+                  <span>Glassco - +971 02 4439943</span>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
+                  <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <span>AMC - +971 2 555 7229</span>
                 </div>
               </div>
               <div className="h-8 w-px bg-gray-700 hidden xl:block"></div>
@@ -276,22 +280,26 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
                   <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
-                  <span>+971 02 443 9943</span>
+                  <span>Glassco - +971 02 4439943</span>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300">
+                  <Phone className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <span>AMC - +971 2 555 7229</span>
                 </div>
                 <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-300 break-all">
                   <Mail className="w-3 h-3 text-amber-500 flex-shrink-0" />
                   <span>info@glasscotrade.com</span>
                 </div>
-                 <div className="flex items-center text-white gap-1.5 min-w-fit">
-                <Globe className="w-3 h-3 text-amber-500 flex-shrink-0" />
-                <Link
-                  href="https://amccompleteinteriors.com/"
-                  className="whitespace-nowrap truncate text-xs xl:max-w-none"
-                  target="_blank"
-                >
-                  www.amccompleteinteriors.com
-                </Link>
-              </div>
+                <div className="flex items-center text-white gap-1.5 min-w-fit">
+                  <Globe className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                  <Link
+                    href="https://amccompleteinteriors.com/"
+                    className="whitespace-nowrap truncate text-xs xl:max-w-none"
+                    target="_blank"
+                  >
+                    www.amccompleteinteriors.com
+                  </Link>
+                </div>
               </div>
 
               {/* Menu Items */}
