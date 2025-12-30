@@ -17,7 +17,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import Link from "next/link";
-import PDFViewerButton from "./PdfViewerButton";
+import PDFViewerButton from "./PDFViewerButton";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

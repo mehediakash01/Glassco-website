@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowRight, FiExternalLink, FiMapPin, FiCalendar, FiAward, FiLoader, FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 import { projectsAPI } from '@/lib/projectApi';
-import PDFViewerButton from '@/components/PdfViewerButton';
+import PDFViewerButton from '@/components/PDFViewerButton';
 
 const localImages = {
   'ballroom': '/assets/projects/ballroom.jpg',
