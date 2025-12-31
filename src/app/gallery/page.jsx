@@ -57,14 +57,14 @@ const GalleryPage = () => {
     { id: 15, category: 'gates', title: 'Boundary Wall Design', location: 'Sharjah', image: localImages[14] },
   ];
 
-  const categories = [
-    { id: 'all', label: 'All Images', count: galleryImages.length },
-    { id: 'aluminum', label: 'Aluminum Works', count: galleryImages.filter(img => img.category === 'aluminum').length },
-    { id: 'curtain-walls', label: 'Curtain Walls', count: galleryImages.filter(img => img.category === 'curtain-walls').length },
-    { id: 'spider-glazing', label: 'Spider Glazing', count: galleryImages.filter(img => img.category === 'spider-glazing').length },
-    { id: 'pergolas', label: 'Pergolas & Canopies', count: galleryImages.filter(img => img.category === 'pergolas').length },
-    { id: 'gates', label: 'Gates & Metalwork', count: galleryImages.filter(img => img.category === 'gates').length },
-  ];
+  // const categories = [
+  //   { id: 'all', label: 'All Images', count: galleryImages.length },
+  //   { id: 'aluminum', label: 'Aluminum Works', count: galleryImages.filter(img => img.category === 'aluminum').length },
+  //   { id: 'curtain-walls', label: 'Curtain Walls', count: galleryImages.filter(img => img.category === 'curtain-walls').length },
+  //   { id: 'spider-glazing', label: 'Spider Glazing', count: galleryImages.filter(img => img.category === 'spider-glazing').length },
+  //   { id: 'pergolas', label: 'Pergolas & Canopies', count: galleryImages.filter(img => img.category === 'pergolas').length },
+  //   { id: 'gates', label: 'Gates & Metalwork', count: galleryImages.filter(img => img.category === 'gates').length },
+  // ];
 
   const filteredImages = activeCategory === 'all' 
     ? galleryImages 
@@ -157,7 +157,7 @@ const GalleryPage = () => {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4 md:px-8">
           {/* Category Filters */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -181,7 +181,7 @@ const GalleryPage = () => {
                 </span>
               </motion.button>
             ))}
-          </motion.div>
+          </motion.div> */}
 
           {/* Image Grid */}
           <motion.div

@@ -153,7 +153,31 @@ export const segmentsData =  [
             "Structural glazing",
             "Shower enclosures"
           ]
-        }
+        },
+        {
+   "glassServiceId": 106,
+   "name": "CNC & Manual Cutting",
+   "image": "/assets/gellary/cutting.JPG",
+   "description": "State-of-the-art automated CNC cutting combined with skilled manual techniques for high-precision results and flexible on-site solutions.",
+   "capabilities": [
+     "Computer-controlled precision cutting",
+     "Complex shapes and customized designs",
+     "Manual hand-cutting for straight and simple shapes",
+     "On-site modification support"
+   ],
+   "benefits": [
+     "High efficiency for large-volume production",
+     "Minimal material wastage",
+     "Quick turnaround for small or urgent quantities",
+     "Cost-effective for minor works and site corrections"
+   ],
+   "applications": [
+     "Architectural and façade glass",
+     "Shower enclosures and partitions",
+     "Customized interior glass works",
+     "Emergency replacements and time-sensitive jobs"
+   ]
+ }
       ]
     },
     {
