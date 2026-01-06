@@ -11,7 +11,7 @@ import {
   FiMessageSquare,
   FiCheckCircle
 } from 'react-icons/fi';
-import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutubeSquare, FaTwitterSquare, FaYoutube } from 'react-icons/fa';
 
 
 const ContactSection = () => {
@@ -333,10 +333,11 @@ const ContactSection = () => {
               <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 md:mb-6">Stay connected with us on social media.</p>
               <div className="flex gap-2 sm:gap-3 md:gap-4">
                 {[
-                  { icon: <FaFacebookF />, color: 'from-blue-600 to-blue-700', link: '#' },
-                  { icon: <FaInstagram />, color: 'from-pink-600 to-purple-600', link: '#' },
-                  { icon: <FaLinkedinIn />, color: 'from-blue-700 to-blue-800', link: '#' },
-                  { icon: <FaWhatsapp />, color: 'from-green-500 to-green-600', link: '#' }
+                  { icon: <FaFacebookF />, color: 'from-blue-600 to-blue-700', link: 'https://www.facebook.com/profile.php?id=61585352374632', },
+                  { icon: <FaInstagram />, color: 'from-pink-600 to-purple-600', link: 'https://www.instagram.com/glassco.uae/', },
+                  { icon: <FaLinkedinIn />, color: 'from-blue-700 to-blue-800', link: 'https://www.linkedin.com/in/glassco-aluminium-and-glass-workshop-llc-753374374/', },
+                  { icon: <FaYoutube />, link: 'https://www.youtube.com/@GlasscoAluminiumGlassWorkshop', color: 'from-red-600 to-red-600 hover:bg-red-600' },
+                                 { icon: <FaTwitter />, link: 'https://x.com/glassco_uae', color: 'from-sky-600 to-sky-700 hover:bg-sky-500' }
                 ].map((social, index) => (
                   <motion.a
                     key={index}

@@ -9,12 +9,12 @@ const Logo = () => {
                 className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-16 sm:h-16 md:w-14 md:h-14 lg:w-24 lg:h-20"
               >
                 <img
-                  src="/assets/images/glassco_logo.png"
+                  src="/assets/images/Glassco_Final.jpeg"
                   alt="Glassco Logo"
                   className="w-full h-full object-contain"
                 />
               </Link>
-              <p className='text-blue-300 -ml-16 -mb-12 lg:-ml-24 lg:-mb-16'>Be Glass superior</p>
+              {/* <p className='text-blue-300 -ml-16 -mb-12 lg:-ml-24 lg:-mb-16'>Be Glass superior</p> */}
             </div>
   )
 }
