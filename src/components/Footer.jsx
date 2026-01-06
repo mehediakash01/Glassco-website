@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaTwitter, FaYoutube } from 'react-icons/fa';
 import Link from 'next/link';
+import Logo from './Logo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,14 +58,8 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="mb-6">
-           <div className="w-32 h-32 mx-auto mb-4">
-                    <img 
-                   src="/assets/images/glassco-logo.png"
-                      alt="Glassco Logo" 
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-              <div className="h-1 w-20 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full mb-4"></div>
+          <Logo></Logo>
+              <div className="h-1 hidden lg:block w-20 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full mb-4"></div>
               <p className="text-white/75 text-sm leading-relaxed">
                 Industry-leading aluminium and glass solutions provider in UAE with 15+ years of excellence in delivering premium quality installations.
               </p>

@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import PDFViewerButton from "./PDFViewerButton";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -142,18 +143,7 @@ const Navbar = () => {
         <div className="w-full max-w-full px-2 sm:px-3 md:px-4 mx-auto">
           <div className="flex items-center justify-between gap-1 sm:gap-2">
             {/* Logo */}
-            <div className="flex items-center gap-2 flex-shrink-0 hover:scale-105 transition-transform duration-200">
-              <Link
-                href="/"
-                className="relative w-14 h-14 xs:w-16 xs:h-16 sm:w-16 sm:h-16 md:w-14 md:h-14 lg:w-24 lg:h-20"
-              >
-                <img
-                  src="/assets/images/glassco-logo.png"
-                  alt="Glassco Logo"
-                  className="w-full h-full object-contain"
-                />
-              </Link>
-            </div>
+          <Logo></Logo>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-3 xl:gap-6">
@@ -258,18 +248,7 @@ const Navbar = () => {
               </button>
 
               {/* Logo */}
-              <div className="mb-6 sm:mb-8 mt-2">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-3 sm:mb-4">
-                  <img
-                    src="/assets/images/glassco-logo.png"
-                    alt="Glassco Logo"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="text-center text-[10px] sm:text-xs text-gray-400">
-                  Aluminium & Glass Workshop LLC
-                </div>
-              </div>
+           <Logo></Logo>
 
               {/* Contact Info - Mobile */}
               <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-black rounded-lg space-y-2">
