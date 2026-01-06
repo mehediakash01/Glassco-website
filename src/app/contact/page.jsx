@@ -415,7 +415,7 @@ const ContactSection = () => {
                 </h4>
                 <p className="text-gray-700 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
                   Glassco Aluminum & Glass Workshop<br />
-                  Mussaffah 42 - 42 Street<br />
+                
                   Musaffah - M42, Abu Dhabi, UAE
                 </p>
                 <motion.a
