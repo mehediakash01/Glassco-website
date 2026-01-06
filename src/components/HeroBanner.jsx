@@ -10,21 +10,21 @@ const HeroBanner = () => {
 
   const slides = [
     {
-      image: "/assets/images/banner-1.jpg", 
+      image: "/assets/images/banner-1.png", 
       title: "Precision in Glass & Aluminium",
       subtitle: "Crafting excellence for modern architecture",
       cta: "Explore Our Work",
       link: "/projects"
     },
     {
-      image: "/assets/images/banner-2.jpg",
+      image: "/assets/images/banner-2.png",
       title: "Transforming Spaces with Quality",
       subtitle: "Premium solutions across the GCC",
       cta: "View Services",
       link: "/services/glass-services"
     },
     {
-      image: "/assets/images/banner-3.jpg",
+      image: "/assets/images/banner-3.png",
       title: "Where Innovation Meets Design",
       subtitle: "15+ years of trusted expertise",
       cta: "Get Started",
@@ -141,16 +141,16 @@ const HeroBanner = () => {
           />
 
           {/* Content */}
-          <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="relative  z-10 h-full flex items-center justify-center">
             <div className="container mx-auto px-4 md:px-8">
-              <div className="max-w-4xl mx-auto text-center">
+              <div className="max-w-4xl  mx-auto text-center">
                 
                 {/* Main Title */}
                 <motion.h1
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-                  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight"
+                  className=" text-4xl lg:pt-16 sm:text-6xl md:text-7xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight"
                 >
                   {slides[currentSlide].title}
                 </motion.h1>
