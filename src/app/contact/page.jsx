@@ -391,7 +391,7 @@ const ContactSection = () => {
           <div className="h-64 sm:h-80 md:h-96 w-full relative overflow-hidden rounded-xl sm:rounded-2xl">
             {/* Embedded Google Map */}
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3634.8!2d54.481352!3d24.339201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDIwJzIxLjEiTiA1NMKwMjgnNTIuOSJF!5e0!3m2!1sen!2sae!4v1234567890"
+              src="https://www.google.com/maps?q=Glassco+Aluminum+%26+Glass+Workshop,+Abu+Dhabi&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -417,10 +417,10 @@ const ContactSection = () => {
                 <p className="text-gray-700 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
                   Glassco Aluminum & Glass Workshop<br />
                 
-                  Musaffah - M42, Abu Dhabi, UAE
+                 Mussaffah 42 - 42 Street - Musaffah - M42 - Abu Dhabi - United Arab Emirates
                 </p>
                 <motion.a
-                  href="https://www.google.com/maps/dir/?api=1&destination=24.339201,54.481352"
+                  href="https://www.google.com/maps/place/Glassco+Aluminum+%26+Glass+Workshop/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
