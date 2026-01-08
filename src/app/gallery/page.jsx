@@ -91,16 +91,16 @@ const GalleryPage = () => {
     setSelectedImage(filteredImages[prevIndex]);
   };
 
-  const handleDownload = () => {
-    if (selectedImage) {
-      const link = document.createElement('a');
-      link.href = selectedImage.image;
-      link.download = `${selectedImage.title}.jpg`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+  // const handleDownload = () => {
+  //   if (selectedImage) {
+  //     const link = document.createElement('a');
+  //     link.href = selectedImage.image;
+  //     link.download = `${selectedImage.title}.jpg`;
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   }
+  // };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -305,13 +305,13 @@ const GalleryPage = () => {
                     <h3 className="text-2xl font-bold mb-1">{selectedImage.title}</h3>
                     <p className="text-amber-400">{selectedImage.location}</p>
                   </div>
-                  <button 
+                  {/* <button 
                     onClick={handleDownload}
                     className="px-4 py-2 bg-amber-600 hover:bg-amber-700 rounded-lg font-medium transition-colors flex items-center gap-2"
                   >
                     <FiDownload />
                     Download
-                  </button>
+                  </button> */}
                 </div>
                 <div className="text-sm text-gray-300 mt-4">
                   Image {currentImageIndex + 1} of {filteredImages.length}
