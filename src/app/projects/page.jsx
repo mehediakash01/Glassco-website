@@ -18,6 +18,15 @@ const localImages = {
   'khunji': '/assets/projects/khunji.jpg',
   'manuel': '/assets/projects/manuel.jpg',
   'padel': '/assets/projects/padel.jpg',
+  'mar1': '/assets/projects/mar1.jpeg',
+  'mar2': '/assets/projects/mar2.jpeg',
+  'mar3': '/assets/projects/mar3.jpeg',
+  'mar4': '/assets/projects/mar4.jpeg',
+  'padel1': '/assets/projects/padel1.jpeg',
+  'padel2': '/assets/projects/padel2.jpeg',
+  'padel3': '/assets/projects/padel3.jpeg',
+  'padel4': '/assets/projects/padel4.jpeg',
+  'padel5': '/assets/projects/padel5.jpeg',
   'urban': '/assets/projects/urban.jpg',
   'view': '/assets/projects/view.jpg',
 };
@@ -34,7 +43,7 @@ const ProjectsSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch projects from API
+   // Fetch projects from API
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -45,18 +54,48 @@ const ProjectsSection = () => {
         
         if (res.success && res.data) {
           // Map projects with local images
-          const projectsWithImages = res.data.map((project, index) => ({
-            ...project,
-            // Assign images in a cycling pattern
-            mainImage: allImages[index % allImages.length],
-            // Each project gets 3-5 random images for gallery
-            galleryImages: [
-              allImages[index % allImages.length],
-              allImages[(index + 1) % allImages.length],
-              allImages[(index + 2) % allImages.length],
-              allImages[(index + 3) % allImages.length],
-            ]
-          }));
+          const projectsWithImages = res.data.map((project, index) => {
+            // Special handling for Padel project
+            if (project.title === "Let's padel cafe ") {
+              return {
+                ...project,
+                mainImage: localImages['padel1'],
+                galleryImages: [
+                  localImages['padel1'],
+                  localImages['padel2'],
+                  localImages['padel3'],
+                  localImages['padel4'],
+                  localImages['padel5'],
+                ]
+              };
+            }
+            
+            // Special handling for MAR project
+            if (project.title === "Restaurant MAR lounge") {
+              return {
+                ...project,
+                mainImage: localImages['mar1'],
+                galleryImages: [
+                  localImages['mar1'],
+                  localImages['mar2'],
+                  localImages['mar3'],
+                  localImages['mar4'],
+                ]
+              };
+            }
+            
+            // Default: Assign images in a cycling pattern for other projects
+            return {
+              ...project,
+              mainImage: allImages[index % allImages.length],
+              galleryImages: [
+                allImages[index % allImages.length],
+                allImages[(index + 1) % allImages.length],
+                allImages[(index + 2) % allImages.length],
+                allImages[(index + 3) % allImages.length],
+              ]
+            };
+          });
           
           setProjects(projectsWithImages);
         } else {
